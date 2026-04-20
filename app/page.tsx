@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 
+import Link from 'next/link'
+
 export default function Home() {
   const navRef = useRef<HTMLDivElement>(null)
   const [formSent, setFormSent] = useState(false)
@@ -53,7 +55,7 @@ export default function Home() {
           />
         </a>
         <ul className="nav-links" style={menuOpen ? { display: 'flex', flexDirection: 'column', position: 'fixed', top: 78, left: 0, right: 0, background: 'rgba(11,29,18,.97)', backdropFilter: 'blur(18px)', padding: '2rem', gap: '1.5rem', borderBottom: '1px solid rgba(78,160,100,.2)', zIndex: 899 } : undefined}>
-          <li><a href="#about">About</a></li>
+          <li><Link href="/about">About</Link></li>
           <li><a href="#products">Product Applications</a></li>
           <li><a href="#advantages">Advantages</a></li>
           <li><a href="#datasheets">Datasheets</a></li>
@@ -444,7 +446,7 @@ export default function Home() {
           <div>
             <div className="fc-head">Navigation</div>
             <ul className="fl">
-              <li><a href="#about">About</a></li>
+<li><Link href="/about">About</Link></li>
               <li><a href="#products">Product Applications</a></li>
               <li><a href="#advantages">Advantages</a></li>
               <li><a href="#datasheets">Datasheets</a></li>
