@@ -1,11 +1,8 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Document, Page, pdfjs } from 'react-pdf'
 import PageFlip from 'react-pageflip'
-import 'react-pageflip/dist/lib/react-pageflip.css'
-
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const PageFlipAny = PageFlip as any
@@ -15,6 +12,10 @@ export default function PDFViewer() {
   const [currentPage, setCurrentPage] = useState(1)
   const [scale] = useState(1.2)
   const pageFlipRef = useRef<any>(null)
+
+  useEffect(() => {
+    pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`
+  }, [])
 
   const pdfUrl = 'https://genesisbiotech.net/wp-content/uploads/2024/07/Genesis-biotech-presentation-4.pdf'
 
