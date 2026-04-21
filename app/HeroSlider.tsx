@@ -1,83 +1,146 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import Image from 'next/image'
 
 const slides = [
   {
     bg: 'https://genesisbiotech.net/wp-content/uploads/2023/11/new-scaled.webp',
-    alt: 'Genesis Biotech Hero 1',
-    title: 'Gelatin Straight from the Source of the Nile.',
-    subtitle: 'Pure, natural gelatin sourced from pristine Nile basin environments.'
+    eyebrow: 'Source of the Nile · Est. 2018',
+    title: 'Gelatin Straight from\nthe Source of the Nile.',
+    sub: 'Pure, natural gelatin sourced from pristine pollution-free environments — where quality is born.',
   },
   {
     bg: 'https://genesisbiotech.net/wp-content/uploads/2023/11/woman-bathrobe-applying-cream-face-scaled.jpg',
-    alt: 'Genesis Biotech Hero 2',
-    title: 'Premium Halal & Kosher Gelatin',
-    subtitle: 'World-class collagen and gelatin products for health and beauty industries.'
+    eyebrow: 'Premium Halal & Kosher Certified',
+    title: 'Collagen for a\nMore Vital World.',
+    sub: 'World-class hydrolyzed collagen for beauty, wellness, and nutraceutical industries globally.',
   },
   {
     bg: '/assets/assortment-multi-colored-marmalades-scaled.jpg',
-    alt: 'Genesis Biotech Hero 3',
-    title: 'Natural Collagen Source',
-    subtitle: 'Embodies the essence of natural selection with vital energy products.'
+    eyebrow: 'Food · Pharmaceutical · Collagen',
+    title: 'The Essence of\nNatural Selection.',
+    sub: 'Embodies pristine, pollution-free vitality — from Africa\'s most biodiverse lake to global markets.',
   },
 ]
 
 export default function HeroSlider() {
   const [current, setCurrent] = useState(0)
+  const [transitioning, setTransitioning] = useState(false)
+  const [contentKey, setContentKey] = useState(0)
+
+  const goTo = useCallback((idx: number) => {
+    if (transitioning || idx === current) return
+    setTransitioning(true)
+    setCurrent(idx)
+    setContentKey(k => k + 1)
+    setTimeout(() => setTransitioning(false), 1800)
+  }, [current, transitioning])
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length)
-    }, 7000) // Match the original 7 seconds
-
+      goTo((current + 1) % slides.length)
+    }, 7000)
     return () => clearInterval(timer)
-  }, [])
+  }, [current, goTo])
+
+  const slide = slides[current]
+  const titleLines = slide.title.split('\n')
 
   return (
     <div className="hero-slider">
-      {slides.map((slide, index) => (
+      {slides.map((s, i) => (
         <div
-          key={index}
-          className={`hero-slide ${index === current ? 'active' : ''}`}
-          style={{ backgroundImage: `url(${slide.bg})` }}
+          key={i}
+          className={`hero-slide ${i === current ? 'active' : ''}`}
+          style={{ backgroundImage: `url(${s.bg})` }}
         />
       ))}
-      <div className="hero-slider-content" key={current}>
+
+      {/* Content */}
+      <div className="hero-slider-content" key={contentKey} style={{ animation: 'heroContentIn .9s var(--ease-out-expo) both' }}>
+        <style>{`
+          @keyframes heroContentIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          @keyframes heroLineIn {
+            from { opacity: 0; transform: translateY(40px) skewY(2deg); }
+            to { opacity: 1; transform: translateY(0) skewY(0deg); }
+          }
+          .hero-line { display: block; overflow: hidden; }
+          .hero-line-inner {
+            display: block;
+            animation: heroLineIn 1s var(--ease-out-expo) both;
+          }
+          .hero-line:nth-child(2) .hero-line-inner { animation-delay: .12s; }
+          .hero-line-em .hero-line-inner { animation-delay: .22s; }
+        `}</style>
+
         <Image
           className="hero-icon"
           src="/assets/iconAsset_resized-100-X-100-px.webp"
           alt="Genesis Biotech"
-          width={68}
-          height={68}
+          width={64}
+          height={64}
+          priority
         />
-        <div className="eyebrow light">Premium Gelatin · Est. 2018</div>
-        <h1 className="hero-title">
-          {slides[current].title}
+        <div className="eyebrow light" style={{ animationDelay: '.1s', opacity: 0, animation: 'heroContentIn .7s .1s var(--ease-out-expo) forwards' }}>
+          {slide.eyebrow}
+        </div>
+
+        <h1 className="hero-title" style={{ marginTop: '.8rem', overflow: 'hidden' }}>
+          {titleLines.map((line, li) =>
+            li === titleLines.length - 1 ? (
+              <span key={li} className="hero-line hero-line-em">
+                <em className="hero-line-inner">{line}</em>
+              </span>
+            ) : (
+              <span key={li} className="hero-line">
+                <span className="hero-line-inner" style={{ animationDelay: `${li * 0.12}s` }}>{line}</span>
+              </span>
+            )
+          )}
         </h1>
+
         <Image
           className="hero-phrase"
           src="/assets/phrase-1Asset-2@300x-1024x66.webp"
           alt=""
           width={520}
           height={66}
+          style={{ opacity: 0, animation: 'heroContentIn .8s .4s var(--ease-out-expo) forwards' }}
         />
-        <p className="hero-sub">
-          {slides[current].subtitle}
+
+        <p className="hero-sub" style={{ opacity: 0, animation: 'heroContentIn .8s .48s var(--ease-out-expo) forwards' }}>
+          {slide.sub}
         </p>
-        <div className="hero-actions">
-          <a href="/product-applications" className="btn-g">Explore Products</a>
+
+        <div className="hero-actions" style={{ opacity: 0, animation: 'heroContentIn .8s .56s var(--ease-out-expo) forwards' }}>
+          <a href="/product-applications" className="btn-g"><span>Explore Products</span></a>
           <a href="#contact" className="btn-o on-dark">Request a Sample</a>
         </div>
       </div>
+
+      {/* Scroll hint */}
       <div className="scroll-hint">
-        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9" /></svg>
-        Scroll
+        <div className="scroll-hint-line" />
+        <span>Scroll</span>
       </div>
-      <div className="scroll-hint">
-        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9" /></svg>
-        Scroll
+
+      {/* Slide dots */}
+      <div className="slide-counter">
+        <div className="slide-dots">
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              className={`slide-dot ${i === current ? 'active' : ''}`}
+              onClick={() => goTo(i)}
+              aria-label={`Slide ${i + 1}`}
+              style={{ border: 'none', cursor: 'pointer', background: 'none', padding: 0 }}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )
