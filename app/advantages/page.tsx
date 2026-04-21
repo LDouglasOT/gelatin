@@ -3,10 +3,12 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 export default function Advantages() {
   const navRef = useRef<HTMLDivElement>(null)
   const [menuOpen, setMenuOpen] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -69,16 +71,16 @@ export default function Advantages() {
           <Image src="/assets/icon-3Asset-3@300x-300x94.webp" alt="Genesis Biotech" width={102} height={32} style={{ height: 34, width: 'auto' }} />
         </Link>
         <ul className="nav-links" style={navMenuStyle}>
-          <li className="has-sub">
+          <li className={`has-sub ${pathname.startsWith('/about') ? 'active' : ''}`}>
             <Link href="/about">About</Link>
             <ul className="sub-nav">
               <li><Link href="/about">Our Story</Link></li>
               <li><Link href="/about/presentation">Presentation</Link></li>
             </ul>
           </li>
-          <li><Link href="/product-applications">Product Applications</Link></li>
-          <li><Link href="/advantages">Advantages</Link></li>
-          <li><Link href="/datasheets">Datasheets</Link></li>
+          <li className={pathname === '/product-applications' ? 'active' : ''}><Link href="/product-applications">Product Applications</Link></li>
+          <li className={pathname === '/advantages' ? 'active' : ''}><Link href="/advantages">Advantages</Link></li>
+          <li className={pathname === '/' ? 'active' : ''}><Link href="/">Home</Link></li>
           <li><Link href="/contact" className="nav-cta">Contact Us</Link></li>
         </ul>
         <div className="burger" onClick={() => setMenuOpen(!menuOpen)}><span /><span /><span /></div>
@@ -162,7 +164,7 @@ export default function Advantages() {
               <li><Link href="/about">About</Link></li>
               <li><Link href="/product-applications">Product Applications</Link></li>
               <li><Link href="/advantages">Advantages</Link></li>
-              <li><Link href="/datasheets">Datasheets</Link></li>
+              <li><Link href="/">Home</Link></li>
               <li><Link href="/contact">Contact Us</Link></li>
             </ul>
           </div>
