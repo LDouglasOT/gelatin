@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import HeroSlider from './HeroSlider'
 
 export default function Home() {
   const navRef = useRef<HTMLDivElement>(null)
@@ -78,7 +79,7 @@ export default function Home() {
           </li>
           <li><Link href="/product-applications">Product Applications</Link></li>
           <li><Link href="/advantages">Advantages</Link></li>
-          <li><Link href="/datasheets">Datasheets</Link></li>
+          <li><Link href="/">Home</Link></li>
           <li><Link href="/contact" className="nav-cta">Contact Us</Link></li>
         </ul>
         <div className="burger" onClick={() => setMenuOpen(!menuOpen)}>
@@ -88,39 +89,7 @@ export default function Home() {
 
       {/* ── HERO ── */}
       <section id="hero">
-        <div className="hero-bg" />
-        <div className="hero-inner">
-          <Image
-            className="hero-icon"
-            src="/assets/iconAsset_resized-100-X-100-px.webp"
-            alt="Genesis Biotech"
-            width={68}
-            height={68}
-          />
-          <div className="eyebrow light">Premium Gelatin · Est. 2018</div>
-          <h1 className="hero-title">
-            Gelatin
-            <em>Straight from<br />the Source of the Nile.</em>
-          </h1>
-          <Image
-            className="hero-phrase"
-            src="/assets/phrase-1Asset-2@300x-1024x66.webp"
-            alt=""
-            width={520}
-            height={66}
-          />
-          <p className="hero-sub">
-            Embodies the essence of natural selection. Our partners and clients favor products from pristine, pollution-free environments pulsating with pure, vital energy.
-          </p>
-          <div className="hero-actions">
-            <a href="/product-applications" className="btn-g">Explore Products</a>
-            <a href="#contact" className="btn-o on-dark">Request a Sample</a>
-          </div>
-        </div>
-        <div className="scroll-hint">
-          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9" /></svg>
-          Scroll
-        </div>
+        <HeroSlider />
       </section>
 
       {/* ── MARQUEE ── */}
@@ -414,7 +383,7 @@ export default function Home() {
               <li><Link href="/about">About</Link></li>
               <li><Link href="/product-applications">Product Applications</Link></li>
               <li><a href="#advantages">Advantages</a></li>
-              <li><a href="#datasheets">Datasheets</a></li>
+              <li><a href="/">Home</a></li>
               <li><a href="#contact">Contact Us</a></li>
             </ul>
           </div>

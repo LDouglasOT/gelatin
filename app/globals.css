@@ -146,6 +146,27 @@ h2.st.on-dark em { color: var(--lime); }
   position: relative; height: 100vh; min-height: 680px;
   display: flex; align-items: center; overflow: hidden;
 }
+.hero-slider {
+  position: absolute; inset: 0;
+}
+.hero-slide {
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0; transition: opacity 1.5s ease-in-out;
+}
+.hero-slide::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(105deg, rgba(11,29,18,.85) 0%, rgba(11,29,18,.5) 40%, rgba(11,29,18,.1) 100%);
+}
+.hero-slide.active { opacity: 1; }
+.hero-slider-content {
+  position: relative; z-index: 2; padding: 0 5vw;
+  max-width: 860px; animation: hfade .9s .15s both;
+}
+@keyframes hfade { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
 .hero-bg {
   position: absolute; inset: 0;
   background:
@@ -159,7 +180,6 @@ h2.st.on-dark em { color: var(--lime); }
   position: relative; z-index: 2; padding: 0 5vw;
   max-width: 860px; animation: hfade .9s .15s both;
 }
-@keyframes hfade { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
 .hero-icon { width: 68px; height: auto; display: block; margin-bottom: 2rem; }
 .hero-title {
   font-family: 'Playfair Display', serif;

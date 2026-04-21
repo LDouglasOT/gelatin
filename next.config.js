@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    domains: ['genesisbiotech.net'],
+  },
   transpilePackages: ['react-pdf'],  // transpile react-pdf but NOT pdfjs-dist
   webpack: (config, { isServer }) => {
     config.resolve.alias = {
