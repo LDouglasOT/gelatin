@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import HTMLFlipBook from 'react-pageflip'
 
 const PDFJS_VERSION = '3.11.174'
@@ -43,11 +43,15 @@ export default function PdfFlipBook() {
   const [currentPage, setCurrentPage] = useState(0)
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
-  const [bookRef, setBookRef] = useState<any>(null)
+  const bookRefInstance = useRef<any>(null)
+  // ✅ Use a ref to track whether rendering has started — avoids stale closure bug
+  const hasStarted = useRef(false)
   const pdfUrl = '/genesis-biotech-presentation.pdf'
 
   const startRendering = useCallback(async () => {
-    if (pages.length > 0) return // already rendered
+    // ✅ Guard with ref, not stale `pages` state
+    if (hasStarted.current) return
+    hasStarted.current = true
     setLoading(true)
     let cancelled = false
 
@@ -57,16 +61,17 @@ export default function PdfFlipBook() {
       pdfjsLib.GlobalWorkerOptions.workerSrc = WORKER_SRC
 
       const pdf = await pdfjsLib.getDocument({ url: pdfUrl, withCredentials: false }).promise
-      setTotalPages(pdf.numPages)
+      const numPages = pdf.numPages
+      setTotalPages(numPages)
 
-      const allImages: string[] = new Array(pdf.numPages)
+      const allImages: string[] = new Array(numPages)
       const batchSize = 3
 
-      for (let batch = 0; batch < pdf.numPages; batch += batchSize) {
+      for (let batch = 0; batch < numPages; batch += batchSize) {
         if (cancelled) return
         const batchPromises = []
 
-        for (let i = batch; i < Math.min(batch + batchSize, pdf.numPages); i++) {
+        for (let i = batch; i < Math.min(batch + batchSize, numPages); i++) {
           batchPromises.push(
             pdf.getPage(i + 1).then(async (page: any) => {
               const viewport = page.getViewport({ scale: 1.5 })
@@ -84,13 +89,16 @@ export default function PdfFlipBook() {
 
         results.forEach(({ index, dataUrl }) => {
           allImages[index] = dataUrl
-          // Set cover from first page
-          if (index === 0) setCoverImage(dataUrl)
+          // ✅ Guard cover image assignment
+          if (index === 0 && dataUrl) setCoverImage(dataUrl)
         })
 
-        setPages([...allImages.filter(Boolean)])
-        setRenderedCount(prev => prev + results.length)
+        // ✅ Derive renderedCount from the same array to avoid batching races
+        const filled = allImages.filter(Boolean)
+        setPages(filled)
+        setRenderedCount(filled.length)
       }
+
       setLoading(false)
     } catch (err) {
       if (!cancelled) {
@@ -100,13 +108,15 @@ export default function PdfFlipBook() {
       }
     }
 
-    return () => { cancelled = true }
-  }, [pages.length])
+    return () => {
+      cancelled = true
+    }
+  }, []) // ✅ empty deps is safe because we use a ref for the guard
 
   // Start rendering on mount so cover is ready fast
   useEffect(() => {
     startRendering()
-  }, [])
+  }, [startRendering])
 
   // Lock body scroll when modal is open
   useEffect(() => {
@@ -115,20 +125,24 @@ export default function PdfFlipBook() {
     } else {
       document.body.style.overflow = ''
     }
-    return () => { document.body.style.overflow = '' }
+    return () => {
+      document.body.style.overflow = ''
+    }
   }, [isOpen])
 
   // Keyboard navigation
   useEffect(() => {
     if (!isOpen) return
     const handler = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') bookRef?.pageFlip()?.flipNext()
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') bookRef?.pageFlip()?.flipPrev()
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown')
+        bookRefInstance.current?.pageFlip()?.flipNext()
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp')
+        bookRefInstance.current?.pageFlip()?.flipPrev()
       if (e.key === 'Escape') setIsOpen(false)
     }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
-  }, [isOpen, bookRef])
+  }, [isOpen])
 
   const progress = totalPages > 0 ? Math.round((renderedCount / totalPages) * 100) : 0
   const isFullyLoaded = renderedCount === totalPages && totalPages > 0
@@ -180,7 +194,10 @@ export default function PdfFlipBook() {
 
       {/* Fullscreen Flipbook Modal */}
       {isOpen && (
-        <div className="modal-backdrop" onClick={(e) => e.target === e.currentTarget && setIsOpen(false)}>
+        <div
+          className="modal-backdrop"
+          onClick={(e) => e.target === e.currentTarget && setIsOpen(false)}
+        >
           <div className="modal-content">
             {/* Header */}
             <div className="modal-header">
@@ -192,7 +209,11 @@ export default function PdfFlipBook() {
                 {!isFullyLoaded && (
                   <span className="loading-indicator">Loading {progress}%</span>
                 )}
-                <button className="close-btn" onClick={() => setIsOpen(false)} aria-label="Close">
+                <button
+                  className="close-btn"
+                  onClick={() => setIsOpen(false)}
+                  aria-label="Close"
+                >
                   ✕
                 </button>
               </div>
@@ -203,10 +224,12 @@ export default function PdfFlipBook() {
               {pages.length > 0 ? (
                 /* @ts-ignore */
                 <HTMLFlipBook
-                  ref={(ref: any) => setBookRef(ref)}
-                  width={420}
+                  ref={(ref: any) => {
+                    bookRefInstance.current = ref
+                  }}
+                  width={820}
                   height={594}
-                  size="stretch"
+                  size="fixed"
                   minWidth={280}
                   maxWidth={600}
                   minHeight={396}
@@ -216,10 +239,12 @@ export default function PdfFlipBook() {
                   className="the-flipbook"
                   style={{}}
                   startPage={0}
-                  showCover={true}
+                  showCover={false}
                   mobileScrollSupport={false}
                   onFlip={(e: any) => setCurrentPage(e.data)}
                   usePortrait={false}
+                   swipeDistance={30} 
+                  clickEventForward={false} 
                 >
                   {pages.map((src, index) => (
                     <div key={index} className="flip-page">
@@ -243,7 +268,7 @@ export default function PdfFlipBook() {
             <div className="nav-bar">
               <button
                 className="nav-btn"
-                onClick={() => bookRef?.pageFlip()?.flipPrev()}
+                onClick={() => bookRefInstance.current?.pageFlip()?.flipPrev()}
                 disabled={currentPage === 0}
               >
                 ← Previous
@@ -251,12 +276,14 @@ export default function PdfFlipBook() {
               <div className="nav-progress">
                 <div
                   className="nav-progress-fill"
-                  style={{ width: `${((currentPage + 1) / Math.max(totalPages, 1)) * 100}%` }}
+                  style={{
+                    width: `${((currentPage + 1) / Math.max(totalPages, 1)) * 100}%`,
+                  }}
                 />
               </div>
               <button
                 className="nav-btn"
-                onClick={() => bookRef?.pageFlip()?.flipNext()}
+                onClick={() => bookRefInstance.current?.pageFlip()?.flipNext()}
                 disabled={currentPage >= totalPages - 1}
               >
                 Next →
@@ -568,6 +595,24 @@ export default function PdfFlipBook() {
           border-radius: 2px;
           transition: width 0.3s ease;
         }
+          .flip-page {
+  background: white;
+  overflow: hidden;
+  /* ✅ Add these: */
+  isolation: isolate;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* ✅ Prevent the inner shadow from bleeding across the spine */
+.the-flipbook .stf__block {
+  box-shadow: none !important;
+}
+
+.the-flipbook .stf__item {
+  border: none !important;
+  outline: none !important;
+}
       `}</style>
     </>
   )
