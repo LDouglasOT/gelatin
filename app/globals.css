@@ -109,8 +109,8 @@ h2.st.on-dark em { color: var(--lime); }
   content: ''; position: absolute; bottom: -3px; left: 0; right: 100%;
   height: 1px; background: var(--green); transition: right .32s cubic-bezier(.4,0,.2,1);
 }
-.nav-links a:hover { color: var(--green); }
-.nav-links a:hover::after { right: 0; }
+.nav-links a:hover, .nav-links .active a { color: var(--green); }
+.nav-links a:hover::after, .nav-links .active a::after { right: 0; }
 .nav-cta { background: var(--green) !important; color: #fff !important; padding: .5rem 1.3rem; border-radius: 2px; }
 .nav-cta::after { display: none !important; }
 .nav-cta:hover { background: var(--green-h) !important; color: #fff !important; }
@@ -154,17 +154,21 @@ h2.st.on-dark em { color: var(--lime); }
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0; transition: opacity 1.5s ease-in-out;
+  transform: translateX(-100%); transition: transform 1.5s ease-in-out;
 }
 .hero-slide::before {
   content: '';
   position: absolute; inset: 0;
   background: linear-gradient(105deg, rgba(11,29,18,.85) 0%, rgba(11,29,18,.5) 40%, rgba(11,29,18,.1) 100%);
 }
-.hero-slide.active { opacity: 1; }
+.hero-slide.active { transform: translateX(0); }
 .hero-slider-content {
   position: relative; z-index: 2; padding: 0 5vw;
-  max-width: 860px; animation: hfade .9s .15s both;
+  max-width: 860px; animation: hfade .9s .15s both, textFade 1.5s ease-in-out;
+}
+@keyframes textFade {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 @keyframes hfade { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
 .hero-bg {

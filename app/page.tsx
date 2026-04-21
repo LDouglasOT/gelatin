@@ -3,12 +3,14 @@
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import HeroSlider from './HeroSlider'
 
 export default function Home() {
   const navRef = useRef<HTMLDivElement>(null)
   const [formSent, setFormSent] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,16 +72,16 @@ export default function Home() {
               : undefined
           }
         >
-          <li className="has-sub">
+          <li className={`has-sub ${pathname.startsWith('/about') ? 'active' : ''}`}>
             <Link href="/about">About</Link>
             <ul className="sub-nav">
               <li><Link href="/about">Our Story</Link></li>
               <li><Link href="/about/presentation">Presentation</Link></li>
             </ul>
           </li>
-          <li><Link href="/product-applications">Product Applications</Link></li>
-          <li><Link href="/advantages">Advantages</Link></li>
-          <li><Link href="/">Home</Link></li>
+          <li className={pathname === '/product-applications' ? 'active' : ''}><Link href="/product-applications">Product Applications</Link></li>
+          <li className={pathname === '/advantages' ? 'active' : ''}><Link href="/advantages">Advantages</Link></li>
+          <li className={pathname === '/' ? 'active' : ''}><Link href="/">Home</Link></li>
           <li><Link href="/contact" className="nav-cta">Contact Us</Link></li>
         </ul>
         <div className="burger" onClick={() => setMenuOpen(!menuOpen)}>

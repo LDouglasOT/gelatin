@@ -4,9 +4,24 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 
 const slides = [
-  { bg: 'https://genesisbiotech.net/wp-content/uploads/2023/11/new-scaled.webp', alt: 'Genesis Biotech Hero 1' },
-  { bg: 'https://genesisbiotech.net/wp-content/uploads/2023/11/woman-bathrobe-applying-cream-face-scaled.jpg', alt: 'Genesis Biotech Hero 2' },
-  { bg: '/assets/assortment-multi-colored-marmalades-scaled.jpg', alt: 'Genesis Biotech Hero 3' },
+  {
+    bg: 'https://genesisbiotech.net/wp-content/uploads/2023/11/new-scaled.webp',
+    alt: 'Genesis Biotech Hero 1',
+    title: 'Gelatin Straight from the Source of the Nile.',
+    subtitle: 'Pure, natural gelatin sourced from pristine Nile basin environments.'
+  },
+  {
+    bg: 'https://genesisbiotech.net/wp-content/uploads/2023/11/woman-bathrobe-applying-cream-face-scaled.jpg',
+    alt: 'Genesis Biotech Hero 2',
+    title: 'Premium Halal & Kosher Gelatin',
+    subtitle: 'World-class collagen and gelatin products for health and beauty industries.'
+  },
+  {
+    bg: '/assets/assortment-multi-colored-marmalades-scaled.jpg',
+    alt: 'Genesis Biotech Hero 3',
+    title: 'Natural Collagen Source',
+    subtitle: 'Embodies the essence of natural selection with vital energy products.'
+  },
 ]
 
 export default function HeroSlider() {
@@ -29,7 +44,7 @@ export default function HeroSlider() {
           style={{ backgroundImage: `url(${slide.bg})` }}
         />
       ))}
-      <div className="hero-slider-content">
+      <div className="hero-slider-content" key={current}>
         <Image
           className="hero-icon"
           src="/assets/iconAsset_resized-100-X-100-px.webp"
@@ -39,8 +54,7 @@ export default function HeroSlider() {
         />
         <div className="eyebrow light">Premium Gelatin · Est. 2018</div>
         <h1 className="hero-title">
-          Gelatin
-          <em>Straight from<br />the Source of the Nile.</em>
+          {slides[current].title}
         </h1>
         <Image
           className="hero-phrase"
@@ -50,7 +64,7 @@ export default function HeroSlider() {
           height={66}
         />
         <p className="hero-sub">
-          Embodies the essence of natural selection. Our partners and clients favor products from pristine, pollution-free environments pulsating with pure, vital energy.
+          {slides[current].subtitle}
         </p>
         <div className="hero-actions">
           <a href="/product-applications" className="btn-g">Explore Products</a>
