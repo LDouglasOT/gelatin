@@ -25,6 +25,9 @@ const slides = [
   },
 ]
 
+
+
+
 export default function HeroSlider() {
   const [current, setCurrent] = useState(0)
   const [transitioning, setTransitioning] = useState(false)
