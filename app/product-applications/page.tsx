@@ -33,7 +33,7 @@ export default function ProductApplications() {
     <>
       <nav id="nav" ref={navRef} className="solid">
         <Link href="/" className="nav-logo">
-          <Image src="https://genesisbiotech.net/wp-content/uploads/2023/07/icon-3Asset-3@300x-300x94.webp" alt="Genesis Biotech" width={102} height={32} style={{ height: 34, width: 'auto' }} />
+          <Image src="/assets/icon-3Asset-3@300x-300x94.webp" alt="Genesis Biotech" width={102} height={32} style={{ height: 34, width: 'auto' }} />
         </Link>
         <ul className="nav-links" style={navMenuStyle}>
           <li className="has-sub">
@@ -74,7 +74,7 @@ export default function ProductApplications() {
         {/* Pharmaceuticals */}
         <div className="pm-row rv">
           <div className="pm-image">
-            <Image src="https://genesisbiotech.net/wp-content/uploads/2023/11/spoons-with-pills-scaled.jpg" alt="Pharmaceuticals" width={600} height={600} className="pm-img" />
+            <Image src="/assets/spoons-with-pills-scaled.jpg" alt="Pharmaceuticals" width={600} height={600} className="pm-img" />
           </div>
           <div className="pm-content">
             <div className="pm-cat">Medical · Healthcare</div>
@@ -86,7 +86,7 @@ export default function ProductApplications() {
         {/* Collagen */}
         <div className="pm-row pm-row-reverse rv">
           <div className="pm-image">
-            <Image src="https://genesisbiotech.net/wp-content/uploads/2023/07/face-cream.png" alt="Collagen" width={600} height={420} className="pm-img" style={{ objectFit: 'contain', background: 'var(--cream)', padding: '2rem' }} />
+            <Image src="/assets/face-cream.png" alt="Collagen" width={600} height={420} className="pm-img" style={{ objectFit: 'contain', background: 'var(--cream)', padding: '2rem' }} />
           </div>
           <div className="pm-content">
             <div className="pm-cat">Beauty · Wellness</div>
@@ -98,7 +98,7 @@ export default function ProductApplications() {
         {/* Food & Confectionary */}
         <div className="pm-row rv">
           <div className="pm-image">
-            <Image src="https://genesisbiotech.net/wp-content/uploads/2023/11/assortment-multi-colored-marmalades-scaled.jpg" alt="Food & Confectionary" width={600} height={400} className="pm-img" />
+            <Image src="/assets/assortment-multi-colored-marmalades-scaled.jpg" alt="Food & Confectionary" width={600} height={400} className="pm-img" />
           </div>
           <div className="pm-content">
             <div className="pm-cat">Food · Confectionary</div>
@@ -116,7 +116,7 @@ export default function ProductApplications() {
           <div className="pb-grid">
             <div className="pb-card rv d1">
               <Image
-                src="https://genesisbiotech.net/wp-content/uploads/2023/11/Taking-care-of-your-bones-and-joints-with-gelatin-150x150-1.webp"
+                src="/assets/Taking-care-of-your-bones-and-joints-with-gelatin-150x150-1.webp"
                 alt="Taking care of your bones and joints"
                 width={100}
                 height={100}
@@ -127,7 +127,7 @@ export default function ProductApplications() {
             </div>
             <div className="pb-card rv d2">
               <Image
-                src="https://genesisbiotech.net/wp-content/uploads/2023/11/Gelatin-for-better-digestion-150x150-1.webp"
+                src="/assets/Gelatin-for-better-digestion-150x150-1.webp"
                 alt="Better Digestion"
                 width={100}
                 height={100}
@@ -138,7 +138,7 @@ export default function ProductApplications() {
             </div>
             <div className="pb-card rv d3">
               <Image
-                src="https://genesisbiotech.net/wp-content/uploads/2023/07/Stronger-and-prettier-nails-hair-and-skin.png"
+                src="/assets/Stronger-and-prettier-nails-hair-and-skin.png"
                 alt="Stronger nails, hair and skin"
                 width={100}
                 height={100}
@@ -166,7 +166,7 @@ export default function ProductApplications() {
       <footer>
         <div className="ft">
           <div>
-            <Image className="fl-logo" src="https://genesisbiotech.net/wp-content/uploads/2023/07/icon-4Asset-4@300x-300x94.webp" alt="Genesis Biotech" width={90} height={28} />
+            <Image className="fl-logo" src="/assets/icon-4Asset-4@300x-300x94.webp" alt="Genesis Biotech" width={90} height={28} />
             <p className="fl-desc">Premium Halal &amp; Kosher gelatin sourced from pristine, pollution-free environments along the Nile. Serving pharmaceutical, collagen, and food industries globally since 2018.</p>
           </div>
           <div>

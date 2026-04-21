@@ -150,7 +150,7 @@ h2.st.on-dark em { color: var(--lime); }
   position: absolute; inset: 0;
   background:
     linear-gradient(105deg, rgba(11,29,18,.88) 0%, rgba(11,29,18,.55) 55%, rgba(11,29,18,.15) 100%),
-    url('https://genesisbiotech.net/wp-content/uploads/2023/11/assortment-multi-colored-marmalades-scaled.jpg') center/cover no-repeat;
+    url('/assets/assortment-multi-colored-marmalades-scaled.jpg') center/cover no-repeat;
   transform: scale(1.06);
   animation: hzoom 14s ease-out forwards;
 }
@@ -263,7 +263,7 @@ h2.st.on-dark em { color: var(--lime); }
 }
 .spearhead::before {
   content: ''; position: absolute; inset: 0;
-  background: url('https://genesisbiotech.net/wp-content/uploads/2023/11/spoons-with-pills-scaled.jpg') center/cover;
+  background: url('/assets/spoons-with-pills-scaled.jpg') center/cover;
   opacity: .05;
 }
 .spearhead-inner {
@@ -394,7 +394,7 @@ footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,.06); p
 .page-hero-bg {
   position: absolute; inset: 0;
   background: linear-gradient(100deg, rgba(11,29,18,.92) 0%, rgba(11,29,18,.55) 52%, rgba(11,29,18,.25) 100%),
-    url('https://genesisbiotech.net/wp-content/uploads/2023/11/assortment-multi-colored-marmalades-scaled.jpg') center/cover no-repeat;
+    url('/assets/assortment-multi-colored-marmalades-scaled.jpg') center/cover no-repeat;
 }
 .page-hero-inner { position: relative; z-index: 2; padding: 0 5vw; max-width: 1360px; margin: 0 auto; width: 100%; }
 .page-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem,6vw,5rem); font-weight: 400; line-height: 1; letter-spacing: -.01em; color: #fff; }
@@ -448,7 +448,7 @@ footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,.06); p
 #hero-products { position: relative; height: 55vh; min-height: 380px; display: flex; align-items: center; overflow: hidden; }
 #hero-products .hero-bg {
   background: linear-gradient(100deg, rgba(11,29,18,.88) 0%, rgba(11,29,18,.5) 52%, rgba(11,29,18,.18) 100%),
-    url('https://genesisbiotech.net/wp-content/uploads/2023/11/spoons-with-pills-scaled.jpg') center/cover no-repeat;
+    url('/assets/spoons-with-pills-scaled.jpg') center/cover no-repeat;
   animation: none; transform: none;
 }
 #products-intro { padding: 6rem 5vw; background: var(--white); text-align: center; }

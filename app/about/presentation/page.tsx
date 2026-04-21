@@ -45,7 +45,7 @@ export default function PresentationPage() {
       <nav id="nav" ref={navRef} className="solid">
         <Link href="/" className="nav-logo">
           <Image
-            src="https://genesisbiotech.net/wp-content/uploads/2023/07/icon-3Asset-3@300x-300x94.webp"
+            src="/assets/icon-3Asset-3@300x-300x94.webp"
             alt="Genesis Biotech"
             width={102}
             height={32}
@@ -186,7 +186,7 @@ export default function PresentationPage() {
         <div className="eyebrow rv" style={{ justifyContent: 'center' }}>Certified Quality</div>
         <Image
           className="rv d1"
-          src="https://genesisbiotech.net/wp-content/uploads/2023/07/logos-2.png"
+          src="/assets/logos-2.png"
           alt="Genesis Biotech Certifications"
           width={800}
           height={200}
@@ -200,7 +200,7 @@ export default function PresentationPage() {
           <div>
             <Image
               className="fl-logo"
-              src="https://genesisbiotech.net/wp-content/uploads/2023/07/icon-4Asset-4@300x-300x94.webp"
+              src="/assets/icon-4Asset-4@300x-300x94.webp"
               alt="Genesis Biotech"
               width={90}
               height={28}

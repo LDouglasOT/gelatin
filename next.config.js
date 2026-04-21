@@ -1,14 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ['react-pdf'],  // transpile react-pdf but NOT pdfjs-dist
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'genesisbiotech.net',
-      },
-    ],
-  },
   webpack: (config, { isServer }) => {
     config.resolve.alias = {
       ...config.resolve.alias,

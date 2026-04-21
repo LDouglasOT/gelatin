@@ -40,7 +40,7 @@ export default function Contact() {
     <>
       <nav id="nav" ref={navRef} className="solid">
         <Link href="/" className="nav-logo">
-          <Image src="https://genesisbiotech.net/wp-content/uploads/2023/07/icon-3Asset-3@300x-300x94.webp" alt="Genesis Biotech" width={102} height={32} style={{ height: 34, width: 'auto' }} />
+          <Image src="/assets/icon-3Asset-3@300x-300x94.webp" alt="Genesis Biotech" width={102} height={32} style={{ height: 34, width: 'auto' }} />
         </Link>
         <ul className="nav-links" style={navMenuStyle}>
           <li className="has-sub">
@@ -138,7 +138,7 @@ export default function Contact() {
       <footer>
         <div className="ft">
           <div>
-            <Image className="fl-logo" src="https://genesisbiotech.net/wp-content/uploads/2023/07/icon-4Asset-4@300x-300x94.webp" alt="Genesis Biotech" width={90} height={28} />
+            <Image className="fl-logo" src="/assets/icon-4Asset-4@300x-300x94.webp" alt="Genesis Biotech" width={90} height={28} />
             <p className="fl-desc">Premium Halal &amp; Kosher gelatin sourced from pristine, pollution-free environments along the Nile. Serving pharmaceutical, collagen, and food industries globally since 2018.</p>
           </div>
           <div>

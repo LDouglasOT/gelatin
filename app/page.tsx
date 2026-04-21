@@ -47,7 +47,7 @@ export default function Home() {
       <nav id="nav" ref={navRef}>
         <a href="#" className="nav-logo">
           <Image
-            src="https://genesisbiotech.net/wp-content/uploads/2023/07/icon-3Asset-3@300x-300x94.webp"
+            src="/assets/icon-3Asset-3@300x-300x94.webp"
             alt="Genesis Biotech"
             width={102}
             height={32}
@@ -92,7 +92,7 @@ export default function Home() {
         <div className="hero-inner">
           <Image
             className="hero-icon"
-            src="https://genesisbiotech.net/wp-content/uploads/2023/11/iconAsset_resized-100-X-100-px.webp"
+            src="/assets/iconAsset_resized-100-X-100-px.webp"
             alt="Genesis Biotech"
             width={68}
             height={68}
@@ -104,7 +104,7 @@ export default function Home() {
           </h1>
           <Image
             className="hero-phrase"
-            src="https://genesisbiotech.net/wp-content/uploads/2023/11/phrase-1Asset-2@300x-1024x66.webp"
+            src="/assets/phrase-1Asset-2@300x-1024x66.webp"
             alt=""
             width={520}
             height={66}
@@ -141,14 +141,14 @@ export default function Home() {
         <div className="about-vis rv">
           <Image
             className="about-main"
-            src="https://genesisbiotech.net/wp-content/uploads/2023/11/assortment-multi-colored-marmalades-scaled.jpg"
+            src="/assets/assortment-multi-colored-marmalades-scaled.jpg"
             alt="Genesis Biotech Products"
             width={500}
             height={600}
           />
           <Image
             className="about-accent"
-            src="https://genesisbiotech.net/wp-content/uploads/2023/11/spoons-with-pills-scaled.jpg"
+            src="/assets/spoons-with-pills-scaled.jpg"
             alt="Pharmaceutical gelatin products"
             width={300}
             height={300}
@@ -161,7 +161,7 @@ export default function Home() {
         <div className="about-txt">
           <Image
             className="about-icon rv"
-            src="https://genesisbiotech.net/wp-content/uploads/2023/11/iconAsset_resized-100-X-100-px.webp"
+            src="/assets/iconAsset_resized-100-X-100-px.webp"
             alt="Genesis Biotech Icon"
             width={80}
             height={80}
@@ -193,7 +193,7 @@ export default function Home() {
         </div>
         <div className="prod-grid rv">
           <div className="pc">
-            <Image className="pc-img" src="https://genesisbiotech.net/wp-content/uploads/2023/11/spoons-with-pills-scaled.jpg" alt="Pharmaceuticals" width={400} height={533} />
+            <Image className="pc-img" src="/assets/spoons-with-pills-scaled.jpg" alt="Pharmaceuticals" width={400} height={533} />
             <div className="pc-ov">
               <div className="pc-n">01</div>
               <div className="pc-cat">Medical · Healthcare</div>
@@ -203,7 +203,7 @@ export default function Home() {
             </div>
           </div>
           <div className="pc">
-            <Image className="pc-img contain" src="https://genesisbiotech.net/wp-content/uploads/2023/07/face-cream.png" alt="Collagen" width={400} height={533} />
+            <Image className="pc-img contain" src="/assets/face-cream.png" alt="Collagen" width={400} height={533} />
             <div className="pc-ov">
               <div className="pc-n">02</div>
               <div className="pc-cat">Beauty · Wellness</div>
@@ -213,7 +213,7 @@ export default function Home() {
             </div>
           </div>
           <div className="pc">
-            <Image className="pc-img" src="https://genesisbiotech.net/wp-content/uploads/2023/11/assortment-multi-colored-marmalades-scaled.jpg" alt="Food and Confectionary" width={400} height={533} />
+            <Image className="pc-img" src="/assets/assortment-multi-colored-marmalades-scaled.jpg" alt="Food and Confectionary" width={400} height={533} />
             <div className="pc-ov">
               <div className="pc-n">03</div>
               <div className="pc-cat">Food · Confectionary</div>
@@ -265,7 +265,7 @@ export default function Home() {
         <p className="sub rv d2">From the heart of Africa to markets across the globe — supplying premium gelatin wherever quality is demanded.</p>
         <div className="map-wrap rv">
           <Image
-            src="https://genesisbiotech.net/wp-content/uploads/2023/11/without-wordingsAsset-4world-map-768x391.webp"
+            src="/assets/without-wordingsAsset-4world-map-768x391.webp"
             alt="Genesis Biotech Global Footprint Map"
             width={768}
             height={391}
@@ -286,9 +286,9 @@ export default function Home() {
           <div className="ds-grid">
             <div className="dsc rv">
               <div className="dsc-thumb">
-                <a href="https://genesisbiotech.net/wp-content/uploads/2023/11/bollatine-specsAsset-2world-map.webp" target="_blank" rel="noopener">
+                <a href="/assets/bollatine-specsAsset-2world-map.webp" target="_blank" rel="noopener">
                   <Image
-                    src="https://genesisbiotech.net/wp-content/uploads/2023/11/bollatine-specsAsset-2world-map-1024x932.webp"
+                    src="/assets/bollatine-specsAsset-2world-map-1024x932.webp"
                     alt="Bovine Gelatin Datasheet Preview"
                     width={148}
                     height={180}
@@ -301,13 +301,13 @@ export default function Home() {
                   <div className="dsc-title">Halal &amp; Kosher<br />Bovine Gelatin</div>
                   <div className="dsc-specs">Bloom: 100–280 g · Viscosity: 2.0–7.5 mPa·s<br />pH: 5.0–7.0 · Available in mesh grades</div>
                 </div>
-                <a href="https://genesisbiotech.net/wp-content/uploads/2023/11/bollatine-specsAsset-2world-map.webp" target="_blank" rel="noopener" className="dsc-dl">View Datasheet ↗</a>
+                <a href="/assets/bollatine-specsAsset-2world-map.webp" target="_blank" rel="noopener" className="dsc-dl">View Datasheet ↗</a>
               </div>
             </div>
             <div className="dsc rv d2">
               <div className="dsc-thumb">
                 <Image
-                  src="https://genesisbiotech.net/wp-content/uploads/2023/11/fish-specsAsset-3world-map-1024x932.webp"
+                  src="/assets/fish-specsAsset-3world-map-1024x932.webp"
                   alt="Fish Gelatin Datasheet Preview"
                   width={148}
                   height={180}
@@ -319,7 +319,7 @@ export default function Home() {
                   <div className="dsc-title">Kosher<br />Fish Gelatin</div>
                   <div className="dsc-specs">Bloom: 100–250 g · Viscosity: 2.0–6.5 mPa·s<br />pH: 5.0–6.5 · Cold-soluble grades available</div>
                 </div>
-                <a href="https://genesisbiotech.net/wp-content/uploads/2023/11/fish-specsAsset-3world-map-1024x932.webp" target="_blank" rel="noopener" className="dsc-dl">View Datasheet ↗</a>
+                <a href="/assets/fish-specsAsset-3world-map-1024x932.webp" target="_blank" rel="noopener" className="dsc-dl">View Datasheet ↗</a>
               </div>
             </div>
           </div>
@@ -342,7 +342,7 @@ export default function Home() {
           </div>
           <div className="cert-right rv d2">
             <Image
-              src="https://genesisbiotech.net/wp-content/uploads/2023/07/logos-2.png"
+              src="/assets/logos-2.png"
               alt="Genesis Biotech Certifications"
               width={460}
               height={200}
@@ -405,7 +405,7 @@ export default function Home() {
       <footer>
         <div className="ft">
           <div>
-            <Image className="fl-logo" src="https://genesisbiotech.net/wp-content/uploads/2023/07/icon-4Asset-4@300x-300x94.webp" alt="Genesis Biotech" width={90} height={28} />
+            <Image className="fl-logo" src="/assets/icon-4Asset-4@300x-300x94.webp" alt="Genesis Biotech" width={90} height={28} />
             <p className="fl-desc">Premium Halal &amp; Kosher gelatin sourced from pristine, pollution-free environments along the Nile. Serving pharmaceutical, collagen, and food industries globally since 2018.</p>
           </div>
           <div>

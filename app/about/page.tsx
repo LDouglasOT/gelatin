@@ -33,7 +33,7 @@ export default function About() {
     <>
       <nav id="nav" ref={navRef} className="solid">
         <Link href="/" className="nav-logo">
-          <Image src="https://genesisbiotech.net/wp-content/uploads/2023/07/icon-3Asset-3@300x-300x94.webp" alt="Genesis Biotech" width={102} height={32} style={{ height: 34, width: 'auto' }} />
+          <Image src="/assets/icon-3Asset-3@300x-300x94.webp" alt="Genesis Biotech" width={102} height={32} style={{ height: 34, width: 'auto' }} />
         </Link>
         <ul className="nav-links" style={navMenuStyle}>
           <li className="has-sub">
@@ -64,7 +64,7 @@ export default function About() {
       <section className="story-section">
         <div className="story-inner">
           <div className="story-img rv">
-            <Image src="https://genesisbiotech.net/wp-content/uploads/2023/11/iconAsset_resized-100-X-100-px.webp" alt="Genesis Biotech" width={180} height={180} />
+            <Image src="/assets/iconAsset_resized-100-X-100-px.webp" alt="Genesis Biotech" width={180} height={180} />
           </div>
           <div className="story-content">
             <h2 className="st rv d1">The Essence of<br /><em>Natural Selection.</em></h2>
@@ -98,7 +98,7 @@ export default function About() {
             </div>
             <div className="source-img rv d2">
               <Image
-                src="https://genesisbiotech.net/wp-content/uploads/2023/11/home.png"
+                src="/assets/home.png"
                 alt="Lake Victoria — the source"
                 width={600}
                 height={450}
@@ -118,10 +118,10 @@ export default function About() {
           </p>
           <div className="factory-grid">
             {[
-              'https://genesisbiotech.net/wp-content/uploads/2023/07/GENESIS-BIOTECH-FACTORY-PHOTO-5-1024x1024.png',
-              'https://genesisbiotech.net/wp-content/uploads/2023/07/GENESIS-BIOTECH-FACTORY-PHOTO-4-1024x1024.png',
-              'https://genesisbiotech.net/wp-content/uploads/2023/07/GENESIS-BIOTECH-FACTORY-PHOTO-3-1024x1024.png',
-              'https://genesisbiotech.net/wp-content/uploads/2023/07/GENESIS-BIOTECH-FACTORY-PHOTO-2-1024x1024.png',
+              '/assets/GENESIS-BIOTECH-FACTORY-PHOTO-5-1024x1024.png',
+              '/assets/GENESIS-BIOTECH-FACTORY-PHOTO-4-1024x1024.png',
+              '/assets/GENESIS-BIOTECH-FACTORY-PHOTO-3-1024x1024.png',
+              '/assets/GENESIS-BIOTECH-FACTORY-PHOTO-2-1024x1024.png',
             ].map((src, i) => (
               <div key={i} className={`fact-img rv d${i + 1}`}>
                 <Image src={src} alt={`Genesis Biotech Factory ${i + 1}`} width={400} height={400} />
@@ -156,7 +156,7 @@ export default function About() {
           <div className="products-grid">
             <div className="prod-card rv d1">
               <Image
-                src="https://genesisbiotech.net/wp-content/uploads/2023/11/cow-2Asset-2@300x.webp"
+                src="/assets/cow-2Asset-2@300x.webp"
                 alt="Halal & Kosher Bovine Gelatin"
                 width={500}
                 height={400}
@@ -169,7 +169,7 @@ export default function About() {
             </div>
             <div className="prod-card rv d2">
               <Image
-                src="https://genesisbiotech.net/wp-content/uploads/2023/07/Nile-Perch.png"
+                src="/assets/Nile-Perch.png"
                 alt="Kosher Fish Gelatin — Nile Perch"
                 width={400}
                 height={400}
@@ -189,7 +189,7 @@ export default function About() {
         <div className="eyebrow rv" style={{ justifyContent: 'center' }}>Certified Quality</div>
           <Image
           className="rv d1"
-          src="https://genesisbiotech.net/wp-content/uploads/2023/07/logos-2.png"
+          src="/assets/logos-2.png"
           alt="Genesis Biotech Certifications"
           width={800}
           height={200}
@@ -201,7 +201,7 @@ export default function About() {
       <footer>
         <div className="ft">
           <div>
-            <Image className="fl-logo" src="https://genesisbiotech.net/wp-content/uploads/2023/07/icon-4Asset-4@300x-300x94.webp" alt="Genesis Biotech" width={90} height={28} />
+            <Image className="fl-logo" src="/assets/icon-4Asset-4@300x-300x94.webp" alt="Genesis Biotech" width={90} height={28} />
             <p className="fl-desc">Premium Halal &amp; Kosher gelatin sourced from pristine, pollution-free environments along the Nile. Serving pharmaceutical, collagen, and food industries globally since 2018.</p>
           </div>
           <div>

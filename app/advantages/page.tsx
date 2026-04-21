@@ -31,32 +31,32 @@ export default function Advantages() {
 
   const advantages = [
     {
-      img: 'https://genesisbiotech.net/wp-content/uploads/2023/07/Pure-Environment.png',
+      img: '/assets/Pure-Environment.png',
       title: 'Pure Environment',
       desc: 'Our natural and virginal environment, free from industrial pollution and chemicals, allows us to deliver the best product to boost our body with pure, vital energy.',
     },
     {
-      img: 'https://genesisbiotech.net/wp-content/uploads/2023/07/Best-Nutrition-_-Energy.png',
+      img: '/assets/Best-Nutrition-_-Energy.png',
       title: 'Best Nutrition & Energy',
       desc: 'Boosts your body with pure, natural and vital energy, rich in zinc, iron, vitamin B12, and calcium, with exceptionally high protein values.',
     },
     {
-      img: 'https://genesisbiotech.net/wp-content/uploads/2023/07/We-Are-Green-_-Blue.png',
+      img: '/assets/We-Are-Green-_-Blue.png',
       title: 'Customization',
       desc: 'The combination of advanced and highly efficient technology alongside our personalized approach creates high customizability opportunities.',
     },
     {
-      img: 'https://genesisbiotech.net/wp-content/uploads/2023/07/Superior-Quality.png',
+      img: '/assets/Superior-Quality.png',
       title: 'Superior Quality',
       desc: 'Proximity to a source of high-quality raw material and a supervised high-technology factory ensures products of the highest quality.',
     },
     {
-      img: 'https://genesisbiotech.net/wp-content/uploads/2023/07/Best-Sustainability.png',
+      img: '/assets/Best-Sustainability.png',
       title: 'Sustainability',
       desc: 'Our factory and supply chain sustainably source pure water in eco-friendly systems, protecting the pristine environments we depend on.',
     },
     {
-      img: 'https://genesisbiotech.net/wp-content/uploads/2023/07/Superior-Quality.png',
+      img: '/assets/Superior-Quality.png',
       title: 'International Standards & Certifications',
       desc: 'Compliance with the strictest international standards, and Kosher and Halal supervision across every batch we produce.',
     },
@@ -66,7 +66,7 @@ export default function Advantages() {
     <>
       <nav id="nav" ref={navRef} className="solid">
         <Link href="/" className="nav-logo">
-          <Image src="https://genesisbiotech.net/wp-content/uploads/2023/07/icon-3Asset-3@300x-300x94.webp" alt="Genesis Biotech" width={102} height={32} style={{ height: 34, width: 'auto' }} />
+          <Image src="/assets/icon-3Asset-3@300x-300x94.webp" alt="Genesis Biotech" width={102} height={32} style={{ height: 34, width: 'auto' }} />
         </Link>
         <ul className="nav-links" style={navMenuStyle}>
           <li className="has-sub">
@@ -123,7 +123,7 @@ export default function Advantages() {
           <div className="adv-row adv-row-centered">
             <div className="adv-card adv-card-wide rv d3">
               <Image
-                src="https://genesisbiotech.net/wp-content/uploads/2023/07/Excellent-Relationships.png"
+                src="/assets/Excellent-Relationships.png"
                 alt="Long Lasting Relationships"
                 width={231}
                 height={231}
@@ -141,7 +141,7 @@ export default function Advantages() {
         <div className="eyebrow rv" style={{ justifyContent: 'center' }}>Our Certifications</div>
         <Image
           className="rv d1"
-          src="https://genesisbiotech.net/wp-content/uploads/2023/07/logos-2.png"
+          src="/assets/logos-2.png"
           alt="Certifications"
           width={460}
           height={120}
@@ -153,7 +153,7 @@ export default function Advantages() {
       <footer>
         <div className="ft">
           <div>
-            <Image className="fl-logo" src="https://genesisbiotech.net/wp-content/uploads/2023/07/icon-4Asset-4@300x-300x94.webp" alt="Genesis Biotech" width={90} height={28} />
+            <Image className="fl-logo" src="/assets/icon-4Asset-4@300x-300x94.webp" alt="Genesis Biotech" width={90} height={28} />
             <p className="fl-desc">Premium Halal &amp; Kosher gelatin sourced from pristine, pollution-free environments along the Nile. Serving pharmaceutical, collagen, and food industries globally since 2018.</p>
           </div>
           <div>
