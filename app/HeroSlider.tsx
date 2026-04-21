@@ -4,18 +4,19 @@ import { useEffect, useState, useCallback } from 'react'
 import Image from 'next/image'
 
 const slides = [
+   {
+    bg: 'https://genesisbiotech.net/wp-content/uploads/2023/11/woman-bathrobe-applying-cream-face-scaled.jpg',
+    eyebrow: 'Premium Halal & Kosher Certified',
+    title: 'Collagen for a\nMore Vital World.',
+    sub: 'World-class hydrolyzed collagen for beauty, wellness, and nutraceutical industries globally.',
+  },
   {
     bg: 'https://genesisbiotech.net/wp-content/uploads/2023/11/new-scaled.webp',
     eyebrow: 'Source of the Nile · Est. 2018',
     title: 'Gelatin Straight from\nthe Source of the Nile.',
     sub: 'Pure, natural gelatin sourced from pristine pollution-free environments — where quality is born.',
   },
-  {
-    bg: 'https://genesisbiotech.net/wp-content/uploads/2023/11/woman-bathrobe-applying-cream-face-scaled.jpg',
-    eyebrow: 'Premium Halal & Kosher Certified',
-    title: 'Collagen for a\nMore Vital World.',
-    sub: 'World-class hydrolyzed collagen for beauty, wellness, and nutraceutical industries globally.',
-  },
+ 
   {
     bg: '/assets/assortment-multi-colored-marmalades-scaled.jpg',
     eyebrow: 'Food · Pharmaceutical · Collagen',
@@ -23,6 +24,9 @@ const slides = [
     sub: 'Embodies pristine, pollution-free vitality — from Africa\'s most biodiverse lake to global markets.',
   },
 ]
+
+
+
 
 export default function HeroSlider() {
   const [current, setCurrent] = useState(0)
