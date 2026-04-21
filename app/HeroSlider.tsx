@@ -106,16 +106,6 @@ export default function HeroSlider() {
             )
           )}
         </h1>
-
-        <Image
-          className="hero-phrase"
-          src="/assets/phrase-1Asset-2@300x-1024x66.webp"
-          alt=""
-          width={520}
-          height={66}
-          style={{ opacity: 0, animation: 'heroContentIn .8s .4s var(--ease-out-expo) forwards' }}
-        />
-
         <p className="hero-sub" style={{ opacity: 0, animation: 'heroContentIn .8s .48s var(--ease-out-expo) forwards' }}>
           {slide.sub}
         </p>

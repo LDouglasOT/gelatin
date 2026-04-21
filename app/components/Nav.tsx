@@ -114,7 +114,7 @@ export default function Nav({ transparent = false }: { transparent?: boolean }) 
                           fontSize: '.74rem',
                           letterSpacing: '.14em',
                           textTransform: 'uppercase' as const,
-                          color: 'var(--text-3)',
+                          color: 'var(--green)',
                           textDecoration: 'none',
                           borderBottom: '1px solid var(--border)',
                           fontFamily: 'var(--font-body)',
