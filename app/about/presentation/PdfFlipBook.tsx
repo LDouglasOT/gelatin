@@ -1,6 +1,7 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
+import { createPortal } from 'react-dom'
 import HTMLFlipBook from 'react-pageflip'
 
 const PDFJS_VERSION = '3.11.174'
@@ -43,11 +44,19 @@ export default function PdfFlipBook() {
   const [currentPage, setCurrentPage] = useState(0)
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
-  const [bookRef, setBookRef] = useState<any>(null)
+  const [mounted, setMounted] = useState(false)
+  const bookRefInstance = useRef<any>(null)
+  const hasStarted = useRef(false)
   const pdfUrl = '/genesis-biotech-presentation.pdf'
 
+  // Track client mount for portal
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   const startRendering = useCallback(async () => {
-    if (pages.length > 0) return // already rendered
+    if (hasStarted.current) return
+    hasStarted.current = true
     setLoading(true)
     let cancelled = false
 
@@ -57,16 +66,17 @@ export default function PdfFlipBook() {
       pdfjsLib.GlobalWorkerOptions.workerSrc = WORKER_SRC
 
       const pdf = await pdfjsLib.getDocument({ url: pdfUrl, withCredentials: false }).promise
-      setTotalPages(pdf.numPages)
+      const numPages = pdf.numPages
+      setTotalPages(numPages)
 
-      const allImages: string[] = new Array(pdf.numPages)
+      const allImages: string[] = new Array(numPages)
       const batchSize = 3
 
-      for (let batch = 0; batch < pdf.numPages; batch += batchSize) {
+      for (let batch = 0; batch < numPages; batch += batchSize) {
         if (cancelled) return
         const batchPromises = []
 
-        for (let i = batch; i < Math.min(batch + batchSize, pdf.numPages); i++) {
+        for (let i = batch; i < Math.min(batch + batchSize, numPages); i++) {
           batchPromises.push(
             pdf.getPage(i + 1).then(async (page: any) => {
               const viewport = page.getViewport({ scale: 1.5 })
@@ -84,13 +94,14 @@ export default function PdfFlipBook() {
 
         results.forEach(({ index, dataUrl }) => {
           allImages[index] = dataUrl
-          // Set cover from first page
-          if (index === 0) setCoverImage(dataUrl)
+          if (index === 0 && dataUrl) setCoverImage(dataUrl)
         })
 
-        setPages([...allImages.filter(Boolean)])
-        setRenderedCount(prev => prev + results.length)
+        const filled = allImages.filter(Boolean)
+        setPages(filled)
+        setRenderedCount(filled.length)
       }
+
       setLoading(false)
     } catch (err) {
       if (!cancelled) {
@@ -101,20 +112,15 @@ export default function PdfFlipBook() {
     }
 
     return () => { cancelled = true }
-  }, [pages.length])
+  }, [])
 
-  // Start rendering on mount so cover is ready fast
   useEffect(() => {
     startRendering()
-  }, [])
+  }, [startRendering])
 
   // Lock body scroll when modal is open
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
+    document.body.style.overflow = isOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [isOpen])
 
@@ -122,16 +128,110 @@ export default function PdfFlipBook() {
   useEffect(() => {
     if (!isOpen) return
     const handler = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') bookRef?.pageFlip()?.flipNext()
-      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') bookRef?.pageFlip()?.flipPrev()
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown')
+        bookRefInstance.current?.pageFlip()?.flipNext()
+      if (e.key === 'ArrowLeft' || e.key === 'ArrowUp')
+        bookRefInstance.current?.pageFlip()?.flipPrev()
       if (e.key === 'Escape') setIsOpen(false)
     }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
-  }, [isOpen, bookRef])
+  }, [isOpen])
 
   const progress = totalPages > 0 ? Math.round((renderedCount / totalPages) * 100) : 0
   const isFullyLoaded = renderedCount === totalPages && totalPages > 0
+
+  const modal = (
+    <div
+      className="modal-backdrop"
+      onClick={(e) => e.target === e.currentTarget && setIsOpen(false)}
+    >
+      <div className="modal-content">
+        {/* Header */}
+        <div className="modal-header">
+          <span className="modal-title">Genesis Biotech — Presentation</span>
+          <div className="modal-controls">
+            <span className="page-indicator">
+              {currentPage + 1} / {totalPages}
+            </span>
+            {!isFullyLoaded && (
+              <span className="loading-indicator">Loading {progress}%</span>
+            )}
+            <button
+              className="close-btn"
+              onClick={() => setIsOpen(false)}
+              aria-label="Close"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+
+        {/* Flipbook */}
+        <div className="flipbook-area">
+          {pages.length > 0 ? (
+            /* @ts-ignore */
+            <HTMLFlipBook
+              ref={(ref: any) => { bookRefInstance.current = ref }}
+              width={820}
+              height={594}
+              size="fixed"
+              minWidth={280}
+              maxWidth={600}
+              minHeight={396}
+              maxHeight={850}
+              drawShadow={true}
+              flippingTime={800}
+              className="the-flipbook"
+              style={{}}
+              startPage={0}
+              showCover={false}
+              mobileScrollSupport={false}
+              onFlip={(e: any) => setCurrentPage(e.data)}
+              usePortrait={false}
+              swipeDistance={30}
+              clickEventForward={false}
+            >
+              {pages.map((src, index) => (
+                <div key={index} className="flip-page">
+                  <img src={src} alt={`Page ${index + 1}`} draggable={false} />
+                </div>
+              ))}
+            </HTMLFlipBook>
+          ) : (
+            <div className="modal-loading">
+              <div className="spinner" />
+              <p>Preparing pages...</p>
+            </div>
+          )}
+        </div>
+
+        {/* Navigation */}
+        <div className="nav-bar">
+          <button
+            className="nav-btn"
+            onClick={() => bookRefInstance.current?.pageFlip()?.flipPrev()}
+            disabled={currentPage === 0}
+          >
+            ← Previous
+          </button>
+          <div className="nav-progress">
+            <div
+              className="nav-progress-fill"
+              style={{ width: `${((currentPage + 1) / Math.max(totalPages, 1)) * 100}%` }}
+            />
+          </div>
+          <button
+            className="nav-btn"
+            onClick={() => bookRefInstance.current?.pageFlip()?.flipNext()}
+            disabled={currentPage >= totalPages - 1}
+          >
+            Next →
+          </button>
+        </div>
+      </div>
+    </div>
+  )
 
   return (
     <>
@@ -178,96 +278,10 @@ export default function PdfFlipBook() {
         </div>
       </div>
 
-      {/* Fullscreen Flipbook Modal */}
-      {isOpen && (
-        <div className="modal-backdrop" onClick={(e) => e.target === e.currentTarget && setIsOpen(false)}>
-          <div className="modal-content">
-            {/* Header */}
-            <div className="modal-header">
-              <span className="modal-title">Genesis Biotech — Presentation</span>
-              <div className="modal-controls">
-                <span className="page-indicator">
-                  {currentPage + 1} / {totalPages}
-                </span>
-                {!isFullyLoaded && (
-                  <span className="loading-indicator">Loading {progress}%</span>
-                )}
-                <button className="close-btn" onClick={() => setIsOpen(false)} aria-label="Close">
-                  ✕
-                </button>
-              </div>
-            </div>
-
-            {/* Flipbook */}
-            <div className="flipbook-area">
-              {pages.length > 0 ? (
-                /* @ts-ignore */
-                <HTMLFlipBook
-                  ref={(ref: any) => setBookRef(ref)}
-                  width={420}
-                  height={594}
-                  size="stretch"
-                  minWidth={280}
-                  maxWidth={600}
-                  minHeight={396}
-                  maxHeight={850}
-                  drawShadow={true}
-                  flippingTime={800}
-                  className="the-flipbook"
-                  style={{}}
-                  startPage={0}
-                  showCover={true}
-                  mobileScrollSupport={false}
-                  onFlip={(e: any) => setCurrentPage(e.data)}
-                  usePortrait={false}
-                >
-                  {pages.map((src, index) => (
-                    <div key={index} className="flip-page">
-                      <img
-                        src={src}
-                        alt={`Page ${index + 1}`}
-                        draggable={false}
-                      />
-                    </div>
-                  ))}
-                </HTMLFlipBook>
-              ) : (
-                <div className="modal-loading">
-                  <div className="spinner" />
-                  <p>Preparing pages...</p>
-                </div>
-              )}
-            </div>
-
-            {/* Navigation */}
-            <div className="nav-bar">
-              <button
-                className="nav-btn"
-                onClick={() => bookRef?.pageFlip()?.flipPrev()}
-                disabled={currentPage === 0}
-              >
-                ← Previous
-              </button>
-              <div className="nav-progress">
-                <div
-                  className="nav-progress-fill"
-                  style={{ width: `${((currentPage + 1) / Math.max(totalPages, 1)) * 100}%` }}
-                />
-              </div>
-              <button
-                className="nav-btn"
-                onClick={() => bookRef?.pageFlip()?.flipNext()}
-                disabled={currentPage >= totalPages - 1}
-              >
-                Next →
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Portal: renders modal directly into document.body, escaping all parent stacking contexts */}
+      {isOpen && mounted && createPortal(modal, document.body)}
 
       <style jsx global>{`
-        /* Cover section */
         .cover-section {
           display: flex;
           justify-content: center;
@@ -395,15 +409,15 @@ export default function PdfFlipBook() {
           z-index: 3;
         }
 
-        /* Modal */
+        /* Modal — portalled into document.body so nothing can clip it */
         .modal-backdrop {
           position: fixed;
           inset: 0;
           background: rgba(0,0,0,0.85);
-          z-index: 9999;
+          z-index: 99999;
           display: flex;
-          align-items: center;
-          justify-content: center;
+          align-items: stretch;
+          justify-content: stretch;
         }
 
         .modal-content {
@@ -477,6 +491,7 @@ export default function PdfFlipBook() {
           justify-content: center;
           overflow: hidden;
           padding: 20px;
+          min-height: 0;
         }
 
         .the-flipbook {
@@ -486,6 +501,9 @@ export default function PdfFlipBook() {
         .flip-page {
           background: white;
           overflow: hidden;
+          isolation: isolate;
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
         }
 
         .flip-page img {
@@ -495,6 +513,15 @@ export default function PdfFlipBook() {
           display: block;
           pointer-events: none;
           user-select: none;
+        }
+
+        .the-flipbook .stf__block {
+          box-shadow: none !important;
+        }
+
+        .the-flipbook .stf__item {
+          border: none !important;
+          outline: none !important;
         }
 
         .modal-loading {
@@ -520,7 +547,6 @@ export default function PdfFlipBook() {
           to { transform: rotate(360deg); }
         }
 
-        /* Nav bar */
         .nav-bar {
           display: flex;
           align-items: center;
