@@ -133,7 +133,7 @@ h2.st.on-dark em { color: var(--lime); }
 .sub-nav a {
   display: block; padding: .6rem 1.2rem;
   font-size: .72rem; font-weight: 400; letter-spacing: .12em; text-transform: uppercase;
-  color: var(--green); text-decoration: none; transition: color .25s, background .25s;
+  color: var(--green) !important; text-decoration: none; transition: color .25s, background .25s;
 }
 .sub-nav a:hover { color: var(--green); background: var(--green-lt); }
 
