@@ -98,7 +98,7 @@ export default function Nav({ transparent = false }: { transparent?: boolean }) 
             <li key={link.href}>
               <Link
                 href={link.href}
-                style={pathname === link.href ? { color: 'var(--green)' } : undefined}
+                style={pathname === link.href ? { color: '#1db47b' } : undefined}
               >
                 {link.label}
               </Link>
@@ -114,7 +114,7 @@ export default function Nav({ transparent = false }: { transparent?: boolean }) 
                           fontSize: '.74rem',
                           letterSpacing: '.14em',
                           textTransform: 'uppercase' as const,
-                          color: 'var(--green)',
+                          color: '#1db47b',
                           textDecoration: 'none',
                           borderBottom: '1px solid var(--border)',
                           fontFamily: 'var(--font-body)',
@@ -129,7 +129,7 @@ export default function Nav({ transparent = false }: { transparent?: boolean }) 
             </li>
           ))}
           <li>
-            <Link href="/contact" className="nav-cta" style={{ display: 'block', textAlign: 'center', padding: '1rem', background: 'var(--green)', color: '#fff', borderRadius: '1px', marginTop: '1rem', fontSize: '.72rem', letterSpacing: '.16em', textTransform: 'uppercase', textDecoration: 'none', fontFamily: 'var(--font-body)' }}>
+            <Link href="/contact" className="nav-cta" style={{ display: 'block', textAlign: 'center', padding: '1rem', background: '#1db47b', color: '#fff', borderRadius: '1px', marginTop: '1rem', fontSize: '.72rem', letterSpacing: '.16em', textTransform: 'uppercase', textDecoration: 'none', fontFamily: 'var(--font-body)' }}>
               Contact Us
             </Link>
           </li>

@@ -202,7 +202,7 @@ export default function Home() {
           {Array(2).fill(0).map((_, i) => (
             <div key={i} style={{ display: 'flex', gap: '3rem' }}>
               {['Halal Certified','Kosher Certified','Pharmaceutical Grade','Bovine Gelatin','Fish Gelatin','Collagen','Food & Confectionary','Global Distribution','Source of the Nile','Pollution-Free Environments'].map(t => (
-                <div key={t} className="mi"><div className="mdot" />{t}</div>
+                <div key={t} className="mi" style={{color:"white"}}><div className="mdot" style={{color:"white"}} />{t}</div>
               ))}
             </div>
           ))}
@@ -210,37 +210,39 @@ export default function Home() {
       </div>
 
       {/* ABOUT */}
-      <section id="about">
+      <section id="about" style={{"backgroundImage":"url('./assets/pattern-gelatin03.webp')"}}>
         <div className="about-vis rv-scale">
           <Image className="about-main" src="/assets/assortment-multi-colored-marmalades-scaled.jpg" alt="Genesis Biotech Products" width={500} height={600} />
           <Image className="about-accent" src="/assets/spoons-with-pills-scaled.jpg" alt="Pharmaceutical gelatin" width={300} height={300} />
-          <div className="since-badge">
-            <span className="sb-label">Since</span>
-            <span className="sb-year">2018</span>
+          <div className="since-badge" style={{backgroundColor:"#1db47b", fontFamily:"Roboto regular"}}>
+            <span className="sb-label" >Since</span>
+            <span className="sb-year" style={{backgroundColor:"#1db47b", fontFamily:"Roboto regular", fontWeight:"bold"}}>2018</span>
           </div>
         </div>
         <div className="about-txt">
-          <Image className="about-icon rv" src="/assets/iconAsset_resized-100-X-100-px.webp" alt="Genesis Biotech Icon" width={80} height={80} />
-          <div className="eyebrow rv d1">Our Story</div>
-          <h2 className="st rv d1">The Essence of<br /><em>Natural Selection.</em></h2>
-          <div className="since-row rv d2">
-            <div className="since-num">2018</div>
-            <div className="since-copy">Established to bring the world's finest Halal &amp; Kosher gelatin — sourced directly from pristine Nile basin environments — to discerning global markets.</div>
+            <div className="eyebrow" style={{"color":"white", fontWeight:"bold", fontSize:"28px",lineHeight:"1.0", letterSpacing:"0.1em",padding:"0px", margin:"0px"}}>Our Story</div>
+        <div style={{display: 'flex', justifyContent:"start", "alignItems":"start", "gap": '0.5ch', flexWrap: 'wrap', width: '100%'}} className="rv d1">
+          <h2 className="st" style={{"color":"white", fontWeight:"medium", fontFamily:"Roboto medium"}}>The Essence of Natural Selection.</h2>
+        </div>
+       
+
+          <div className="since-row rv d2" style={{"backgroundColor":"#2877a7;","color":"white"}}>
+            <div className="since-num" style={{"color":"white", fontFamily:"gotham", fontWeight:"bold"}}>2018</div>
+            <div className="since-copy" style={{"color":"white", fontFamily:"Roboto regular", fontSize:"16px"}}>Established to bring the world's finest Halal &amp; Kosher gelatin — sourced directly from pristine Nile basin environments — to discerning global markets.</div>
           </div>
-          <p className="rv d2">Embodies the essence of natural selection. Our partners and clients favor products from pristine, pollution-free environments pulsating with pure, vital energy.</p>
-          <p className="rv d3">We nurture lasting relationships with clients, partners, suppliers, employees, and our community — building trust at every link in the supply chain.</p>
-          <a href="/about" className="btn-g rv d3" style={{ display: 'inline-flex', marginTop: '2rem' }}><span>Read More</span></a>
+          <p className="rv d2" style={{"color":"white","fontSize":"19px",padding:"0px", margin:"0px", lineHeight:"1.3"}}>Embodies the essence of natural selection. Our partners and clients favor products from pristine, pollution-free environments pulsating with pure, vital energy.</p>
+          <p className="rv d3" style={{"color":"white","fontSize":"19px"}}>We nurture lasting relationships with clients, partners, suppliers, employees, and our community — building trust at every link in the supply chain.</p>
+          <a href="/about" className="btn-g rv d3" style={{ display: 'inline-flex', marginTop: '2rem', backgroundColor:"#1db47b", border:"0px" }}><span>Read More</span></a>
         </div>
       </section>
 
       {/* PRODUCTS */}
       <section id="products">
         <div className="prod-hdr">
-          <div>
-            <div className="eyebrow rv">What We Offer</div>
-            <h2 className="st rv d1">Product<br /><em>Applications</em></h2>
+          <div style={{"color":"#2877A7", display: 'flex',flexDirection: 'column', justifyContent:"center", "alignItems":"center", "gap": '0.5ch', flexWrap: 'wrap', width: '100%'}}>
+            <div className="eyebrow rv" style={{"color":"#2877A7", fontSize:"28px",fontWeight:"bold", letterSpacing:"0.1em"}}>What We Offer</div>
+            <h2 className="st rv d1">Product <em style={{"color":"#2877A7",}}>Applications</em></h2>
           </div>
-          <p className="prod-hdr-r rv d2">We offer our customers a prime product that represents the spearhead of the industry.</p>
         </div>
         <div className="prod-grid rv-scale">
           {[
@@ -260,8 +262,8 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <div className="prod-cta rv">
-          <a href="#contact" className="btn-o">Request Product Information</a>
+        <div className="prod-cta" style={{backgroundColor:'#2977a8', border:"0px", height:"40px", display:"flex", justifyContent:"center", alignItems:"center"}}>
+          <a href="" className="" style={{color:"white", textDecoration:"none"}}>REQUEST PRODUCT INFORMATION</a>
         </div>
       </section>
 
@@ -274,7 +276,7 @@ export default function Home() {
             { num: '100', suffix: '%', label: 'Halal & Kosher Verified' },
             { num: '280', suffix: 'g', label: 'Max Bloom Strength' },
           ].map((s, i) => (
-            <div key={i} className="stat-item rv" style={{ transitionDelay: `${i * 0.1}s` }}>
+            <div key={i} className="stat-item rv" style={{ transitionDelay: `${i * 0.1}s`, display: 'flex', flexDirection: 'column', alignItems: 'center',justifyContent: 'center', gap: '0.4rem' }}>
               <span className="stat-num">
                 <span data-count={s.num}>0</span>{s.suffix}
               </span>
@@ -294,13 +296,12 @@ export default function Home() {
 
       {/* ADVANTAGES */}
       <section id="advantages">
-        <div className="adv-wrap">
-          <div className="eyebrow rv">Why Choose Us</div>
-          <h2 className="st rv d1" style={{ maxWidth: '440px' }}>Our <em>Advantages</em></h2>
+        <div className="adv-wrap" style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", gap:"2rem"}}>
+          <div className="eyebrow rv" style={{"color":"#2877A7",}}>Why Choose Us</div>
+          <h2 className="st rv d1" style={{ maxWidth: '440px' }}>Our <em style={{"color":"#2877A7",}}>Advantages</em></h2>
           <div className="adv-grid">
             {advantages.map((a, i) => (
               <div key={i} className={`ac rv d${i + 1}`}>
-                <div className="ac-icon">{a.icon}</div>
                 <div className="ac-title">{a.title}</div>
                 <div className="ac-body">{a.body}</div>
               </div>
@@ -310,16 +311,16 @@ export default function Home() {
       </section>
 
       {/* FOOTPRINT */}
-      <section id="footprint">
-        <div className="eyebrow rv" style={{ justifyContent: 'center' }}>Global Reach</div>
-        <h2 className="st rv d1">Our <em>Footprint</em></h2>
-        <p className="sub rv d2">From the heart of Africa to markets across the globe — supplying premium gelatin wherever quality is demanded.</p>
+      <section id="footprint" style={{backgroundColor:"white"}}>
+        <div className="eyebrow" style={{ "color":"#2877A7",justifyContent: 'center' }}>Global Reach</div>
+        <h2 className="st rv d1" style={{"color":"#2877A7",}}>Our Footprint</h2>
+        <p className="sub rv d2" style={{"color":"black",}}>From the heart of Africa to markets across the globe — supplying premium gelatin wherever quality is demanded.</p>
         <div className="map-wrap rv-scale">
-          <Image src="/assets/without-wordingsAsset-4world-map-768x391.webp" alt="Genesis Biotech Global Footprint" width={768} height={391} />
+          <Image src="/assets/without-wordingsAsset-4world-map-768x391.webp" alt="Genesis Biotech Global Footprint" width={568} height={391} />
         </div>
-        <div className="regions rv d2">
+        <div className="regions rv d2" style={{"color":"#2877A7",}}>
           {['Africa','Middle East','Europe','North America','Asia Pacific'].map(r => (
-            <div key={r} className="region"><div className="rdot" />{r}</div>
+            <div key={r} className="region" style={{"color":"#2877A7",}}><div className="rdot" style={{"color":"#2877A7",}}/>{r}</div>
           ))}
         </div>
       </section>
@@ -327,8 +328,11 @@ export default function Home() {
       {/* DATASHEETS */}
       <section id="datasheets">
         <div className="ds-wrap">
+          <div style={{display:"flex",alignItems:"center", justifyContent:"center", flexDirection:"column"}}>
           <div className="eyebrow rv">Technical Documentation</div>
-          <h2 className="st rv d1">Our <em>Datasheets</em></h2>
+          <h2 className="st rv d1">Our <em style={{"color":"#2877A7",}}>Datasheets</em></h2>
+          </div>
+
           <div className="ds-grid">
             <div className="dsc rv">
               <div className="dsc-thumb">
@@ -367,7 +371,7 @@ export default function Home() {
         <div className="cert-inner">
           <div className="cert-left">
             <div className="eyebrow rv">Quality &amp; Compliance</div>
-            <h2 className="st rv d1">Quality You<br />Can <em>Trust.</em></h2>
+            <h2 className="st rv d1">Quality You Can <em>Trust.</em></h2>
             <p className="rv d2">Every batch of Genesis Biotech gelatin is produced under internationally recognized standards. Our certifications reflect our unwavering commitment to purity, safety, and compliance across global markets.</p>
             <p className="rv d3">We partner with independent certifying bodies to ensure full traceability from source to delivery — so you never have to guess about what's in your product.</p>
             <div className="cert-chips rv d3">
@@ -377,58 +381,8 @@ export default function Home() {
             </div>
           </div>
           <div className="cert-right rv d2">
-            <Image src="/assets/logos-2.png" alt="Genesis Biotech Certifications" width={460} height={200} />
+            <img src="/assets/logos-2.png" alt="Genesis Biotech Certifications"  />
           </div>
-        </div>
-      </section>
-
-      {/* CONTACT */}
-      <section id="contact">
-        <div className="ct-inner">
-          <div className="ct-left">
-            <div className="eyebrow rv">Get in Touch</div>
-            <h2 className="st rv d1">Let's Work<br /><em>Together.</em></h2>
-            <p className="rv d2">Whether you're exploring a new product line, scaling production, or seeking a reliable gelatin supplier — we'd love to hear from you.</p>
-            <div className="ct-deets rv d3">
-              {[
-                { icon: '📞', lbl: 'Phone', val: '+971 55 132 1079' },
-                { icon: '✉', lbl: 'General Inquiries', val: 'romy@genesisbiotech.net' },
-                { icon: '🌎', lbl: 'North America', val: 'northamerica@genesisbiotech.net' },
-              ].map(item => (
-                <div key={item.lbl} className="ct-item">
-                  <div className="ct-icon">{item.icon}</div>
-                  <div>
-                    <div className="ct-lbl">{item.lbl}</div>
-                    <div className="ct-val">{item.val}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <form className="cf rv d2" onSubmit={handleFormSubmit}>
-            <div className="cf-title">Request a Quote or Sample</div>
-            <div className="frow">
-              <div className="fg"><label>First Name</label><input type="text" placeholder="John" /></div>
-              <div className="fg"><label>Last Name</label><input type="text" placeholder="Smith" /></div>
-            </div>
-            <div className="fg"><label>Company</label><input type="text" placeholder="Your Company Ltd." /></div>
-            <div className="fg"><label>Email Address</label><input type="email" placeholder="john@company.com" /></div>
-            <div className="fg">
-              <label>Product Interest</label>
-              <select defaultValue="">
-                <option value="" disabled>Select a product</option>
-                <option>Halal &amp; Kosher Bovine Gelatin</option>
-                <option>Kosher Fish Gelatin</option>
-                <option>Collagen</option>
-                <option>Multiple Products</option>
-                <option>Custom Specification</option>
-              </select>
-            </div>
-            <div className="fg"><label>Message</label><textarea placeholder="Tell us about your requirements — quantity, specifications, intended use…" /></div>
-            <button type="submit" className={`f-btn${formSent ? ' sent' : ''}`}>
-              {formSent ? "Message Sent — We'll be in touch soon." : 'Send Inquiry →'}
-            </button>
-          </form>
         </div>
       </section>
 
