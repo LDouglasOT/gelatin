@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import HeroSlider from './HeroSlider'
+import QualitySection from './components/QualitySection'
 
 export default function Home() {
   const navRef = useRef<HTMLDivElement>(null)
@@ -288,7 +289,7 @@ export default function Home() {
 
       {/* SPEARHEAD */}
       <div className="spearhead">
-        <div className="spearhead-inner rv">
+        <div className="spearhead-inner rv" style={{fontFamily:"Georgia, serif"}}>
           We offer our customers a prime product<br />
           <em>that represents the spearhead of the industry.</em>
         </div>
@@ -297,7 +298,7 @@ export default function Home() {
       {/* ADVANTAGES */}
       <section id="advantages">
         <div className="adv-wrap" style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center", gap:"2rem"}}>
-          <div className="eyebrow rv" style={{"color":"#2877A7",}}>Why Choose Us</div>
+          <div className="eyebrow rv" style={{"color":"#2877A7",fontSize:"28px",letterSpacing:"0.1em"}}>Why Choose Us</div>
           <h2 className="st rv d1" style={{ maxWidth: '440px' }}>Our <em style={{"color":"#2877A7",}}>Advantages</em></h2>
           <div className="adv-grid">
             {advantages.map((a, i) => (
@@ -312,7 +313,7 @@ export default function Home() {
 
       {/* FOOTPRINT */}
       <section id="footprint" style={{backgroundColor:"white"}}>
-        <div className="eyebrow" style={{ "color":"#2877A7",justifyContent: 'center' }}>Global Reach</div>
+        <div className="eyebrow" style={{ "color":"#2877A7",justifyContent: 'center',fontSize:"28px",letterSpacing:"0.1em" }}>Global Reach</div>
         <h2 className="st rv d1" style={{"color":"#2877A7",}}>Our Footprint</h2>
         <p className="sub rv d2" style={{"color":"black",}}>From the heart of Africa to markets across the globe — supplying premium gelatin wherever quality is demanded.</p>
         <div className="map-wrap rv-scale">
@@ -367,24 +368,26 @@ export default function Home() {
       </section>
 
       {/* CERTIFICATIONS */}
-      <section id="certifications">
-        <div className="cert-inner">
-          <div className="cert-left">
-            <div className="eyebrow rv">Quality &amp; Compliance</div>
-            <h2 className="st rv d1">Quality You Can <em>Trust.</em></h2>
-            <p className="rv d2">Every batch of Genesis Biotech gelatin is produced under internationally recognized standards. Our certifications reflect our unwavering commitment to purity, safety, and compliance across global markets.</p>
-            <p className="rv d3">We partner with independent certifying bodies to ensure full traceability from source to delivery — so you never have to guess about what's in your product.</p>
-            <div className="cert-chips rv d3">
+      {/* <section id="" >
+        <div style={{display:"flex", justifyContent:"center", alignItems:"center",flexDirection:"column", gap:"2rem", marginLeft:"auto", marginRight:"auto" , marginTop:"4rem", marginBottom:"4rem"}}>
+          <div  style={{"display":"flex",alignItems:"center", justifyContent:"center", flexDirection:'column'}}>
+            <div>Quality &amp; Compliance</div>
+            <h2 >Quality You Can <em>Trust.</em></h2>
+            <p >Every batch of Genesis Biotech gelatin is produced under internationally recognized standards. Our certifications reflect our unwavering commitment to purity, safety, and compliance across global markets.</p>
+            <p >We partner with independent certifying bodies to ensure full traceability from source to delivery — so you never have to guess about what's in your product.</p>
+            <div>
               {['Halal Certified','Kosher Certified','ISO Compliant','GMP Verified'].map(c => (
                 <div key={c} className="chip"><span className="chipdot" />{c}</div>
               ))}
             </div>
           </div>
-          <div className="cert-right rv d2">
+          <div>
             <img src="/assets/logos-2.png" alt="Genesis Biotech Certifications"  />
           </div>
         </div>
-      </section>
+      </section> */}
+      <QualitySection />
+      
 
       {/* FOOTER */}
       <footer>

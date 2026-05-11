@@ -929,7 +929,7 @@ h2.st.on-dark em { color: var(--lime); }
 /* ─────────────────────────────────────────────
    ADVANTAGES
 ───────────────────────────────────────────── */
-#advantages { padding: 10rem 5vw; background: var(--white); }
+#advantages { padding: 5rem 5vw; background: var(--white); }
 
 .adv-wrap { max-width: 1400px; margin: 0 auto; }
 
@@ -1093,7 +1093,7 @@ h2.st.on-dark em { color: var(--lime); }
 ───────────────────────────────────────────── */
 #footprint {
   background: var(--cream-2);
-  padding: 10rem 5vw;
+  padding: 5rem 5vw;
   text-align: center;
   border-top: 1px solid var(--border);
 }
