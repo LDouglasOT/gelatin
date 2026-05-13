@@ -186,13 +186,11 @@ export default function PresentationPage() {
       {/* ── CERTIFICATIONS (same strip as Home / About) ── */}
       <div style={{ background: 'var(--white)', borderTop: '1px solid var(--border)', padding: '5rem 5vw', textAlign: 'center' }}>
         <div className="eyebrow rv" style={{ justifyContent: 'center' }}>Certified Quality</div>
-        <Image
+        <img
           className="rv d1"
           src="/assets/logos-2.png"
           alt="Genesis Biotech Certifications"
-          width={800}
-          height={200}
-          style={{ margin: '2rem auto 0', display: 'block', width: '100%', height: 'auto' }}
+          style={{ margin: '2rem auto 0', display: 'block', width: '60%', height: 'auto', marginLeft:"auto", marginRight:"auto" }}
         />
       </div>
 

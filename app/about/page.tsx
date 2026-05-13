@@ -1,11 +1,21 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 
-export default function About() {
+const PdfFlipBook = dynamic(() => import('./presentation/PdfFlipBook'), {
+  ssr: false,
+  loading: () => (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '40vh' }}>
+      <p style={{ fontFamily: 'inherit', color: '#888' }}>Loading presentation…</p>
+    </div>
+  ),
+})
+
+export default function PresentationPage() {
   const navRef = useRef<HTMLDivElement>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const pathname = usePathname()
@@ -33,9 +43,16 @@ export default function About() {
 
   return (
     <>
+      {/* ── NAV ── */}
       <nav id="nav" ref={navRef} className="solid">
         <Link href="/" className="nav-logo">
-          <Image src="/assets/icon-3Asset-3@300x-300x94.webp" alt="Genesis Biotech" width={102} height={32} style={{ height: 34, width: 'auto' }} />
+          <Image
+            src="/assets/icon-3Asset-3@300x-300x94.webp"
+            alt="Genesis Biotech"
+            width={102}
+            height={32}
+            style={{ height: 34, width: 'auto' }}
+          />
         </Link>
         <ul className="nav-links" style={navMenuStyle}>
           <li className={`has-sub ${pathname.startsWith('/about') ? 'active' : ''}`}>
@@ -50,152 +67,98 @@ export default function About() {
           <li className={pathname === '/' ? 'active' : ''}><Link href="/">Home</Link></li>
           <li><Link href="/contact" className="nav-cta">Contact Us</Link></li>
         </ul>
-        <div className="burger" onClick={() => setMenuOpen(!menuOpen)}><span /><span /><span /></div>
+        <div className="burger" onClick={() => setMenuOpen(!menuOpen)}>
+          <span /><span /><span />
+        </div>
       </nav>
 
       {/* ── PAGE HERO ── */}
       <section className="page-hero">
         <div className="page-hero-bg" />
         <div className="page-hero-inner">
-          <div className="eyebrow light rv">Our Story</div>
-          <h1 className="page-title rv d1">About <em>Us</em></h1>
+          <div className="page-title rv">Our Presentation</div>
         </div>
       </section>
 
-      {/* ── STORY ── */}
+      {/* ── INTRO ── */}
       <section className="story-section">
         <div className="story-inner">
-          <div className="story-img rv">
-            <Image src="/assets/iconAsset_resized-100-X-100-px.webp" alt="Genesis Biotech" width={180} height={180} />
-          </div>
           <div className="story-content">
-            <h2 className="st rv d1">The Essence of<br /><em>Natural Selection.</em></h2>
-            <div className="story-since rv d2">
-              <span className="story-year">2018</span>
-              <span className="story-label">Established</span>
+            <h2 className="st rv d1" style={{ color: 'black', fontSize: '30px', fontWeight: 'bold', letterSpacing: '0.1px', marginLeft: 'auto', marginRight: 'auto' }}>
+              The Natural Selection.
+            </h2>
+            <br />
+            <br />
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'start', alignItems: 'start' }}>
+              <span className="story-year" style={{ color: 'rgb(40, 119, 167)' }}>Company Overview</span>
+              <span className="story-label" style={{ fontSize: '15px' }}>Interactive Presentation</span>
             </div>
-            <p className="rv d2">
-              Genesis Biotech embodies the essence of natural selection. Our partners and clients favor products from pristine, pollution-free environments pulsating with pure, vital energy.
+            <p className="rv d2" style={{ fontSize: '19px' }}>
+              Genesis Biotech embodies the essence of natural selection — premium gelatin and collagen products sourced from pristine, pollution-free environments pulsating with pure, vital energy.
             </p>
-            <p className="rv d3">
-              We nurture lasting relationships with clients, partners, suppliers, employees, and our community. Our founding values are integrity and reliability, while our unceasing commitment to improvement drives our mission.
+            <p className="rv d3" style={{ fontSize: '19px' }}>
+              Explore our full company presentation below to learn about our products, certifications, global footprint, and commitment to quality.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ── WATER SOURCE ── */}
+      {/* ── STATS ── */}
       <section className="source-section">
         <div className="source-inner">
-          <div className="eyebrow rv">Our Water Source</div>
-          <div className="source-grid">
-            <div className="source-card rv d1">
-              <h3>Lake Victoria</h3>
-              <p>
-                Lake Victoria is the world's 2nd largest tropical lake in addition to its breathtaking beauty. It features other unique properties: its portable warm water (24–29°C) functions as a closed and pure biological ecosystem. 80% of the lake's water comes from pure rainfall, whereas the balance is provided by underground springs and rivers.
-              </p>
-              <p>
-                Unlike seawater, which suffers from industrial pollution, Lake Victoria's water is one of the purest water bodies in the world, as there are very few industries around the huge lake.
-              </p>
-            </div>
-            <div className="source-img rv d2">
-              <Image
-                src="/assets/home.png"
-                alt="Lake Victoria — the source"
-                width={600}
-                height={450}
-              />
-            </div>
+          <div className="eyebrow rv" style={{ color: 'rgb(40, 119, 167)', fontSize: '30px', fontWeight: 'bold', letterSpacing: '0.1px' }}>
+            At a Glance
           </div>
-        </div>
-      </section>
-
-      {/* ── FACTORY ── */}
-      <section className="factory-section">
-        <div className="factory-inner">
-          <div className="eyebrow rv">Our Factory</div>
-          <h2 className="st rv d1">World-Class<br /><em>Production</em></h2>
-          <p className="factory-intro rv d2">
-            Making gelatin is an intricate, sensitive process that requires cutting-edge professional and technological skills. Our production process abides by the highest standards: supervised and monitored 24×7. It guarantees the highest, world-leading sterilization and cleanliness of all of our facility's systems and overall high-quality products.
-          </p>
-          <div className="factory-grid">
+          <div className="source-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
             {[
-              '/assets/GENESIS-BIOTECH-FACTORY-PHOTO-5-1024x1024.png',
-              '/assets/GENESIS-BIOTECH-FACTORY-PHOTO-4-1024x1024.png',
-              '/assets/GENESIS-BIOTECH-FACTORY-PHOTO-3-1024x1024.png',
-              '/assets/GENESIS-BIOTECH-FACTORY-PHOTO-2-1024x1024.png',
-            ].map((src, i) => (
-              <div key={i} className={`fact-img rv d${i + 1}`}>
-                <Image src={src} alt={`Genesis Biotech Factory ${i + 1}`} width={400} height={400} />
+              { value: '2018', label: 'Founded' },
+              { value: 'Halal & Kosher', label: 'Certified' },
+              { value: 'Global', label: 'Reach' },
+              { value: 'Bovine & Fish', label: 'Product Lines' },
+            ].map(({ value, label }, i) => (
+              <div
+                key={label}
+                className={`source-card rv d${i + 1}`}
+                style={{
+                  textAlign: 'center',
+                  padding: '2rem 1.5rem',
+                  background: 'var(--white, #fff)',
+                  borderRadius: '12px',
+                  border: '1px solid var(--border, #e8ede6)',
+                }}
+              >
+                <div style={{ fontSize: '22px', fontWeight: '700', color: 'rgb(40, 119, 167)', marginBottom: '0.5rem' }}>{value}</div>
+                <div style={{ fontSize: '13px', color: '#888', letterSpacing: '0.08em', textTransform: 'uppercase' }}>{label}</div>
               </div>
             ))}
           </div>
-          <div className="factory-features rv d2">
-            <h4>Our factory leverages the optimal combination of:</h4>
-            <div className="feat-list">
-              {[
-                'Proximity to a sustainable source of high-quality raw material',
-                'Use of advanced know-how, novel and highly-efficient technology',
-                'Ongoing development with up-to-date research',
-                'Compliance with strict international standards and Kosher supervision',
-                'Multinational management capabilities',
-              ].map((f) => (
-                <div key={f} className="feat-item"><span className="feat-dot" /><span>{f}</span></div>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* ── OUR PRODUCTS ── */}
-      <section className="products-section">
-        <div className="products-inner">
-          <div className="eyebrow rv">Our Products</div>
-          <h2 className="st rv d1">Premium <em>Gelatin</em></h2>
-          <p className="products-intro rv d2">
-            Genesis Biotech produces both the Halal &amp; Kosher Bovine Gelatin and the Kosher Fish Gelatin in the highest quality, purity, and bloom values. Extensive knowledge, advanced equipment, and novelty enable us to produce high-level gelatin for various food-grade, pharmaceutical, and collagen applications.
+      {/* ── FLIPBOOK ── */}
+      <section className="factory-section">
+        <div className="factory-inner" style={{ textAlign: 'center' }}>
+          <div className="eyebrow rv" style={{ color: 'rgb(40, 119, 167)', fontSize: '30px', fontWeight: 'bold', letterSpacing: '0.1px', justifyContent: 'center' }}>
+            Interactive Viewer
+          </div>
+          <h2 className="st rv d1">Company Presentation</h2>
+          <p className="factory-intro rv d2" style={{ fontSize: '19px' }}>
+            Click the book to open the interactive presentation and flip through our full company overview.
           </p>
-          <div className="products-grid">
-            <div className="prod-card rv d1">
-              <Image
-                src="/assets/cow-2Asset-2@300x.webp"
-                alt="Halal & Kosher Bovine Gelatin"
-                width={500}
-                height={400}
-              />
-              <div className="prod-card-content">
-                <div className="pcat">Halal &amp; Kosher Certified</div>
-                <h3>Halal &amp; Kosher Bovine Gelatin</h3>
-                <p>The fresh cow hides from the local Eastern African region provide a remarkable source of high-quality gelatin. Thanks to the region's unique climate and the cows' organic diet, the gelatin derived from these hides is known for its high protein content.</p>
-              </div>
-            </div>
-            <div className="prod-card rv d2">
-              <Image
-                src="/assets/Nile-Perch.png"
-                alt="Kosher Fish Gelatin — Nile Perch"
-                width={400}
-                height={400}
-              />
-              <div className="prod-card-content">
-                <div className="pcat">Kosher Certified</div>
-                <h3>Kosher Fish Gelatin</h3>
-                <p>Nile Perch is considered an excellent source for the production of pure, high-quality gelatin. Unlike other fish, the Nile Perch of Lake Victoria benefits from a relatively warm environment; hence, the collagen produced from its thick skin has exceptionally high protein value.</p>
-              </div>
-            </div>
+          <div className="rv d3" style={{ marginTop: '2rem' }}>
+            <PdfFlipBook />
           </div>
         </div>
       </section>
 
       {/* ── CERTIFICATIONS STRIP ── */}
       <div style={{ background: 'var(--white)', borderTop: '1px solid var(--border)', padding: '5rem 5vw', textAlign: 'center' }}>
-        <div className="eyebrow rv" style={{ justifyContent: 'center' }}>Certified Quality</div>
-          <Image
+        <div className="eyebrow rv" style={{ justifyContent: 'center', color: 'rgb(40, 119, 167)', fontSize: '20px', fontWeight: 'bold' }}>Certified Quality</div>
+        <img
           className="rv d1"
           src="/assets/logos-2.png"
           alt="Genesis Biotech Certifications"
-          width={800}
-          height={200}
-          style={{ margin: '2rem auto 0', display: 'block', width: '100%', height: 'auto' }}
+          style={{ margin: '2rem auto 0', display: 'block', height: 'auto', width: '90%' }}
         />
       </div>
 
@@ -203,29 +166,37 @@ export default function About() {
       <footer>
         <div className="ft">
           <div>
-            <Image className="fl-logo" src="/assets/icon-4Asset-4@300x-300x94.webp" alt="Genesis Biotech" width={90} height={28} />
-            <p className="fl-desc">Premium Halal &amp; Kosher gelatin sourced from pristine, pollution-free environments along the Nile. Serving pharmaceutical, collagen, and food industries globally since 2018.</p>
+            <Image
+              className="fl-logo"
+              src="/assets/icon-4Asset-4@300x-300x94.webp"
+              alt="Genesis Biotech"
+              width={90}
+              height={28}
+            />
+            <p className="fl-desc" style={{ color: 'white', fontSize: '19px' }}>
+              Premium Halal &amp; Kosher gelatin sourced from pristine, pollution-free environments along the Nile. Serving pharmaceutical, collagen, and food industries globally since 2018.
+            </p>
           </div>
           <div>
-            <div className="fc-head">Navigation</div>
+            <div className="fc-head" style={{ color: 'white' }}>Navigation</div>
             <ul className="fl">
-              <li><Link href="/about">About</Link></li>
-              <li><Link href="/product-applications">Product Applications</Link></li>
-              <li><Link href="/advantages">Advantages</Link></li>
-              <li><Link href="/">Home</Link></li>
-              <li><Link href="/contact">Contact Us</Link></li>
+              <li><Link href="/about" style={{ color: 'white' }}>About</Link></li>
+              <li><Link href="/product-applications" style={{ color: 'white' }}>Product Applications</Link></li>
+              <li><Link href="/advantages" style={{ color: 'white' }}>Advantages</Link></li>
+              <li><Link href="/" style={{ color: 'white' }}>Home</Link></li>
+              <li><Link href="/contact" style={{ color: 'white' }}>Contact Us</Link></li>
             </ul>
           </div>
           <div>
-            <div className="fc-head">Contact Us</div>
-            <div className="fci"><span>Phone</span>+971 55 132 1079</div>
-            <div className="fci"><span>General</span>romy@genesisbiotech.net</div>
-            <div className="fci"><span>North America</span>northamerica@genesisbiotech.net</div>
+            <div className="fc-head" style={{ color: 'white' }}>Contact Us</div>
+            <div className="fci" style={{ color: 'white' }}><span style={{ color: 'white' }}>Phone</span>+971 55 132 1079</div>
+            <div className="fci" style={{ color: 'white' }}><span style={{ color: 'white' }}>General</span>romy@genesisbiotech.net</div>
+            <div className="fci" style={{ color: 'white' }}><span style={{ color: 'white' }}>North America</span>northamerica@genesisbiotech.net</div>
           </div>
         </div>
         <div className="fb">
-          <div className="fb-copy">Genesis Biotech © 2025 · All Rights Reserved</div>
-          <div className="fb-copy">Premium Gelatin · Straight from the Source of the Nile</div>
+          <div className="fb-copy" style={{ color: 'white' }}>Genesis Biotech © 2025 · All Rights Reserved</div>
+          <div className="fb-copy" style={{ color: 'white' }}>Premium Gelatin · Straight from the Source of the Nile</div>
         </div>
       </footer>
     </>

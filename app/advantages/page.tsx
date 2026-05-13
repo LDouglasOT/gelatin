@@ -62,10 +62,16 @@ export default function Advantages() {
       title: 'International Standards & Certifications',
       desc: 'Compliance with the strictest international standards, and Kosher and Halal supervision across every batch we produce.',
     },
+    {
+      img: '/assets/Excellent-Relationships.png',
+      title: 'Long Lasting Relationships',
+      desc: 'Our multinational management capabilities and diverse workforce are dedicated to pursuing and maintaining mutually beneficial, long-lasting relationships.',
+    },
   ]
 
   return (
     <>
+      {/* ── NAV ── */}
       <nav id="nav" ref={navRef} className="solid">
         <Link href="/" className="nav-logo">
           <Image src="/assets/icon-3Asset-3@300x-300x94.webp" alt="Genesis Biotech" width={102} height={32} style={{ height: 34, width: 'auto' }} />
@@ -90,64 +96,72 @@ export default function Advantages() {
       <section className="page-hero">
         <div className="page-hero-bg" />
         <div className="page-hero-inner">
-          <div className="eyebrow light rv">Why Choose Genesis Biotech</div>
-          <h1 className="page-title rv d1">Our <em>Advantages</em></h1>
+          <div className="page-title rv">Our Advantages</div>
         </div>
       </section>
 
-      {/* ── ADVANTAGES ── */}
-      <section id="advantages" style={{ paddingTop: '9rem', paddingBottom: '2rem' }}>
-        <div className="adv-wrap">
-          <div className="eyebrow rv">What Sets Us Apart</div>
-          <h2 className="st rv d1" style={{ maxWidth: '520px' }}>Built on <em>Quality &amp; Trust</em></h2>
-          <p className="rv d2" style={{ fontSize: '.97rem', lineHeight: '1.82', color: 'var(--text-2)', maxWidth: '620px', marginTop: '1.2rem' }}>
-            From pristine sourcing to sustainable practices, international certifications, and lasting partnerships — discover what makes Genesis Biotech the preferred gelatin supplier for discerning global markets.
-          </p>
+      {/* ── INTRO ── */}
+      <section className="story-section">
+        <div className="story-inner">
+          <div className="story-content">
+            <h2 className="st rv d1" style={{ color: 'black', fontSize: '30px', fontWeight: 'bold', letterSpacing: '0.1px', marginLeft: 'auto', marginRight: 'auto' }}>
+              Built on Quality &amp; Trust.
+            </h2>
+            <br />
+            <br />
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'start', alignItems: 'start' }}>
+              <span className="story-year" style={{ color: 'rgb(40, 119, 167)' }}>Why Us</span>
+              <span className="story-label" style={{ fontSize: '15px' }}>What Sets Us Apart</span>
+            </div>
+            <p className="rv d2" style={{ fontSize: '19px' }}>
+              From pristine sourcing to sustainable practices, international certifications, and lasting partnerships — discover what makes Genesis Biotech the preferred gelatin supplier for discerning global markets.
+            </p>
+            <p className="rv d3" style={{ fontSize: '19px' }}>
+              Every advantage we offer is rooted in our core values: integrity, reliability, and an unceasing commitment to improvement.
+            </p>
+          </div>
         </div>
       </section>
 
-      <section id="advantages-content">
-        <div className="adv-container">
-          {/* Rows of 2 */}
+      {/* ── ADVANTAGES GRID ── */}
+      <section className="source-section">
+        <div className="source-inner">
+          <div className="eyebrow rv" style={{ color: 'rgb(40, 119, 167)', fontSize: '30px', fontWeight: 'bold', letterSpacing: '0.1px' }}>
+            What Sets Us Apart
+          </div>
+
+          {/* Pair rows */}
           {[0, 2, 4].map((start) => (
-            <div key={start} className="adv-row">
+            <div key={start} className="source-grid" style={{ marginBottom: '4rem' }}>
               {advantages.slice(start, start + 2).map((a, i) => (
-                <div key={a.title} className={`adv-card rv d${i + 1}`}>
-                  <Image src={a.img} alt={a.title} width={231} height={231} className="adv-img" />
-                  <h3 className="adv-title">{a.title}</h3>
-                  <p className="adv-desc">{a.desc}</p>
+                <div key={a.title} className={`source-card rv d${i + 1}`} style={{ textAlign: 'center', padding: '2.5rem 2rem', background: 'var(--white, #fff)', borderRadius: '12px', border: '1px solid var(--border, #e8ede6)' }}>
+                  <Image src={a.img} alt={a.title} width={120} height={120} style={{ margin: '0 auto 1.5rem', display: 'block' }} />
+                  <h3 style={{ fontSize: '20px', fontWeight: '700', color: 'black', marginBottom: '1rem' }}>{a.title}</h3>
+                  <p style={{ fontSize: '19px', lineHeight: '1.75' }}>{a.desc}</p>
                 </div>
               ))}
             </div>
           ))}
 
-          {/* Centered last card */}
-          <div className="adv-row adv-row-centered">
-            <div className="adv-card adv-card-wide rv d3">
-              <Image
-                src="/assets/Excellent-Relationships.png"
-                alt="Long Lasting Relationships"
-                width={231}
-                height={231}
-                className="adv-img"
-              />
-              <h3 className="adv-title">Long Lasting Relationships</h3>
-              <p className="adv-desc">Our multinational management capabilities and diverse workforce are dedicated to pursuing and maintaining mutually beneficial, long-lasting relationships.</p>
+          {/* Last card centered */}
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <div className="rv d1" style={{ textAlign: 'center', padding: '2.5rem 2rem', background: 'var(--white, #fff)', borderRadius: '12px', border: '1px solid var(--border, #e8ede6)', maxWidth: '520px', width: '100%' }}>
+              <Image src={advantages[6].img} alt={advantages[6].title} width={120} height={120} style={{ margin: '0 auto 1.5rem', display: 'block' }} />
+              <h3 style={{ fontSize: '20px', fontWeight: '700', color: 'black', marginBottom: '1rem' }}>{advantages[6].title}</h3>
+              <p style={{ fontSize: '19px', lineHeight: '1.75' }}>{advantages[6].desc}</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── CERT STRIP ── */}
-      <div style={{ background: 'var(--cream)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '5rem 5vw', textAlign: 'center' }}>
-        <div className="eyebrow rv" style={{ justifyContent: 'center' }}>Our Certifications</div>
-        <Image
+      {/* ── CERTIFICATIONS STRIP ── */}
+      <div style={{ background: 'var(--white)', borderTop: '1px solid var(--border)', padding: '5rem 5vw', textAlign: 'center' }}>
+        <div className="eyebrow rv" style={{ justifyContent: 'center', color: 'rgb(40, 119, 167)', fontSize: '20px', fontWeight: 'bold' }}>Certified Quality</div>
+        <img
           className="rv d1"
           src="/assets/logos-2.png"
-          alt="Certifications"
-          width={460}
-          height={120}
-          style={{ margin: '2rem auto 0', display: 'block', maxWidth: '100%' }}
+          alt="Genesis Biotech Certifications"
+          style={{ margin: '2rem auto 0', display: 'block', width: '60%', height: 'auto', marginLeft:"auto", marginRight:"auto" }}
         />
       </div>
 
@@ -156,28 +170,28 @@ export default function Advantages() {
         <div className="ft">
           <div>
             <Image className="fl-logo" src="/assets/icon-4Asset-4@300x-300x94.webp" alt="Genesis Biotech" width={90} height={28} />
-            <p className="fl-desc">Premium Halal &amp; Kosher gelatin sourced from pristine, pollution-free environments along the Nile. Serving pharmaceutical, collagen, and food industries globally since 2018.</p>
+            <p className="fl-desc" style={{ color: 'white', fontSize: '19px' }}>Premium Halal &amp; Kosher gelatin sourced from pristine, pollution-free environments along the Nile. Serving pharmaceutical, collagen, and food industries globally since 2018.</p>
           </div>
           <div>
-            <div className="fc-head">Navigation</div>
+            <div className="fc-head" style={{ color: 'white' }}>Navigation</div>
             <ul className="fl">
-              <li><Link href="/about">About</Link></li>
-              <li><Link href="/product-applications">Product Applications</Link></li>
-              <li><Link href="/advantages">Advantages</Link></li>
-              <li><Link href="/">Home</Link></li>
-              <li><Link href="/contact">Contact Us</Link></li>
+              <li><Link href="/about" style={{ color: 'white' }}>About</Link></li>
+              <li><Link href="/product-applications" style={{ color: 'white' }}>Product Applications</Link></li>
+              <li><Link href="/advantages" style={{ color: 'white' }}>Advantages</Link></li>
+              <li><Link href="/" style={{ color: 'white' }}>Home</Link></li>
+              <li><Link href="/contact" style={{ color: 'white' }}>Contact Us</Link></li>
             </ul>
           </div>
           <div>
-            <div className="fc-head">Contact Us</div>
-            <div className="fci"><span>Phone</span>+971 55 132 1079</div>
-            <div className="fci"><span>General</span>romy@genesisbiotech.net</div>
-            <div className="fci"><span>North America</span>northamerica@genesisbiotech.net</div>
+            <div className="fc-head" style={{ color: 'white' }}>Contact Us</div>
+            <div className="fci" style={{ color: 'white' }}><span style={{ color: 'white' }}>Phone</span>+971 55 132 1079</div>
+            <div className="fci" style={{ color: 'white' }}><span style={{ color: 'white' }}>General</span>romy@genesisbiotech.net</div>
+            <div className="fci" style={{ color: 'white' }}><span style={{ color: 'white' }}>North America</span>northamerica@genesisbiotech.net</div>
           </div>
         </div>
         <div className="fb">
-          <div className="fb-copy">Genesis Biotech © 2025 · All Rights Reserved</div>
-          <div className="fb-copy">Premium Gelatin · Straight from the Source of the Nile</div>
+          <div className="fb-copy" style={{ color: 'white' }}>Genesis Biotech © 2025 · All Rights Reserved</div>
+          <div className="fb-copy" style={{ color: 'white' }}>Premium Gelatin · Straight from the Source of the Nile</div>
         </div>
       </footer>
     </>

@@ -5,11 +5,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-export default function Contact() {
+export default function ProductApplications() {
   const navRef = useRef<HTMLDivElement>(null)
   const [menuOpen, setMenuOpen] = useState(false)
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', subject: '', message: '' })
-  const [submitted, setSubmitted] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -29,17 +27,13 @@ export default function Contact() {
     return () => observer.disconnect()
   }, [])
 
-  const handleSubmit = (e: React.FormEvent) => { e.preventDefault(); setSubmitted(true) }
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
-
   const navMenuStyle: React.CSSProperties = menuOpen
     ? { display: 'flex', flexDirection: 'column', position: 'fixed', top: 78, left: 0, right: 0, background: 'rgba(255,255,255,.98)', backdropFilter: 'blur(18px)', padding: '2rem', gap: '1.5rem', borderBottom: '1px solid rgba(45,107,68,.14)', zIndex: 899 }
     : {}
 
   return (
     <>
+      {/* ── NAV ── */}
       <nav id="nav" ref={navRef} className="solid">
         <Link href="/" className="nav-logo">
           <Image src="/assets/icon-3Asset-3@300x-300x94.webp" alt="Genesis Biotech" width={102} height={32} style={{ height: 34, width: 'auto' }} />
@@ -64,105 +58,204 @@ export default function Contact() {
       <section className="page-hero">
         <div className="page-hero-bg" />
         <div className="page-hero-inner">
-          <div className="eyebrow light rv">Get in Touch</div>
-          <h1 className="page-title rv d1">Contact <em>Us</em></h1>
+          <div className="page-title rv">Product Applications</div>
         </div>
       </section>
 
-      {/* ── CONTACT SECTION ── */}
-      <section className="contact-section">
-        <div className="contact-inner">
-          <p className="contact-intro rv">We would love to hear from you.</p>
-          <div className="contact-grid">
-            <div className="contact-info rv">
-              <div className="ci-item">
-                <div className="ci-icon">📞</div>
-                <div className="ci-label">Phone</div>
-                <div className="ci-value">+971 55 132 1079</div>
-              </div>
-              <div className="ci-item">
-                <div className="ci-icon">✉️</div>
-                <div className="ci-label">General Inquiries</div>
-                <div className="ci-value">
-                  <span>romy@genesisbiotech.net</span>
-                </div>
-              </div>
-              <div className="ci-item">
-                <div className="ci-icon">🌎</div>
-                <div className="ci-label">North America</div>
-                <div className="ci-value">
-                  <span>northamerica@genesisbiotech.net</span>
-                </div>
-              </div>
+      {/* ── INTRO ── */}
+      <section className="story-section">
+        <div className="story-inner">
+          <div className="story-img rv">
+            <Image src="/assets/iconAsset_resized-100-X-100-px.webp" alt="Genesis Biotech" width={180} height={180} />
+          </div>
+          <div className="story-content">
+            <h2 className="st rv d1" style={{ color: 'black', fontSize: '30px', fontWeight: 'bold', letterSpacing: '0.1px', marginLeft: 'auto', marginRight: 'auto' }}>
+              What Our High Quality Gelatin Can Do.
+            </h2>
+            <br />
+            <br />
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'start', alignItems: 'start' }}>
+              <span className="story-year" style={{ color: 'rgb(40, 119, 167)' }}>Applications</span>
+              <span className="story-label" style={{ fontSize: '15px' }}>Three Major Industries</span>
             </div>
-            <div className="contact-form-wrapper rv d1">
-              {submitted ? (
-                <div className="form-success">
-                  <h3>Thank you!</h3>
-                  <p>We have received your message and will get back to you shortly.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit}>
-                  <div className="cf-title">Send Us a Message</div>
-                  <div className="form-row">
-                    <div className="fg">
-                      <label htmlFor="name">Name</label>
-                      <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required placeholder="Your Name" />
-                    </div>
-                    <div className="fg">
-                      <label htmlFor="email">Email</label>
-                      <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required placeholder="your@email.com" />
-                    </div>
-                  </div>
-                  <div className="form-row">
-                    <div className="fg">
-                      <label htmlFor="phone">Phone</label>
-                      <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleChange} placeholder="+1 234 567 890" />
-                    </div>
-                    <div className="fg">
-                      <label htmlFor="subject">Subject</label>
-                      <input type="text" id="subject" name="subject" value={formData.subject} onChange={handleChange} required placeholder="Subject" />
-                    </div>
-                  </div>
-                  <div className="fg">
-                    <label htmlFor="message">Message</label>
-                    <textarea id="message" name="message" value={formData.message} onChange={handleChange} required placeholder="Tell us about your requirements…" rows={5} />
-                  </div>
-                  <button type="submit" className="f-btn">Send Message →</button>
-                </form>
-              )}
+            <p className="rv d2" style={{ fontSize: '19px' }}>
+              Genesis Biotech produces premium gelatin serving three major industries — pharmaceutical, cosmetic, and food &amp; confectionary — with consistent quality, compliance, and care.
+            </p>
+            <p className="rv d3" style={{ fontSize: '19px' }}>
+              Extensive knowledge, advanced equipment, and novelty enable us to produce high-level gelatin for various food-grade, pharmaceutical, and collagen applications.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── PHARMACEUTICALS ── */}
+      <section className="source-section">
+        <div className="source-inner">
+          <div className="eyebrow rv" style={{ color: 'rgb(40, 119, 167)', fontSize: '30px', fontWeight: 'bold', letterSpacing: '0.1px' }}>Medical · Healthcare</div>
+          <div className="source-grid">
+            <div className="source-card rv d1">
+              <h3>Pharmaceuticals</h3>
+              <p style={{ fontSize: '19px' }}>
+                Benefit from precise drug delivery and safety ensured by our gelatin products, a crucial element in pharmaceutical formulations.
+              </p>
+              <p style={{ fontSize: '19px' }}>
+                Our gelatin meets BP and USP pharmacopeial standards for hard and soft capsules, tablet coatings, plasma expanders, and wound dressings.
+              </p>
+            </div>
+            <div className="source-img rv d2">
+              <Image
+                src="/assets/spoons-with-pills-scaled.jpg"
+                alt="Pharmaceuticals"
+                width={600}
+                height={450}
+              />
             </div>
           </div>
         </div>
       </section>
+
+      {/* ── COLLAGEN ── */}
+      <section className="factory-section">
+        <div className="factory-inner">
+          <div className="eyebrow rv" style={{ color: 'rgb(40, 119, 167)', fontSize: '30px', fontWeight: 'bold', letterSpacing: '0.1px' }}>Beauty · Wellness</div>
+          <h2 className="st rv d1">Collagen</h2>
+          <p className="factory-intro rv d2" style={{ fontSize: '19px' }}>
+            Experience the natural benefits of collagen for healthy skin, hair, and joints. Our premium hydrolyzed collagen peptides are ideal for skincare, anti-aging formulations, nutraceuticals, and functional beauty supplements.
+          </p>
+          <div className="factory-grid" style={{ gridTemplateColumns: '1fr', maxWidth: '520px', margin: '0 auto' }}>
+            <div className="fact-img rv d1">
+              <Image src="/assets/face-cream.png" alt="Collagen" width={520} height={400} style={{ objectFit: 'contain', background: 'var(--cream)', padding: '2rem', borderRadius: '12px' }} />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FOOD & CONFECTIONARY ── */}
+      <section className="source-section">
+        <div className="source-inner">
+          <div className="eyebrow rv" style={{ color: 'rgb(40, 119, 167)', fontSize: '30px', fontWeight: 'bold', letterSpacing: '0.1px' }}>Food · Confectionary</div>
+          <div className="source-grid">
+            <div className="source-card rv d1">
+              <h3>Food &amp; Confectionary</h3>
+              <p style={{ fontSize: '19px' }}>
+                Enjoy the enhanced texture and taste of your products, from desserts to gummy candies, thanks to our high-quality gelatin.
+              </p>
+              <p style={{ fontSize: '19px' }}>
+                Perfect for gummies, marshmallows, jellies, dairy stabilizers, and desserts — delivering perfect texture, clarity, and mouthfeel every time.
+              </p>
+            </div>
+            <div className="source-img rv d2">
+              <Image
+                src="/assets/assortment-multi-colored-marmalades-scaled.jpg"
+                alt="Food & Confectionary"
+                width={600}
+                height={450}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── HEALTH BENEFITS ── */}
+      <section className="products-section">
+        <div className="products-inner">
+          <div className="eyebrow rv" style={{ color: 'rgb(40, 119, 167)', fontSize: '30px', fontWeight: 'bold', letterSpacing: '0.1px' }}>Health Benefits</div>
+          <h2 className="st rv d1">Benefits of Gelatin</h2>
+          <div className="products-grid">
+            <div className="prod-card rv d1">
+              <Image
+                src="/assets/Taking-care-of-your-bones-and-joints-with-gelatin-150x150-1.webp"
+                alt="Bones and Joints"
+                width={200}
+                height={200}
+              />
+              <div className="prod-card-content">
+                <div className="pcat" style={{ color: 'rgb(40, 119, 167)' }}>Structural Health</div>
+                <h3>Taking care of your bones and joints</h3>
+                <p style={{ fontSize: '19px' }}>Gelatin contains multiple amino acids that are proven to help prevent joint cartilage erosion and weakening.</p>
+              </div>
+            </div>
+            <div className="prod-card rv d2">
+              <Image
+                src="/assets/Gelatin-for-better-digestion-150x150-1.webp"
+                alt="Better Digestion"
+                width={200}
+                height={200}
+              />
+              <div className="prod-card-content">
+                <div className="pcat" style={{ color: 'rgb(40, 119, 167)' }}>Gut Health</div>
+                <h3>Better Digestion</h3>
+                <p style={{ fontSize: '19px' }}>Gelatin's natural bond with water eases the food's movement through the digestive system, supporting gut health.</p>
+              </div>
+            </div>
+            <div className="prod-card rv d3">
+              <Image
+                src="/assets/Stronger-and-prettier-nails-hair-and-skin.png"
+                alt="Nails, Hair and Skin"
+                width={200}
+                height={200}
+              />
+              <div className="prod-card-content">
+                <div className="pcat" style={{ color: 'rgb(40, 119, 167)' }}>Beauty</div>
+                <h3>Stronger and prettier nails, hair and skin</h3>
+                <p style={{ fontSize: '19px' }}>Gelatin enhances the look of the skin, strengthens the hair roots, reinforces thin brittle nails, and smooths out wrinkles.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA STRIP ── */}
+      <section className="factory-section" style={{ textAlign: 'center' }}>
+        <div className="factory-inner">
+          <h2 className="st rv d1">Ready to Source the World's Finest Gelatin?</h2>
+          <p className="factory-intro rv d2" style={{ fontSize: '19px' }}>
+            Contact us today to request a sample or quotation for Halal &amp; Kosher certified gelatin.
+          </p>
+          <div className="rv d3" style={{ marginTop: '2.5rem' }}>
+            <Link href="/contact" className="btn-g">Get in Touch</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CERTIFICATIONS STRIP ── */}
+      <div style={{ background: 'var(--white)', borderTop: '1px solid var(--border)', padding: '5rem 5vw', textAlign: 'center' }}>
+        <div className="eyebrow rv" style={{ justifyContent: 'center', color: 'rgb(40, 119, 167)', fontSize: '20px', fontWeight: 'bold' }}>Certified Quality</div>
+        <img
+          className="rv d1"
+          src="/assets/logos-2.png"
+          alt="Genesis Biotech Certifications"
+          style={{ margin: '2rem auto 0', display: 'block', height: 'auto', width: '90%' }}
+        />
+      </div>
 
       {/* ── FOOTER ── */}
       <footer>
         <div className="ft">
           <div>
             <Image className="fl-logo" src="/assets/icon-4Asset-4@300x-300x94.webp" alt="Genesis Biotech" width={90} height={28} />
-            <p className="fl-desc">Premium Halal &amp; Kosher gelatin sourced from pristine, pollution-free environments along the Nile. Serving pharmaceutical, collagen, and food industries globally since 2018.</p>
+            <p className="fl-desc" style={{ color: 'white', fontSize: '19px' }}>Premium Halal &amp; Kosher gelatin sourced from pristine, pollution-free environments along the Nile. Serving pharmaceutical, collagen, and food industries globally since 2018.</p>
           </div>
           <div>
-            <div className="fc-head">Navigation</div>
+            <div className="fc-head" style={{ color: 'white' }}>Navigation</div>
             <ul className="fl">
-              <li><Link href="/about">About</Link></li>
-              <li><Link href="/product-applications">Product Applications</Link></li>
-              <li><Link href="/advantages">Advantages</Link></li>
-              <li><Link href="/">Home</Link></li>
-              <li><Link href="/contact">Contact Us</Link></li>
+              <li><Link href="/about" style={{ color: 'white' }}>About</Link></li>
+              <li><Link href="/product-applications" style={{ color: 'white' }}>Product Applications</Link></li>
+              <li><Link href="/advantages" style={{ color: 'white' }}>Advantages</Link></li>
+              <li><Link href="/" style={{ color: 'white' }}>Home</Link></li>
+              <li><Link href="/contact" style={{ color: 'white' }}>Contact Us</Link></li>
             </ul>
           </div>
           <div>
-            <div className="fc-head">Contact Us</div>
-            <div className="fci"><span>Phone</span>+971 55 132 1079</div>
-            <div className="fci"><span>General</span>romy@genesisbiotech.net</div>
-            <div className="fci"><span>North America</span>northamerica@genesisbiotech.net</div>
+            <div className="fc-head" style={{ color: 'white' }}>Contact Us</div>
+            <div className="fci" style={{ color: 'white' }}><span style={{ color: 'white' }}>Phone</span>+971 55 132 1079</div>
+            <div className="fci" style={{ color: 'white' }}><span style={{ color: 'white' }}>General</span>romy@genesisbiotech.net</div>
+            <div className="fci" style={{ color: 'white' }}><span style={{ color: 'white' }}>North America</span>northamerica@genesisbiotech.net</div>
           </div>
         </div>
         <div className="fb">
-          <div className="fb-copy">Genesis Biotech © 2025 · All Rights Reserved</div>
-          <div className="fb-copy">Premium Gelatin · Straight from the Source of the Nile</div>
+          <div className="fb-copy" style={{ color: 'white' }}>Genesis Biotech © 2025 · All Rights Reserved</div>
+          <div className="fb-copy" style={{ color: 'white' }}>Premium Gelatin · Straight from the Source of the Nile</div>
         </div>
       </footer>
     </>
