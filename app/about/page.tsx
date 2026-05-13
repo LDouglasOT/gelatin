@@ -43,6 +43,7 @@ export default function PresentationPage() {
 
   return (
     <>
+  
       {/* ── NAV ── */}
       <nav id="nav" ref={navRef} className="solid">
         <Link href="/" className="nav-logo">
@@ -54,6 +55,7 @@ export default function PresentationPage() {
             style={{ height: 34, width: 'auto' }}
           />
         </Link>
+        
         <ul className="nav-links" style={navMenuStyle}>
           <li className={`has-sub ${pathname.startsWith('/about') ? 'active' : ''}`}>
             <Link href="/about">About</Link>
@@ -71,7 +73,7 @@ export default function PresentationPage() {
           <span /><span /><span />
         </div>
       </nav>
-
+       
       {/* ── PAGE HERO ── */}
       <section className="page-hero">
         <div className="page-hero-bg" />
