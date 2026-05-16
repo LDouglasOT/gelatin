@@ -179,40 +179,40 @@ export default function ProductApplications() {
           Ready to source the world's finest Halal &amp; Kosher gelatin?<br />
           <em>Contact us today to request a sample or quotation.</em>
         </div>
-        <div style={{ textAlign: 'center', marginTop: '2.5rem', position: 'relative', zIndex: 1 }}>
-          <Link href="/contact" className="btn-g">Get in Touch</Link>
+        <div style={{ textAlign: 'center',  marginTop: '2.5rem', position: 'relative', zIndex: 1 }}>
+          <Link href="/contact" style={{borderWidth:"2px",borderColor:"white",borderStyle:"solid",borderRadius:"3px"}} className="btn-g">Get in Touch</Link>
         </div>
       </div>
-
+          <hr />
       {/* ── FOOTER ── */}
-      <footer>
-        <div className="ft">
-          <div>
-            <Image className="fl-logo" src="/assets/icon-4Asset-4@300x-300x94.webp" alt="Genesis Biotech" width={90} height={28} />
-            <p className="fl-desc">Premium Halal &amp; Kosher gelatin sourced from pristine, pollution-free environments along the Nile. Serving pharmaceutical, collagen, and food industries globally since 2018.</p>
-          </div>
-          <div>
-            <div className="fc-head">Navigation</div>
-            <ul className="fl">
-              <li><Link href="/about">About</Link></li>
-              <li><Link href="/product-applications">Product Applications</Link></li>
-              <li><Link href="/advantages">Advantages</Link></li>
-              <li><Link href="/">Home</Link></li>
-              <li><Link href="/contact">Contact Us</Link></li>
-            </ul>
-          </div>
-          <div>
-            <div className="fc-head">Contact Us</div>
-            <div className="fci"><span>Phone</span>+971 55 132 1079</div>
-            <div className="fci"><span>General</span>romy@genesisbiotech.net</div>
-            <div className="fci"><span>North America</span>northamerica@genesisbiotech.net</div>
-          </div>
-        </div>
-        <div className="fb">
-          <div className="fb-copy">Genesis Biotech © 2025 · All Rights Reserved</div>
-          <div className="fb-copy">Premium Gelatin · Straight from the Source of the Nile</div>
-        </div>
-      </footer>
+       <footer style={{color:"black", backgroundColor:"white"}}>
+              <div className="ft">
+                <div>
+                  <Image  style={{color:"black", backgroundColor:"white"}} className="fl-logo" src="/assets/icon-4Asset-4@300x-300x94.webp" alt="Genesis Biotech" width={100} height={32} />
+                  <p  style={{color:"black", backgroundColor:"white"}} className="fl-desc">Premium Halal &amp; Kosher gelatin sourced from pristine, pollution-free environments along the Nile. Serving pharmaceutical, collagen, and food industries globally since 2018.</p>
+                </div>
+                <div>
+                  <div  style={{color:"black", backgroundColor:"white"}} className="fc-head">Navigation</div>
+                  <ul  style={{color:"black", backgroundColor:"white"}} className="fl">
+                    <li><Link href="/about"  style={{color:"black", backgroundColor:"white"}}>About</Link></li>
+                    <li><Link href="/product-applications"  style={{color:"black", backgroundColor:"white"}}>Product Applications</Link></li>
+                    <li><a href="#advantages"  style={{color:"black", backgroundColor:"white"}}>Advantages</a></li>
+                    <li><a href="/"  style={{color:"black", backgroundColor:"white"}}>Home</a></li>
+                    <li><a href="#contact"  style={{color:"black", backgroundColor:"white"}}>Contact Us</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <div className="fc-head"  style={{color:"black", backgroundColor:"white"}}>Contact Us</div>
+                  <div className="fci"  style={{color:"black", backgroundColor:"white"}}><span  style={{color:"black", backgroundColor:"white"}}>Phone</span>+971 55 132 1079</div>
+                  <div className="fci"  style={{color:"black", backgroundColor:"white"}}><span  style={{color:"black", backgroundColor:"white"}}>General</span>romy@genesisbiotech.net</div>
+                  <div className="fci"  style={{color:"black", backgroundColor:"white"}}><span  style={{color:"black", backgroundColor:"white"}}>North America</span>northamerica@genesisbiotech.net</div>
+                </div>
+              </div>
+              <div className="fb">
+                <div className="fb-copy"  style={{color:"black", backgroundColor:"white"}}>Genesis Biotech © 2025 · All Rights Reserved</div>
+                <div className="fb-copy"  style={{color:"black", backgroundColor:"white"}}>Premium Gelatin · Straight from the Source of the Nile</div>
+              </div>
+            </footer>
     </>
   )
 }

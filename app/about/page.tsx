@@ -174,42 +174,34 @@ export default function PresentationPage() {
           style={{ margin: '2rem auto 0', display: 'block', height: 'auto', width: '90%' }}
         />
       </div>
-
+   <hr />
       {/* ── FOOTER ── */}
-      <footer>
+       <footer style={{color:"black", backgroundColor:"white"}}>
         <div className="ft">
           <div>
-            <Image
-              className="fl-logo"
-              src="/assets/icon-4Asset-4@300x-300x94.webp"
-              alt="Genesis Biotech"
-              width={90}
-              height={28}
-            />
-            <p className="fl-desc" style={{ color: 'white', fontSize: '19px' }}>
-              Premium Halal &amp; Kosher gelatin sourced from pristine, pollution-free environments along the Nile. Serving pharmaceutical, collagen, and food industries globally since 2018.
-            </p>
+            <Image  style={{color:"black", backgroundColor:"white"}} className="fl-logo" src="/assets/icon-4Asset-4@300x-300x94.webp" alt="Genesis Biotech" width={100} height={32} />
+            <p  style={{color:"black", backgroundColor:"white"}} className="fl-desc">Premium Halal &amp; Kosher gelatin sourced from pristine, pollution-free environments along the Nile. Serving pharmaceutical, collagen, and food industries globally since 2018.</p>
           </div>
           <div>
-            <div className="fc-head" style={{ color: 'white' }}>Navigation</div>
-            <ul className="fl">
-              <li><Link href="/about" style={{ color: 'white' }}>About</Link></li>
-              <li><Link href="/product-applications" style={{ color: 'white' }}>Product Applications</Link></li>
-              <li><Link href="/advantages" style={{ color: 'white' }}>Advantages</Link></li>
-              <li><Link href="/" style={{ color: 'white' }}>Home</Link></li>
-              <li><Link href="/contact" style={{ color: 'white' }}>Contact Us</Link></li>
+            <div  style={{color:"black", backgroundColor:"white"}} className="fc-head">Navigation</div>
+            <ul  style={{color:"black", backgroundColor:"white"}} className="fl">
+              <li><Link href="/about"  style={{color:"black", backgroundColor:"white"}}>About</Link></li>
+              <li><Link href="/product-applications"  style={{color:"black", backgroundColor:"white"}}>Product Applications</Link></li>
+              <li><a href="#advantages"  style={{color:"black", backgroundColor:"white"}}>Advantages</a></li>
+              <li><a href="/"  style={{color:"black", backgroundColor:"white"}}>Home</a></li>
+              <li><a href="#contact"  style={{color:"black", backgroundColor:"white"}}>Contact Us</a></li>
             </ul>
           </div>
           <div>
-            <div className="fc-head" style={{ color: 'white' }}>Contact Us</div>
-            <div className="fci" style={{ color: 'white' }}><span style={{ color: 'white' }}>Phone</span>+971 55 132 1079</div>
-            <div className="fci" style={{ color: 'white' }}><span style={{ color: 'white' }}>General</span>romy@genesisbiotech.net</div>
-            <div className="fci" style={{ color: 'white' }}><span style={{ color: 'white' }}>North America</span>northamerica@genesisbiotech.net</div>
+            <div className="fc-head"  style={{color:"black", backgroundColor:"white"}}>Contact Us</div>
+            <div className="fci"  style={{color:"black", backgroundColor:"white"}}><span  style={{color:"black", backgroundColor:"white"}}>Phone</span>+971 55 132 1079</div>
+            <div className="fci"  style={{color:"black", backgroundColor:"white"}}><span  style={{color:"black", backgroundColor:"white"}}>General</span>romy@genesisbiotech.net</div>
+            <div className="fci"  style={{color:"black", backgroundColor:"white"}}><span  style={{color:"black", backgroundColor:"white"}}>North America</span>northamerica@genesisbiotech.net</div>
           </div>
         </div>
         <div className="fb">
-          <div className="fb-copy" style={{ color: 'white' }}>Genesis Biotech © 2025 · All Rights Reserved</div>
-          <div className="fb-copy" style={{ color: 'white' }}>Premium Gelatin · Straight from the Source of the Nile</div>
+          <div className="fb-copy"  style={{color:"black", backgroundColor:"white"}}>Genesis Biotech © 2025 · All Rights Reserved</div>
+          <div className="fb-copy"  style={{color:"black", backgroundColor:"white"}}>Premium Gelatin · Straight from the Source of the Nile</div>
         </div>
       </footer>
     </>
