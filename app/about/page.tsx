@@ -5,6 +5,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
+import HeroSlider from '../HeroSlider'
 
 const PdfFlipBook = dynamic(() => import('./presentation/PdfFlipBook'), {
   ssr: false,
@@ -45,18 +46,25 @@ export default function PresentationPage() {
     <>
   
       {/* ── NAV ── */}
-      <nav id="nav" ref={navRef} className="solid">
-        <Link href="/" className="nav-logo">
+        <nav id="nav" ref={navRef}>
+        <a href="#" className="nav-logo">
           <Image
             src="/assets/icon-3Asset-3@300x-300x94.webp"
             alt="Genesis Biotech"
-            width={102}
-            height={32}
-            style={{ height: 34, width: 'auto' }}
+            width={120}
+            height={38}
+            style={{ height: 36, width: 'auto' }}
+            priority
           />
-        </Link>
-        
-        <ul className="nav-links" style={navMenuStyle}>
+        </a>
+        <ul className="nav-links" style={menuOpen ? {
+          display: 'flex', flexDirection: 'column', position: 'fixed',
+          top: 82, left: 0, right: 0,
+          background: 'rgb(40, 119, 167)',
+          backdropFilter: 'blur(24px)',
+          padding: '2rem', gap: '1.5rem',
+          borderBottom: '1px solid rgba(38,92,58,.12)', zIndex: 899,
+        } : undefined}>
           <li className={`has-sub ${pathname.startsWith('/about') ? 'active' : ''}`}>
             <Link href="/about">About</Link>
             <ul className="sub-nav">
@@ -69,11 +77,15 @@ export default function PresentationPage() {
           <li className={pathname === '/' ? 'active' : ''}><Link href="/">Home</Link></li>
           <li><Link href="/contact" className="nav-cta">Contact Us</Link></li>
         </ul>
-        <div className="burger" onClick={() => setMenuOpen(!menuOpen)}>
+        <button
+          className={`burger ${menuOpen ? 'open' : ''}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+          style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+          aria-label="Toggle menu"
+        >
           <span /><span /><span />
-        </div>
+        </button>
       </nav>
-       
       {/* ── PAGE HERO ── */}
       <section className="page-hero">
         <div className="page-hero-bg" />
@@ -90,9 +102,8 @@ export default function PresentationPage() {
               The Natural Selection.
             </h2>
             <br />
-            <br />
-            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'start', alignItems: 'start' }}>
-              <span className="story-year" style={{ color: 'rgb(40, 119, 167)' }}>Company Overview</span>
+            <div className='overviewcomp' style={{ }}>
+              <span className="story-year" style={{"color":"#2877A7", fontSize:"28px",fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}}>Company Overview</span>
               <span className="story-label" style={{ fontSize: '15px' }}>Interactive Presentation</span>
             </div>
             <p className="rv d2" style={{ fontSize: '19px' }}>
@@ -108,7 +119,7 @@ export default function PresentationPage() {
       {/* ── STATS ── */}
       <section className="source-section">
         <div className="source-inner">
-          <div className="eyebrow rv" style={{ color: 'rgb(40, 119, 167)', fontSize: '30px', fontWeight: 'bold', letterSpacing: '0.1px' }}>
+          <div style={{"color":"#2877A7",display:"flex",alignItems:"center", justifyContent:"center", fontSize:"28px",fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}}>
             At a Glance
           </div>
           <div className="source-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
@@ -140,7 +151,7 @@ export default function PresentationPage() {
       {/* ── FLIPBOOK ── */}
       <section className="factory-section">
         <div className="factory-inner" style={{ textAlign: 'center' }}>
-          <div className="eyebrow rv" style={{ color: 'rgb(40, 119, 167)', fontSize: '30px', fontWeight: 'bold', letterSpacing: '0.1px', justifyContent: 'center' }}>
+          <div style={{"color":"#2877A7", fontSize:"28px",fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}}>
             Interactive Viewer
           </div>
           <h2 className="st rv d1">Company Presentation</h2>
@@ -155,7 +166,7 @@ export default function PresentationPage() {
 
       {/* ── CERTIFICATIONS STRIP ── */}
       <div style={{ background: 'var(--white)', borderTop: '1px solid var(--border)', padding: '5rem 5vw', textAlign: 'center' }}>
-        <div className="eyebrow rv" style={{ justifyContent: 'center', color: 'rgb(40, 119, 167)', fontSize: '20px', fontWeight: 'bold' }}>Certified Quality</div>
+        <div style={{"color":"#2877A7", fontSize:"28px",fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}}>Certified Quality</div>
         <img
           className="rv d1"
           src="/assets/logos-2.png"

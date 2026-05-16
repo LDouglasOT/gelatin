@@ -302,7 +302,7 @@ export default function Home() {
       <section id="advantages">
         <div  style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center",}}>
           <div style={{display:"flex",alignItems:"start",justifyContent:"start", flexDirection:"column"}}>
-          <div className="eyebrow rv" style={{"color":"#2877A7",fontSize:"28px",letterSpacing:"0.1em",margin:"0px!",padding:"0px"}}>Why Choose Us</div>
+          <div  style={{"color":"#2877A7", fontSize:"28px",fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}}>Why Choose Us</div>
           <div className="" style={{fontSize:"18px", color:"#black" ,marginLeft:"auto", marginRight:"auto",padding:"0px",marginTop:"0px",marginBottom:"0px"}}>Our Advantages</div>
           </div>
            <div className="adv-grid">

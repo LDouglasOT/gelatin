@@ -34,11 +34,25 @@ export default function ProductApplications() {
   return (
     <>
       {/* ── NAV ── */}
-      <nav id="nav" ref={navRef} className="solid">
-        <Link href="/" className="nav-logo">
-          <Image src="/assets/icon-3Asset-3@300x-300x94.webp" alt="Genesis Biotech" width={102} height={32} style={{ height: 34, width: 'auto' }} />
-        </Link>
-        <ul className="nav-links" style={navMenuStyle}>
+       <nav id="nav" ref={navRef}>
+        <a href="#" className="nav-logo">
+          <Image
+            src="/assets/icon-3Asset-3@300x-300x94.webp"
+            alt="Genesis Biotech"
+            width={120}
+            height={38}
+            style={{ height: 36, width: 'auto' }}
+            priority
+          />
+        </a>
+        <ul className="nav-links" style={menuOpen ? {
+          display: 'flex', flexDirection: 'column', position: 'fixed',
+          top: 82, left: 0, right: 0,
+          background: 'rgb(40, 119, 167)',
+          backdropFilter: 'blur(24px)',
+          padding: '2rem', gap: '1.5rem',
+          borderBottom: '1px solid rgba(38,92,58,.12)', zIndex: 899,
+        } : undefined}>
           <li className={`has-sub ${pathname.startsWith('/about') ? 'active' : ''}`}>
             <Link href="/about">About</Link>
             <ul className="sub-nav">
@@ -51,7 +65,14 @@ export default function ProductApplications() {
           <li className={pathname === '/' ? 'active' : ''}><Link href="/">Home</Link></li>
           <li><Link href="/contact" className="nav-cta">Contact Us</Link></li>
         </ul>
-        <div className="burger" onClick={() => setMenuOpen(!menuOpen)}><span /><span /><span /></div>
+        <button
+          className={`burger ${menuOpen ? 'open' : ''}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+          style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+          aria-label="Toggle menu"
+        >
+          <span /><span /><span />
+        </button>
       </nav>
 
       {/* ── PAGE HERO ── */}

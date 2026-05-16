@@ -44,17 +44,25 @@ export default function PresentationPage() {
   return (
     <>
       {/* ── NAV (identical to About / Home) ── */}
-      <nav id="nav" ref={navRef} className="solid">
-        <Link href="/" className="nav-logo">
+      <nav id="nav" ref={navRef}>
+        <a href="#" className="nav-logo">
           <Image
             src="/assets/icon-3Asset-3@300x-300x94.webp"
             alt="Genesis Biotech"
-            width={102}
-            height={32}
-            style={{ height: 34, width: 'auto' }}
+            width={120}
+            height={38}
+            style={{ height: 36, width: 'auto' }}
+            priority
           />
-        </Link>
-        <ul className="nav-links" style={navMenuStyle}>
+        </a>
+        <ul className="nav-links" style={menuOpen ? {
+          display: 'flex', flexDirection: 'column', position: 'fixed',
+          top: 82, left: 0, right: 0,
+          background: 'rgb(40, 119, 167)',
+          backdropFilter: 'blur(24px)',
+          padding: '2rem', gap: '1.5rem',
+          borderBottom: '1px solid rgba(38,92,58,.12)', zIndex: 899,
+        } : undefined}>
           <li className={`has-sub ${pathname.startsWith('/about') ? 'active' : ''}`}>
             <Link href="/about">About</Link>
             <ul className="sub-nav">
@@ -67,9 +75,14 @@ export default function PresentationPage() {
           <li className={pathname === '/' ? 'active' : ''}><Link href="/">Home</Link></li>
           <li><Link href="/contact" className="nav-cta">Contact Us</Link></li>
         </ul>
-        <div className="burger" onClick={() => setMenuOpen(!menuOpen)}>
+        <button
+          className={`burger ${menuOpen ? 'open' : ''}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+          style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+          aria-label="Toggle menu"
+        >
           <span /><span /><span />
-        </div>
+        </button>
       </nav>
 
       {/* ── PAGE HERO (same pattern as About) ── */}
@@ -77,31 +90,13 @@ export default function PresentationPage() {
         <div className="page-hero-bg" />
         <div className="page-hero-inner">
           {/* Breadcrumb */}
-          <nav
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              gap: 8,
-              fontSize: 13,
-              color: 'rgba(255,255,255,0.55)',
-              marginBottom: 20,
-              letterSpacing: '0.03em',
-            }}
-          >
-            <Link href="/" style={{ color: 'rgba(255,255,255,0.55)', textDecoration: 'none' }}>Home</Link>
-            <span>/</span>
-            <Link href="/about" style={{ color: 'rgba(255,255,255,0.55)', textDecoration: 'none' }}>About</Link>
-            <span>/</span>
-            <span style={{ color: 'rgba(255,255,255,0.9)' }}>Presentation</span>
-          </nav>
-          <div className="eyebrow light rv">Company Overview</div>
-          <h1 className="page-title rv d1">Our <em>Presentation</em></h1>
+          <div className="page-title rv d1">Company Overview</div>
+          {/* style={{"color":"#2877A7", fontSize:"28px",fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}} */}
         </div>
       </section>
 
       {/* ── INTRO ── */}
       <section style={{ padding: '5rem 5vw', maxWidth: 1200, margin: '0 auto' }}>
-        <div className="eyebrow rv">About Us</div>
         <div
           style={{
             display: 'grid',
@@ -113,7 +108,7 @@ export default function PresentationPage() {
         >
           {/* Text */}
           <div>
-            <h2 className="st rv d1">The Natural<br /><em>Selection.</em></h2>
+            <h2 style={{"color":"#2877A7", fontSize:"28px",fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}}>The Natural Selection.</h2>
             <p className="rv d2" style={{ color: 'var(--muted)', lineHeight: 1.8, marginTop: '1.2rem' }}>
               Genesis Biotech embodies the essence of natural selection — premium gelatin and collagen products sourced from pristine, pollution-free environments pulsating with pure, vital energy.
             </p>
@@ -169,8 +164,7 @@ export default function PresentationPage() {
         }}
       >
         <div style={{ maxWidth: 1200, margin: '0 auto', textAlign: 'center' }}>
-          <div className="eyebrow rv" style={{ justifyContent: 'center' }}>Interactive Viewer</div>
-          <h2 className="st rv d1" style={{ marginTop: '0.5rem' }}>Company <em>Presentation</em></h2>
+          <h2 style={{"color":"#2877A7", fontSize:"28px",fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}}>Company <em>Presentation</em></h2>
           <p
             className="rv d2"
             style={{ color: 'var(--muted)', maxWidth: 480, margin: '1rem auto 3rem', lineHeight: 1.7, fontSize: 15 }}
@@ -185,7 +179,7 @@ export default function PresentationPage() {
 
       {/* ── CERTIFICATIONS (same strip as Home / About) ── */}
       <div style={{ background: 'var(--white)', borderTop: '1px solid var(--border)', padding: '5rem 5vw', textAlign: 'center' }}>
-        <div className="eyebrow rv" style={{ justifyContent: 'center' }}>Certified Quality</div>
+        <div style={{"color":"#2877A7", fontSize:"28px",fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}}>Certified Quality</div>
         <img
           className="rv d1"
           src="/assets/logos-2.png"

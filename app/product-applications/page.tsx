@@ -33,11 +33,25 @@ export default function ProductApplications() {
 
   return (
     <>
-      <nav id="nav" ref={navRef} className="solid">
-        <Link href="/" className="nav-logo">
-          <Image src="/assets/icon-3Asset-3@300x-300x94.webp" alt="Genesis Biotech" width={102} height={32} style={{ height: 34, width: 'auto' }} />
-        </Link>
-        <ul className="nav-links" style={navMenuStyle}>
+     <nav id="nav" ref={navRef}>
+        <a href="#" className="nav-logo">
+          <Image
+            src="/assets/icon-3Asset-3@300x-300x94.webp"
+            alt="Genesis Biotech"
+            width={120}
+            height={38}
+            style={{ height: 36, width: 'auto' }}
+            priority
+          />
+        </a>
+        <ul className="nav-links" style={menuOpen ? {
+          display: 'flex', flexDirection: 'column', position: 'fixed',
+          top: 82, left: 0, right: 0,
+          background: 'rgb(40, 119, 167)',
+          backdropFilter: 'blur(24px)',
+          padding: '2rem', gap: '1.5rem',
+          borderBottom: '1px solid rgba(38,92,58,.12)', zIndex: 899,
+        } : undefined}>
           <li className={`has-sub ${pathname.startsWith('/about') ? 'active' : ''}`}>
             <Link href="/about">About</Link>
             <ul className="sub-nav">
@@ -50,23 +64,29 @@ export default function ProductApplications() {
           <li className={pathname === '/' ? 'active' : ''}><Link href="/">Home</Link></li>
           <li><Link href="/contact" className="nav-cta">Contact Us</Link></li>
         </ul>
-        <div className="burger" onClick={() => setMenuOpen(!menuOpen)}><span /><span /><span /></div>
+        <button
+          className={`burger ${menuOpen ? 'open' : ''}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+          style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+          aria-label="Toggle menu"
+        >
+          <span /><span /><span />
+        </button>
       </nav>
 
       {/* ── PAGE HERO ── */}
       <section id="hero-products">
         <div className="hero-bg" />
-        <div className="hero-inner">
-          <div className="eyebrow light rv">What We Offer</div>
-          <h1 className="hero-title rv d1">Product <em>Applications</em></h1>
+        <div className="" style={{width:"100%", backgroundColor:"yellow", display:"flex",alignItems:"center", justifyContent:"center"}}>
+          <div className="page-title rv" style={{width:"100%", marginLeft:"auto",marginRight:"auto"}}>What We Offer</div>
         </div>
       </section>
 
       {/* ── INTRO ── */}
       <section id="products-intro">
         <div className="pi-container">
-          <div className="eyebrow rv" style={{ justifyContent: 'center' }}>High Quality Gelatin</div>
-          <h2 className="rv">What Our High Quality Gelatin Can Do</h2>
+          <div className="eyebrow rv" style={{"color":"#2877A7", fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}}>High Quality Gelatin</div>
+          <h2 className="rv" style={{"color":"#2877A7", fontSize:"28px",fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}}>What Our High Quality Gelatin Can Do</h2>
           <p className="rv d1">Genesis Biotech produces premium gelatin serving three major industries — pharmaceutical, cosmetic, and food &amp; confectionary — with consistent quality, compliance, and care.</p>
         </div>
       </section>
@@ -80,7 +100,7 @@ export default function ProductApplications() {
           </div>
           <div className="pm-content">
             <div className="pm-cat">Medical · Healthcare</div>
-            <h2 className="pm-title">Pharmaceuticals</h2>
+            <h2 className="pm-title" style={{"color":"#2877A7", fontSize:"28px",fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}}>Pharmaceuticals</h2>
             <p className="pm-desc">Benefit from precise drug delivery and safety ensured by our gelatin products, a crucial element in pharmaceutical formulations. Our gelatin meets BP and USP pharmacopeial standards for hard and soft capsules, tablet coatings, plasma expanders, and wound dressings.</p>
           </div>
         </div>
@@ -92,7 +112,7 @@ export default function ProductApplications() {
           </div>
           <div className="pm-content">
             <div className="pm-cat">Beauty · Wellness</div>
-            <h2 className="pm-title">Collagen</h2>
+            <h2 className="pm-title" style={{"color":"#2877A7", fontSize:"28px",fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}}>Collagen</h2>
             <p className="pm-desc">Experience the natural benefits of collagen for healthy skin, hair, and joints. Our premium hydrolyzed collagen peptides are ideal for skincare, anti-aging formulations, nutraceuticals, and functional beauty supplements.</p>
           </div>
         </div>
@@ -104,7 +124,7 @@ export default function ProductApplications() {
           </div>
           <div className="pm-content">
             <div className="pm-cat">Food · Confectionary</div>
-            <h2 className="pm-title">Food &amp; Confectionary</h2>
+            <h2 className="pm-title" style={{"color":"#2877A7", fontSize:"28px",fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}}>Food &amp; Confectionary</h2>
             <p className="pm-desc">Enjoy the enhanced texture and taste of your products, from desserts to gummy candies, thanks to our high-quality gelatin. Perfect for gummies, marshmallows, jellies, dairy stabilizers, and desserts — delivering perfect texture, clarity, and mouthfeel every time.</p>
           </div>
         </div>
@@ -114,7 +134,7 @@ export default function ProductApplications() {
       <section id="products-benefits">
         <div className="pb-container">
           <div className="eyebrow rv" style={{ justifyContent: 'center' }}>Health Benefits</div>
-          <h2 className="pb-head rv">Benefits of Gelatin</h2>
+          <h2 className="pb-head rv" style={{"color":"#2877A7", fontSize:"28px",fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}}>Benefits of Gelatin</h2>
           <div className="pb-grid">
             <div className="pb-card rv d1">
               <Image
