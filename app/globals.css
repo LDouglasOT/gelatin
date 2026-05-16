@@ -324,8 +324,7 @@ h2.st.on-dark em { color: var(--lime); }
   position: absolute;
   top: calc(100% + 12px);
   left: -1.5rem;
-  background: rgba(255,255,255,.97);
-  backdrop-filter: blur(20px);
+  background: rgba(255,255,255,255);
   border: 1px solid var(--border);
   border-radius: 2px;
   padding: .7rem 0;
@@ -2002,11 +2001,25 @@ footer {
    justify-content: start;
     align-items: start; 
 }
+.techdoc{
+  font-size:28px;
+  color:#2877A7;
+  margin:0px;
+  font-weight:bold;
+
+}
 
 /* ─────────────────────────────────────────────
    RESPONSIVE
 ───────────────────────────────────────────── */
 @media (max-width: 1100px) {
+  .techdoc{
+  font-size:18px;
+  color:#2877A7;
+  margin:0px;
+  font-weight:bold;
+
+}
   .overviewcomp{
   display: flex;
   justify-content: center;

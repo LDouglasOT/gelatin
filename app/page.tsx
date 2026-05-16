@@ -347,7 +347,7 @@ export default function Home() {
 
           <div style={{display:"flex",alignItems:"center", justifyContent:"center", flexDirection:"column"}}>
              <div style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center",}}>
-                <div className="" style={{fontSize:"28px",color:"#2877A7",margin:"0px",fontWeight:"bold"}}>Technical Documentation</div>
+                <div className="techdoc" >Technical Documentation</div>
                 <div className="" style={{fontSize:"18px", color:"#black" ,marginLeft:"auto", marginRight:"auto",padding:"0px",marginTop:"0px",marginBottom:"0px"}}>Datasheets</div>
              </div>
  
