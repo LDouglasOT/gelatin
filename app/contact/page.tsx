@@ -48,9 +48,9 @@ export default function ProductApplications() {
         <ul className="nav-links" style={menuOpen ? {
           display: 'flex', flexDirection: 'column', position: 'fixed',
           top: 82, left: 0, right: 0,
-          background: 'rgb(40, 119, 167)',
+          background: 'rgb(40, 119, 167)', padding: '2rem',
           backdropFilter: 'blur(24px)',
-          padding: '2rem', gap: '1.5rem',
+         gap: '1.5rem',
           borderBottom: '1px solid rgba(38,92,58,.12)', zIndex: 899,
         } : undefined}>
           <li className={`has-sub ${pathname.startsWith('/about') ? 'active' : ''}`}>

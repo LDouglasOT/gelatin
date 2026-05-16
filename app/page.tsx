@@ -320,7 +320,7 @@ export default function Home() {
       <section id="footprint" style={{}}>
         <div className='footwrapper' style={{}}>
         <div className='ladyb'>
-           <div className="eyebrow" style={{ "color":"#2877A7",fontSize:"28px",letterSpacing:"0.01em",fontWeight:"bold" }}>Global Reach</div>
+           <div className="" style={{ "color":"#2877A7",fontSize:"28px",letterSpacing:"0.01em",fontWeight:"bold" }}>Global Reach</div>
            <div className="footword" >Our Footprint</div>
         </div>
         <br />
