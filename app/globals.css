@@ -1933,17 +1933,17 @@ footer {
 /* ─────────────────────────────────────────────
    CONTACT PAGE
 ───────────────────────────────────────────── */
-.contact-section { padding: 9rem 5vw; background: var(--white); }
+.contact-section { padding: 5rem 3vw; background: var(--white); }
 .contact-inner { max-width: 1400px; margin: 0 auto; }
-.contact-intro { font-family: var(--font-body); font-size: 1.1rem; color: var(--text-2); text-align: center; margin-bottom: 5rem; }
+.contact-intro { font-family: var(--font-body); font-size: 1.1rem; color: var(--text-2); text-align: center; margin-bottom: 1rem; }
 .contact-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 6rem; }
 .contact-info { display: flex; flex-direction: column; gap: 2.5rem; }
-.ci-item { background: var(--cream); border: 1px solid var(--border); padding: 2.2rem; border-radius: 2px; transition: border-color .4s, transform .4s var(--ease-spring); }
+.ci-item { background: var(--cream); border: 1px solid var(--border); padding: 1rem; border-radius: 2px; transition: border-color .4s, transform .4s var(--ease-spring); }
 .ci-item:hover { border-color: var(--border-h); transform: translateX(4px); }
 .ci-icon { font-size: 1.4rem; margin-bottom: 1.1rem; }
 .ci-label { font-family: var(--font-body); font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: #1db47b; margin-bottom: .5rem; }
 .ci-value { font-family: var(--font-body); font-size: .94rem; color: var(--text); line-height: 1.6; }
-.contact-form-wrapper { background: var(--cream); border: 1px solid var(--border); padding: 3rem; border-radius: 2px; position: relative; overflow: hidden; }
+.contact-form-wrapper { background: var(--cream); border: 1px solid var(--border); padding: 0.4rem; border-radius: 2px; position: relative; overflow: hidden; }
 .contact-form-wrapper::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #1db47b, var(--lime), transparent); }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
 .form-success { text-align: center; padding: 4rem; }
