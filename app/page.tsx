@@ -494,12 +494,15 @@ export default function Home() {
 
       </div>
     </section>
-
+<br />
+        <br />
       {/* PRODUCTS */}
       <section id="products">
         <div className="prod-hdr">
           <div style={{"color":"#2877A7", display: 'flex',flexDirection: 'column', justifyContent:"center", "alignItems":"center", "gap": '0.5ch', flexWrap: 'wrap', width: '100%'}}>
           <div style={{display:"flex", flexDirection:"column", justifyContent:"start", alignItems:"start", gap:"0.5ch"}}>
+            <br />
+        <br />
             <div className="" style={{fontSize:"18px", color:"black" ,marginLeft:"auto", marginRight:"auto",padding:"0px",marginTop:"-10px"}}>Product Application</div>
             </div>
           </div>
@@ -548,6 +551,7 @@ export default function Home() {
          <br />
        <br />
         <br />
+
         <div className="regions rv d2" style={{"color":"#2877A7",}}>
           {['Africa','Middle East','Europe','North America','Asia Pacific'].map(r => (
             <div key={r} className="region" style={{"color":"#2877A7",}}><div className="rdot" style={{"color":"#2877A7",}}/>{r}</div>
@@ -555,6 +559,8 @@ export default function Home() {
         </div>
 
        </div>
+       <br />
+        <br />
        
       </section>
       {/* STATS BAR */}

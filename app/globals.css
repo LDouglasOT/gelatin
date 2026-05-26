@@ -1183,8 +1183,8 @@ width: 100%;
  .footwrapper{
  display:flex;
  flex-direction:column;
- justify-content:start;
- align-items:start;
+ justify-content:center;
+ align-items:center;
  width:100%;
  }
 
@@ -1231,8 +1231,8 @@ width: 100%;
 .footwrapper{
 display:flex;
 flex-direction:column;
-justify-content:start;
-align-items:start;
+justify-content:center;
+align-items:center;
 width:100%;
 }
 
