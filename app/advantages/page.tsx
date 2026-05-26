@@ -172,15 +172,17 @@ export default function Advantages() {
       </section>
 
       {/* ── CERTIFICATIONS STRIP ── */}
-      <div style={{ background: 'var(--white)', borderTop: '1px solid var(--border)', padding: '5rem 5vw', textAlign: 'center' }}>
-        <div className="eyebrow rv" style={{ justifyContent: 'center', color: 'rgb(40, 119, 167)', fontSize: '20px', fontWeight: 'bold' }}>Certified Quality</div>
-        <img
-          className="rv d1"
-          src="/assets/logos-2.png"
-          alt="Genesis Biotech Certifications"
-          style={{ margin: '2rem auto 0', display: 'block', width: '90%', height: 'auto', marginLeft:"auto", marginRight:"auto" }}
-        />
-      </div>
+      <div className="cert-strip">
+              <div className="eyebrow rv" style={{ justifyContent: 'center' }}>
+                Certified Quality
+              </div>
+              <img
+              
+                src="/assets/Icons.webp"
+                alt="Genesis Biotech Certifications"
+                style={{ margin: '2rem auto 0', display: 'block', width: '70%', height: 'auto' }}
+              />
+            </div>
    <hr />
       {/* ── FOOTER ── */}
        <footer style={{color:"black", backgroundColor:"white"}}>

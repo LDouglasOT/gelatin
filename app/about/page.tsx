@@ -388,12 +388,7 @@ h2.st.on-dark em { color: var(--lime); }
 .prod-card p          { font-family: var(--font-body); font-size: .86rem; line-height: 1.78; color: var(--text-2); }
 
 /* ── CERTIFICATIONS STRIP ─────────────────────────────── */
-.cert-strip {
-  background: var(--white);
-  border-top: 1px solid var(--border);
-  padding: 5rem 5vw;
-  text-align: center;
-}
+
 
 /* ── FOOTER ───────────────────────────────────────────── */
 footer {
@@ -719,18 +714,17 @@ export default function About() {
 
       {/* ── CERTIFICATIONS STRIP ── */}
       <div className="cert-strip">
-        <div className="eyebrow rv" style={{ justifyContent: 'center' }}>
-          Certified Quality
-        </div>
-        <Image
-          className="rv d1"
-          src="https://genesisbiotech.net/wp-content/uploads/2023/07/logos-2.png"
-          alt="Genesis Biotech Certifications"
-          width={800}
-          height={200}
-          style={{ margin: '2rem auto 0', display: 'block', width: '100%', height: 'auto' }}
-        />
-      </div>
+              <div className="eyebrow rv" style={{ justifyContent: 'center' }}>
+                Certified Quality
+              </div>
+              <img
+              
+                src="/assets/Icons.webp"
+                alt="Genesis Biotech Certifications"
+                style={{ margin: '2rem auto 0', display: 'block', width: '70%', height: 'auto' }}
+              />
+            </div>
+         <hr />
 
       {/* ── FOOTER ── */}
       <footer>

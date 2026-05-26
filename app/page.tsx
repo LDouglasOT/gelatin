@@ -532,6 +532,8 @@ export default function Home() {
       </section>
 <PrimeProductSection/>
  {/* FOOTPRINT */}
+ <br />
+ <br />
       <section id="footprint" style={{}}>
         <div className='footwrapper' style={{}}>
         <div className='ladyb'>
@@ -544,8 +546,8 @@ export default function Home() {
       <br />
        <br />
         <br />
-       <div>
-         <div className="map-wrap rv-scale">
+       <div style={{width:'100%', overflow:"hidden"}}>
+         <div className="map-wrap">
           <img src="/assets/without-wordingsAsset-4world-map-768x391.webp" alt="Genesis Biotech Global Footprint" />
         </div>
          <br />
@@ -667,7 +669,17 @@ export default function Home() {
           </div>
         </div>
       </section> */}
-      <QualitySection />
+       <div className="cert-strip">
+              <div className="eyebrow rv" style={{ justifyContent: 'center' }}>
+                Certified Quality
+              </div>
+              <img
+              
+                src="/assets/Icons.webp"
+                alt="Genesis Biotech Certifications"
+                style={{ margin: '2rem auto 0', display: 'block', width: '70%', height: 'auto' }}
+              />
+            </div>
          <hr />
 
       {/* FOOTER */}

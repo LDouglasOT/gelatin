@@ -1483,13 +1483,31 @@ width:100%;
     justify-content: center;
     grid-template-rows: 3;
     grid-gap: 15px;
-    margin-top: 3.5rem;
+    margin-top: 0.5rem;
     flex-wrap: wrap;
 }
   
 
 }
 
+.cert-strip {
+  display: flex;
+  padding: 1.8rem 0;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: var(--white);
+ width: 80%;
+ margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.cert-strip img{
+  width: 50%;
+  height: auto;
+}
 
 /* ─────────────────────────────────────────────
    CONTACT

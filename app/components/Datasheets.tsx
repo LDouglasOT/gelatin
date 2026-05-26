@@ -518,7 +518,7 @@ export default function DatasheetsSection() {
 
         /* ── RESPONSIVE ────────────────────────────────────── */
         @media (max-width: 700px) {
-          #datasheets { padding: 4rem 1.5rem; }
+          #datasheets { padding: 1.5rem 1.5rem; }
 
           .ds-selectors { grid-template-columns: 1fr; }
 
@@ -550,8 +550,8 @@ export default function DatasheetsSection() {
 
         {/* Section header */}
         <div className="ds-header">
-          <span className="ds-eyebrow">Product Specifications</span>
-          <h2 className="ds-title">Technical Documentation</h2>
+     
+          <h2 className="ds-title">Product Specifications</h2>
           <p className="ds-subtitle">
             Full specification sheets for our gelatin product range — tested to GB6783-2013 standards.
           </p>

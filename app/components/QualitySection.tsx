@@ -189,32 +189,11 @@ export default function QualitySection() {
           }
         }
       `}</style>
-
       <div className="quality-inner">
         {/* Text */}
         <div className="quality-text">
-          <div className="quality-eyebrow">Quality &amp; Compliance</div>
-          <h2 className="quality-heading">
-            Quality You Can <em>Trust.</em>
-          </h2>
-          <div className="quality-divider" />
-          <p className="quality-body">
-            Every batch of Genesis Biotech gelatin is produced under internationally recognized
-            standards. Our certifications reflect our unwavering commitment to purity, safety,
-            and compliance across global markets.
-          </p>
-          <p className="quality-body">
-            We partner with independent certifying bodies to ensure full traceability from source
-            to delivery — so you never have to guess about what's in your product.
-          </p>
-          <div className="quality-chips">
-            {certifications.map((c) => (
-              <div key={c} className="chip">
-                <span className="chipdot" />
-                {c}
-              </div>
-            ))}
-          </div>
+          
+          
         </div>
 
         {/* Image */}
