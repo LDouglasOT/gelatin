@@ -4,13 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-
-/* ─────────────────────────────────────────────────────────
-   All styles are scoped to this page via the <style> tag
-   below. Class names are identical to globals.css so both
-   can coexist — the page styles simply override/extend
-   where needed, and nothing leaks to other pages.
-───────────────────────────────────────────────────────── */
+import PdfFlipBook from './presentation/PdfFlipBook'
 
 const aboutStyles = `
 /* ── IMPORTS ──────────────────────────────────────────── */
@@ -44,7 +38,7 @@ const aboutStyles = `
   --text-3:       rgba(8,15,9,.35);
   --accent:       #1db47b;
 
-  --font-display: Roboto, serif;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body:    'DM Sans', system-ui, sans-serif;
   --font-mono:    'DM Mono', monospace;
 
@@ -100,12 +94,13 @@ body {
 
 /* ── UTILITY: SECTION HEADINGS ────────────────────────── */
 h2.st {
-  font-family: Gotham, var(--font-display);
-  font-size: 18px;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
   font-weight: 300;
-  line-height: 1.05;
-  letter-spacing: -.02em;
+  line-height: 1.1;
+  letter-spacing: -.01em;
   color: var(--dark);
+  margin-top: .75rem;
 }
 h2.st em      { font-style: italic; font-weight: 400; color: var(--accent); }
 h2.st.on-dark { color: var(--white); }
@@ -124,12 +119,14 @@ h2.st.on-dark em { color: var(--lime); }
 .d4       { transition-delay: .38s; }
 .d5       { transition-delay: .48s; }
 
-/* ── NAV ──────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────
+   NAV
+───────────────────────────────────────────────────────── */
 #nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 900;
-  height: 82px;
+  height: 72px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -138,29 +135,28 @@ h2.st.on-dark em { color: var(--lime); }
   transition: background .6s var(--ease-out-expo), border-color .6s, box-shadow .6s;
 }
 #nav.solid {
-  background: rgba(207,207,207,.92);
+  background: rgba(255,255,255,.96);
   backdrop-filter: blur(24px) saturate(180%);
   border-bottom: 1px solid var(--border);
   box-shadow: 0 1px 30px rgba(8,15,9,.06);
 }
 
-/* Nav logo */
-.nav-logo img { height: 36px; display: block; }
+.nav-logo img { height: 34px; width: auto; display: block; }
 
-/* Nav links */
+/* Desktop links */
 .nav-links {
   display: flex;
-  gap: 3rem;
+  gap: 2.5rem;
   list-style: none;
   align-items: center;
 }
 .nav-links a {
   font-family: var(--font-body);
-  font-size: .72rem;
+  font-size: .7rem;
   font-weight: 400;
   letter-spacing: .16em;
   text-transform: uppercase;
-  color: white;
+  color: rgba(255,255,255,.85);
   text-decoration: none;
   position: relative;
   transition: color .3s;
@@ -177,23 +173,19 @@ h2.st.on-dark em { color: var(--lime); }
 .nav-links .active a            { color: var(--accent); }
 .nav-links a:hover::after,
 .nav-links .active a::after     { right: 0; }
+#nav.solid .nav-links a:not(.nav-cta) { color: var(--text); }
+#nav.solid .nav-links a:not(.nav-cta):hover { color: var(--accent); }
 
-/* CTA link in nav */
 .nav-cta {
   background: var(--accent) !important;
   color: #fff !important;
-  padding: .6rem 1.5rem !important;
-  border-radius: 1px !important;
-  letter-spacing: .14em !important;
+  padding: .55rem 1.3rem !important;
+  border-radius: 2px !important;
+  letter-spacing: .12em !important;
   transition: background .3s, transform .3s !important;
 }
 .nav-cta:hover        { background: var(--green-h) !important; transform: translateY(-1px) !important; }
 .nav-cta::after       { display: none !important; }
-
-/* Hero state — white links */
-#nav:not(.solid) .nav-links a:not(.nav-cta)       { color: rgba(255,255,255,.78); }
-#nav:not(.solid) .nav-links a:not(.nav-cta):hover  { color: #fff; }
-#nav:not(.solid) .nav-links a::after               { background: var(--lime); }
 
 /* Dropdown */
 .has-sub { position: relative; }
@@ -232,66 +224,86 @@ h2.st.on-dark em { color: var(--lime); }
   gap: 5px;
   cursor: pointer;
   padding: 6px;
+  background: none;
+  border: none;
+  z-index: 1000;
 }
 .burger span {
   display: block;
   width: 22px; height: 1.5px;
-  background: var(--dark);
+  background: #fff;
   transition: transform .4s var(--ease-spring), opacity .3s, background .3s;
 }
-#nav:not(.solid) .burger span     { background: #fff; }
+#nav.solid .burger span  { background: var(--dark); }
 .burger.open span:nth-child(1)    { transform: translateY(6.5px) rotate(45deg); }
 .burger.open span:nth-child(2)    { opacity: 0; transform: scaleX(0); }
 .burger.open span:nth-child(3)    { transform: translateY(-6.5px) rotate(-45deg); }
 
-/* Mobile menu overlay */
+/* Mobile drawer */
 .nav-mobile-menu {
   position: fixed;
-  top: 82px; left: 0; right: 0;
-  background: rgba(255,255,255,.98);
+  top: 72px; left: 0; right: 0;
+  background: rgba(255,255,255,.99);
   backdrop-filter: blur(24px);
-  padding: 2rem;
+  padding: 1.5rem 5vw 2rem;
   border-bottom: 1px solid var(--border);
   z-index: 899;
-  transform: translateY(-8px);
+  transform: translateY(-12px);
   opacity: 0;
   visibility: hidden;
   transition: transform .4s var(--ease-out-expo), opacity .4s, visibility .4s;
+  box-shadow: 0 8px 40px rgba(8,15,9,.08);
 }
 .nav-mobile-menu.open { transform: translateY(0); opacity: 1; visibility: visible; }
-.nav-mobile-menu ul   { list-style: none; display: flex; flex-direction: column; gap: 0; }
+.nav-mobile-menu ul   { list-style: none; display: flex; flex-direction: column; }
 .nav-mobile-menu li a {
   display: block;
-  padding: 1rem 0;
+  padding: .9rem 0;
   font-family: var(--font-body);
   font-size: .8rem;
   font-weight: 400;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--text);
   text-decoration: none;
   border-bottom: 1px solid var(--border);
   transition: color .25s, padding-left .25s;
 }
 .nav-mobile-menu li:last-child a { border-bottom: none; }
-.nav-mobile-menu li a:hover      { padding-left: .5rem; }
-.nav-mobile-menu .nav-cta        { background: var(--accent) !important; color: #fff !important; border-radius: 1px; margin-top: 1rem; text-align: center; }
+.nav-mobile-menu li a:hover      { color: var(--accent); padding-left: .5rem; }
+.nav-mobile-menu .mobile-cta {
+  display: block;
+  margin-top: 1.2rem;
+  padding: .85rem 1.5rem;
+  background: var(--accent);
+  color: #fff !important;
+  text-align: center;
+  border-radius: 2px;
+  font-size: .75rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 400;
+  border-bottom: none !important;
+}
 
-/* ── PAGE HERO ────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────
+   PAGE HERO
+───────────────────────────────────────────────────────── */
 .page-hero {
   position: relative;
-  height: 58vh;
-  min-height: 400px;
+  height: 55vh;
+  min-height: 360px;
   display: flex;
   align-items: flex-end;
-  padding-bottom: 5rem;
+  padding-bottom: 4rem;
   overflow: hidden;
 }
 .page-hero-bg {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(110deg, rgba(8,15,9,.94) 0%, rgba(8,15,9,.62) 10%, rgba(8,15,9,.28) 10%),
+    linear-gradient(160deg, rgba(8,15,9,.92) 0%, rgba(8,15,9,.55) 50%, rgba(8,15,9,.35) 100%),
     url('/assets/smile-scaled.webp') center / cover no-repeat;
 }
 .page-hero-inner {
@@ -304,93 +316,122 @@ h2.st.on-dark em { color: var(--lime); }
 }
 .page-title {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 7vw, 5.8rem);
+  font-size: clamp(2.8rem, 8vw, 5.5rem);
   font-weight: 300;
   line-height: 1;
   letter-spacing: -.02em;
   color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 .page-title em { font-style: italic; font-weight: 400; color: var(--lime); }
 
-/* ── OUR STORY ────────────────────────────────────────── */
-.story-section { padding: 1rem 5vw; background: var(--white); }
+/* ─────────────────────────────────────────────────────────
+   OUR STORY
+───────────────────────────────────────────────────────── */
+.story-section {
+  padding: 5rem 5vw;
+  background: var(--white);
+}
 .story-inner {
   max-width: 1400px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 6rem;
+  grid-template-columns: 200px 1fr;
+  gap: 5rem;
   align-items: center;
 }
 .story-img           { width: 200px; height: 200px; flex-shrink: 0; }
 .story-img img       { width: 100%; height: 100%; object-fit: contain; }
-.story-content       { display: flex; flex-direction: column; }
-.story-since         { display: flex; align-items: baseline; gap: 1rem; margin: 1.2rem 0 1.8rem; }
-.story-year          { font-family: var(--font-display); font-size: 2.5rem; font-weight: bold; }
-.story-label         { font-family: var(--font-body); font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; color: var(--text-3); }
-.story-content p     { font-family: var(--font-body); font-size: .96rem; line-height: 1.88; color: var(--text-2); }
+.story-content       { display: flex; flex-direction: column; gap: .5rem; }
+.story-since         { display: flex; align-items: baseline; gap: 1rem; margin: 1rem 0 1.5rem; }
+.story-year          { font-family: var(--font-display); font-size: 2.8rem; font-weight: 600; color: var(--accent); }
+.story-label         { font-family: var(--font-body); font-size: .7rem; letter-spacing: .22em; text-transform: uppercase; color: var(--text-3); }
+.story-content p     { font-family: var(--font-body); font-size: .94rem; line-height: 1.9; color: var(--text-2); margin-bottom: .6rem; }
 
-/* ── WATER SOURCE ─────────────────────────────────────── */
-.source-section { padding: 8rem 5vw; background: var(--white); }
+/* ─────────────────────────────────────────────────────────
+   WATER SOURCE
+───────────────────────────────────────────────────────── */
+.source-section { padding: 6rem 5vw; background: var(--cream); }
 .source-inner   { max-width: 1400px; margin: 0 auto; }
 .source-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 5rem;
+  gap: 4rem;
   align-items: center;
+  margin-top: 2rem;
 }
-.source-card          { background: var(--white); padding: 2.8rem; }
-.source-card h3       { font-family: var(--font-display); font-size: 2rem; font-weight: 400; color: var(--dark); margin-bottom: 1.6rem; }
-.source-card p        { font-family: var(--font-body); font-size: .92rem; line-height: 1.85; color: var(--text-2); margin-bottom: 1rem; }
-.source-img img       { width: 100%; height: auto; border-radius: 2px; }
+.source-card          { }
+.source-card h3       { font-family: var(--font-display); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; color: var(--dark); margin-bottom: 1.4rem; }
+.source-card p        { font-family: var(--font-body); font-size: .92rem; line-height: 1.88; color: var(--text-2); margin-bottom: 1rem; }
+.source-img           { border-radius: 2px; overflow: hidden; }
+.source-img img       { width: 100%; height: auto; display: block; border-radius: 2px; }
 
-/* ── OUR FACTORY ──────────────────────────────────────── */
-.factory-section  { padding: 9rem 5vw; background: var(--white); }
+/* ─────────────────────────────────────────────────────────
+   FACTORY
+───────────────────────────────────────────────────────── */
+.factory-section  { padding: 7rem 5vw; background: var(--white); }
 .factory-inner    { max-width: 1400px; margin: 0 auto; }
-.factory-intro    { font-family: var(--font-body); font-size: .96rem; line-height: 1.88; color: var(--text-2); max-width: 740px; margin: 1.8rem 0 5rem; }
+.factory-intro    { font-family: var(--font-body); font-size: .94rem; line-height: 1.9; color: var(--text-2); max-width: 740px; margin: 1.2rem 0 3.5rem; }
 
 .factory-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 4rem;
+  gap: 1rem;
+  margin-bottom: 3rem;
 }
 .fact-img             { aspect-ratio: 1; overflow: hidden; border-radius: 2px; }
 .fact-img img         { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease-out-expo); }
 .fact-img:hover img   { transform: scale(1.06); }
 
-.factory-features     { background: var(--cream); border: 1px solid var(--border); padding: 2.8rem; border-radius: 2px; }
-.factory-features h4  { font-family: var(--font-body); font-size: .82rem; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--text-2); margin-bottom: 2rem; }
-.feat-list            { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem 3.5rem; }
-.feat-item            { display: flex; align-items: flex-start; gap: .9rem; font-family: var(--font-body); font-size: .86rem; line-height: 1.65; color: var(--text-2); }
-.feat-dot             { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: .55rem; }
+.factory-features     { background: var(--cream); border: 1px solid var(--border); padding: 2.4rem; border-radius: 2px; }
+.factory-features h4  { font-family: var(--font-body); font-size: .75rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--text-2); margin-bottom: 1.8rem; }
+.feat-list            { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 3rem; }
+.feat-item            { display: flex; align-items: flex-start; gap: .85rem; font-family: var(--font-body); font-size: .86rem; line-height: 1.65; color: var(--text-2); }
+.feat-dot             { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: .58rem; }
 
-/* ── OUR PRODUCTS ─────────────────────────────────────── */
-.products-section { padding: 9rem 5vw; background: var(--cream); border-top: 1px solid var(--border); }
+/* ─────────────────────────────────────────────────────────
+   PRODUCTS
+───────────────────────────────────────────────────────── */
+.products-section { padding: 7rem 5vw; background: var(--cream); border-top: 1px solid var(--border); }
 .products-inner   { max-width: 1400px; margin: 0 auto; }
-.products-intro   { font-family: var(--font-body); font-size: .96rem; line-height: 1.88; color: var(--text-2); max-width: 740px; margin: 1.8rem 0 5rem; }
+.products-intro   { font-family: var(--font-body); font-size: .94rem; line-height: 1.9; color: var(--text-2); max-width: 740px; margin: 1.2rem 0 3.5rem; }
 
 .products-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  gap: 2.5rem;
 }
 .prod-card            { background: var(--white); border-radius: 2px; overflow: hidden; border: 1px solid var(--border); transition: box-shadow .4s, transform .4s var(--ease-out-expo); }
 .prod-card:hover      { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
-.prod-card img        { width: 100%; aspect-ratio: 5/4; object-fit: cover; display: block; transition: transform .6s var(--ease-out-expo); }
-.prod-card:hover img  { transform: scale(1.04); }
-.prod-card-content    { padding: 2.2rem; }
-.pcat                 { font-family: var(--font-body); font-size: .63rem; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin-bottom: .9rem; }
-.prod-card h3         { font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; color: var(--dark); margin-bottom: 1.1rem; }
+.prod-card-img-wrap   { overflow: hidden; }
+.prod-card-img-wrap img { width: 100%; aspect-ratio: 5/4; object-fit: cover; display: block; transition: transform .6s var(--ease-out-expo); }
+.prod-card:hover .prod-card-img-wrap img { transform: scale(1.04); }
+.prod-card-content    { padding: 1.8rem; }
+.pcat                 { font-family: var(--font-body); font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); margin-bottom: .8rem; }
+.prod-card h3         { font-family: var(--font-display); font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 400; color: var(--dark); margin-bottom: 1rem; }
 .prod-card p          { font-family: var(--font-body); font-size: .86rem; line-height: 1.78; color: var(--text-2); }
 
-/* ── CERTIFICATIONS STRIP ─────────────────────────────── */
+/* ─────────────────────────────────────────────────────────
+   CERTIFICATIONS
+───────────────────────────────────────────────────────── */
+.cert-strip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 5vw;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.cert-strip img {
+  margin-top: 2rem;
+  display: block;
+  width: min(70%, 600px);
+  height: auto;
+}
 
-
-/* ── FOOTER ───────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────────────────────── */
 footer {
   background: var(--dark);
   border-top: 1px solid rgba(255,255,255,.05);
@@ -405,10 +446,10 @@ footer {
   max-width: 1400px;
   margin: 0 auto;
 }
-.fl-logo  { height: 30px; display: block; margin-bottom: 1.5rem; }
-.fl-desc  { font-family: var(--font-body); font-size: .86rem; line-height: 1.82; color: rgba(255,255,255,.28); }
-.fc-head  { font-family: var(--font-body); font-size: .64rem; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; color: var(--lime); margin-bottom: 1.6rem; }
-.fl       { list-style: none; display: flex; flex-direction: column; gap: .9rem; }
+.fl-logo  { height: 30px; width: auto; display: block; margin-bottom: 1.5rem; }
+.fl-desc  { font-family: var(--font-body); font-size: .86rem; line-height: 1.82; color: rgba(255,255,255,.3); }
+.fc-head  { font-family: var(--font-body); font-size: .64rem; font-weight: 500; letter-spacing: .24em; text-transform: uppercase; color: var(--lime); margin-bottom: 1.4rem; }
+.fl       { list-style: none; display: flex; flex-direction: column; gap: .85rem; }
 .fl a     { font-family: var(--font-body); font-size: .84rem; color: rgba(255,255,255,.32); text-decoration: none; transition: color .3s, padding-left .3s; }
 .fl a:hover { color: rgba(255,255,255,.78); padding-left: .4rem; }
 .fci      { font-family: var(--font-body); font-size: .84rem; color: rgba(255,255,255,.32); line-height: 1.5; margin-bottom: .9rem; }
@@ -416,26 +457,89 @@ footer {
 .fb       { max-width: 1400px; margin: 2.5rem auto 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
 .fb-copy  { font-family: var(--font-body); font-size: .72rem; color: rgba(255,255,255,.18); letter-spacing: .08em; }
 
-/* ── RESPONSIVE ───────────────────────────────────────── */
-@media (max-width: 1100px) {
-  #nav           { padding: 0 2rem; }
+/* ─────────────────────────────────────────────────────────
+   RESPONSIVE — TABLET  (≤ 1024px)
+───────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
   .nav-links     { display: none; }
   .burger        { display: flex; }
 
-  .story-inner   { grid-template-columns: 1fr; gap: 4rem; text-align: center; }
+  .story-inner   { grid-template-columns: 1fr; gap: 2.5rem; }
   .story-img     { width: 140px; height: 140px; margin: 0 auto; }
-  .source-grid   { grid-template-columns: 1fr; }
-  .factory-grid  { grid-template-columns: 1fr 1fr; }
-  .products-grid { grid-template-columns: 1fr; }
-  .ft            { grid-template-columns: 1fr; gap: 3rem; }
+  .story-content { text-align: center; align-items: center; }
+  .story-since   { justify-content: center; }
+
+  .source-grid   { grid-template-columns: 1fr; gap: 2.5rem; }
+
+  .factory-grid  { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .feat-list     { grid-template-columns: 1fr; gap: .9rem; }
+
+  .products-grid { grid-template-columns: 1fr; max-width: 560px; margin: 0 auto; }
+
+  .ft            { grid-template-columns: 1fr 1fr; gap: 3rem; }
 }
 
-@media (max-width: 700px) {
-  .factory-grid  { grid-template-columns: 1fr; }
-  .feat-list     { grid-template-columns: 1fr; }
-  .products-grid { grid-template-columns: 1fr; }
-  .fb            { flex-direction: column; text-align: center; }
-  .page-title    { font-size: clamp(2rem, 10vw, 3.5rem); }
+/* ─────────────────────────────────────────────────────────
+   RESPONSIVE — MOBILE  (≤ 640px)
+───────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  /* Nav */
+  #nav { height: 64px; padding: 0 1.25rem; }
+  .nav-mobile-menu { top: 64px; }
+  .nav-logo img { height: 28px; }
+
+  /* Hero */
+  .page-hero { height: 52vh; min-height: 280px; padding-bottom: 2.5rem; }
+  .page-title { font-size: clamp(2rem, 11vw, 2.8rem); }
+
+  /* Story */
+  .story-section { padding: 3.5rem 1.25rem; }
+  .story-inner   { gap: 2rem; }
+  .story-img     { width: 110px; height: 110px; }
+  .story-year    { font-size: 2rem; }
+  .story-content p { font-size: .88rem; }
+
+  /* Source */
+  .source-section { padding: 3.5rem 1.25rem; }
+  .source-card h3 { font-size: 1.5rem; }
+  .source-card p  { font-size: .88rem; }
+
+  /* Factory */
+  .factory-section { padding: 3.5rem 1.25rem; }
+  .factory-intro   { font-size: .88rem; margin-bottom: 2.5rem; }
+  .factory-grid    { grid-template-columns: 1fr 1fr; gap: .6rem; }
+  .factory-features { padding: 1.6rem; }
+  .factory-features h4 { font-size: .7rem; }
+  .feat-item { font-size: .82rem; }
+
+  /* Products */
+  .products-section { padding: 3.5rem 1.25rem; }
+  .products-intro   { font-size: .88rem; margin-bottom: 2.5rem; }
+  .products-grid    { max-width: 100%; gap: 1.5rem; }
+  .prod-card-content { padding: 1.4rem; }
+  .prod-card p      { font-size: .84rem; }
+
+  /* Certifications */
+  .cert-strip { padding: 3rem 1.25rem; }
+  .cert-strip img { width: 90%; }
+
+  /* Footer */
+  footer { padding: 3.5rem 1.25rem 2rem; }
+  .ft {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+  .fb { flex-direction: column; text-align: center; gap: .6rem; }
+  .fb-copy { font-size: .68rem; }
+}
+
+/* ─────────────────────────────────────────────────────────
+   RESPONSIVE — SMALL MOBILE  (≤ 380px)
+───────────────────────────────────────────────────────── */
+@media (max-width: 380px) {
+  .page-title { font-size: 1.9rem; }
+  .factory-grid { grid-template-columns: 1fr; }
 }
 `
 
@@ -464,82 +568,75 @@ export default function About() {
             observer.unobserve(e.target)
           }
         }),
-      { threshold: 0.1 }
+      { threshold: 0.08 }
     )
     document.querySelectorAll('.rv').forEach((el) => observer.observe(el))
     return () => observer.disconnect()
   }, [])
 
-  /* ── mobile menu style ── */
-  const navMenuStyle: React.CSSProperties = menuOpen
-    ? {
-        display: 'flex',
-        flexDirection: 'column',
-        position: 'fixed',
-        top: 78,
-        left: 0,
-        right: 0,
-        background: 'rgba(255,255,255,.98)',
-        backdropFilter: 'blur(18px)',
-        padding: '2rem',
-        gap: '1.5rem',
-        borderBottom: '1px solid rgba(45,107,68,.14)',
-        zIndex: 899,
-      }
-    : {}
+  /* Close menu on route change */
+  useEffect(() => { setMenuOpen(false) }, [pathname])
+
+  /* Prevent body scroll when menu open */
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? 'hidden' : ''
+    return () => { document.body.style.overflow = '' }
+  }, [menuOpen])
 
   return (
     <>
       {/* ── SCOPED STYLES ── */}
       <style dangerouslySetInnerHTML={{ __html: aboutStyles }} />
 
-    <nav id="nav" ref={navRef}>
-            <a href="#" className="nav-logo">
-              <Image
-                src="/assets/icon-3Asset-3@300x-300x94.webp"
-                alt="Genesis Biotech"
-                width={120}
-                height={38}
-                style={{ height: 36, width: 'auto' }}
-                priority
-              />
-            </a>
-            <ul className="nav-links" style={menuOpen ? {
-              display: 'flex', flexDirection: 'column', position: 'fixed',
-              top: 82, left: 0, right: 0,
-              background: 'rgb(40, 119, 167)',
-              backdropFilter: 'blur(24px)',
-              padding: '2rem', gap: '1.5rem',
-              borderBottom: '1px solid rgba(38,92,58,.12)', zIndex: 899,
-            } : undefined}>
-              <li className={`has-sub ${pathname.startsWith('/about') ? 'active' : ''}`}>
-                <Link href="/about">About</Link>
-                <ul className="sub-nav">
-                  <li><Link href="/about">Our Story</Link></li>
-                  <li><Link href="/about/presentation">Presentation</Link></li>
-                </ul>
-              </li>
-              <li className={pathname === '/product-applications' ? 'active' : ''}><Link href="/product-applications">Product Applications</Link></li>
-              <li className={pathname === '/advantages' ? 'active' : ''}><Link href="/advantages">Advantages</Link></li>
-              <li className={pathname === '/' ? 'active' : ''}><Link href="/">Home</Link></li>
-              <li><Link href="/contact" className="nav-cta">Contact Us</Link></li>
+      {/* ── NAV ── */}
+     <nav id="nav" ref={navRef}>
+        <a href="#" className="nav-logo">
+          <Image
+            src="/assets/icon-3Asset-3@300x-300x94.webp"
+            alt="Genesis Biotech"
+            width={120}
+            height={38}
+            style={{ height: 36, width: 'auto' }}
+            priority
+          />
+        </a>
+        <ul className="nav-links" style={menuOpen ? {
+          display: 'flex', flexDirection: 'column', position: 'fixed',
+          top: 82, left: 0, right: 0,
+          background: 'rgb(40, 119, 167)',
+          backdropFilter: 'blur(24px)',
+          padding: '2rem', gap: '1.5rem',
+          borderBottom: '1px solid rgba(38,92,58,.12)', zIndex: 899,
+        } : undefined}>
+          <li className={`has-sub ${pathname.startsWith('/about') ? 'active' : ''}`}>
+            <Link href="/about">About</Link>
+            <ul className="sub-nav">
+              <li><Link href="/about">Our Story</Link></li>
+              <li><Link href="/about/presentation">Presentation</Link></li>
             </ul>
-            <button
-              className={`burger ${menuOpen ? 'open' : ''}`}
-              onClick={() => setMenuOpen(!menuOpen)}
-              style={{ background: 'none', border: 'none', cursor: 'pointer' }}
-              aria-label="Toggle menu"
-            >
-              <span /><span /><span />
-            </button>
-          </nav>
-    
+          </li>
+          <li className={pathname === '/product-applications' ? 'active' : ''}><Link href="/product-applications">Product Applications</Link></li>
+          <li className={pathname === '/advantages' ? 'active' : ''}><Link href="/advantages">Advantages</Link></li>
+          <li className={pathname === '/' ? 'active' : ''}><Link href="/">Home</Link></li>
+          <li><Link href="/contact" className="nav-cta">Contact Us</Link></li>
+        </ul>
+        <button
+          className={`burger ${menuOpen ? 'open' : ''}`}
+          onClick={() => setMenuOpen(!menuOpen)}
+          style={{ background: 'none', border: 'none', cursor: 'pointer' }}
+          aria-label="Toggle menu"
+        >
+          <span /><span /><span />
+        </button>
+      </nav>
 
       {/* ── PAGE HERO ── */}
       <section className="page-hero">
-        <div className="about-page-hero-bg" />
+        <div className="page-hero-bg" />
         <div className="page-hero-inner">
-          <h1 className="page-title rv d1">About Us</h1>
+          <h1 className="page-title rv d1">
+            Our <em>Story</em>
+          </h1>
         </div>
       </section>
 
@@ -602,6 +699,7 @@ export default function About() {
                 alt="Lake Victoria — the source"
                 width={600}
                 height={450}
+                style={{ width: '100%', height: 'auto' }}
               />
             </div>
           </div>
@@ -613,7 +711,7 @@ export default function About() {
         <div className="factory-inner">
           <div className="eyebrow rv">Our Factory</div>
           <h2 className="st rv d1">
-            World-Class<br /><em>Production</em>
+            World-Class <em>Production</em>
           </h2>
           <p className="factory-intro rv d2">
             Making gelatin is an intricate, sensitive process that requires cutting-edge professional
@@ -635,6 +733,7 @@ export default function About() {
                   alt={`Genesis Biotech Factory ${i + 1}`}
                   width={400}
                   height={400}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               </div>
             ))}
@@ -673,12 +772,15 @@ export default function About() {
           </p>
           <div className="products-grid">
             <div className="prod-card rv d1">
-              <Image
-                src="https://genesisbiotech.net/wp-content/uploads/2023/11/cow-2Asset-2@300x.webp"
-                alt="Halal & Kosher Bovine Gelatin"
-                width={500}
-                height={400}
-              />
+              <div className="prod-card-img-wrap">
+                <Image
+                  src="https://genesisbiotech.net/wp-content/uploads/2023/11/cow-2Asset-2@300x.webp"
+                  alt="Halal & Kosher Bovine Gelatin"
+                  width={500}
+                  height={400}
+                  style={{ width: '100%', height: 'auto', aspectRatio: '5/4', objectFit: 'cover' }}
+                />
+              </div>
               <div className="prod-card-content">
                 <div className="pcat">Halal &amp; Kosher Certified</div>
                 <h3>Halal &amp; Kosher Bovine Gelatin</h3>
@@ -691,12 +793,15 @@ export default function About() {
               </div>
             </div>
             <div className="prod-card rv d2">
-              <Image
-                src="https://genesisbiotech.net/wp-content/uploads/2023/07/Nile-Perch.png"
-                alt="Kosher Fish Gelatin — Nile Perch"
-                width={400}
-                height={400}
-              />
+              <div className="prod-card-img-wrap">
+                <Image
+                  src="https://genesisbiotech.net/wp-content/uploads/2023/07/Nile-Perch.png"
+                  alt="Kosher Fish Gelatin — Nile Perch"
+                  width={400}
+                  height={400}
+                  style={{ width: '100%', height: 'auto', aspectRatio: '5/4', objectFit: 'cover' }}
+                />
+              </div>
               <div className="prod-card-content">
                 <div className="pcat">Kosher Certified</div>
                 <h3>Kosher Fish Gelatin</h3>
@@ -711,20 +816,38 @@ export default function About() {
           </div>
         </div>
       </section>
-
-      {/* ── CERTIFICATIONS STRIP ── */}
-      <div className="cert-strip">
-              <div className="eyebrow rv" style={{ justifyContent: 'center' }}>
-                Certified Quality
-              </div>
-              <img
-              
-                src="/assets/Icons.webp"
-                alt="Genesis Biotech Certifications"
-                style={{ margin: '2rem auto 0', display: 'block', width: '70%', height: 'auto' }}
-              />
-            </div>
-         <hr />
+  <section
+        style={{
+          background: 'var(--bg-alt, #f8f9f6)',
+          borderTop: '1px solid var(--border, #eee)',
+          borderBottom: '1px solid var(--border, #eee)',
+          padding: '5rem 5vw',
+        }}
+      >
+        <div style={{ maxWidth: 1200, margin: '0 auto', textAlign: 'center' }}>
+          <h2 style={{"color":"#2877A7", fontSize:"28px",fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}}>Company <em>Presentation</em></h2>
+          <p
+            className="rv d2"
+            style={{ color: 'var(--muted)', maxWidth: 480, margin: '1rem auto 3rem', lineHeight: 1.7, fontSize: 15 }}
+          >
+            Click the book to open the interactive presentation and flip through our full company overview.
+          </p>
+          <div className="rv d3">
+            <PdfFlipBook />
+          </div>
+        </div>
+      </section>
+      
+      {/* ── CERTIFICATIONS ── */}
+      <div className="cert-strip rv">
+        <div className="eyebrow" style={{ justifyContent: 'center' }}>
+          Certified Quality
+        </div>
+        <img
+          src="/assets/Icons.webp"
+          alt="Genesis Biotech Certifications"
+        />
+      </div>
 
       {/* ── FOOTER ── */}
       <footer>
@@ -736,6 +859,7 @@ export default function About() {
               alt="Genesis Biotech"
               width={90}
               height={28}
+              style={{ height: 30, width: 'auto' }}
             />
             <p className="fl-desc">
               Premium Halal &amp; Kosher gelatin sourced from pristine, pollution-free environments
@@ -747,8 +871,8 @@ export default function About() {
             <div className="fc-head">Navigation</div>
             <ul className="fl">
               <li><Link href="/about">About</Link></li>
-              <li><Link href="/product-applications">Product Applications</Link></li>
-              <li><Link href="/advantages">Advantages</Link></li>
+              <li><Link href="/product-applications">Product Application</Link></li>
+              <li><Link href="/advantages">Benefits</Link></li>
               <li><Link href="/datasheets">Datasheets</Link></li>
               <li><Link href="/contact">Contact Us</Link></li>
             </ul>

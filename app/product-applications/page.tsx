@@ -77,8 +77,8 @@ export default function ProductApplications() {
       {/* ── PAGE HERO ── */}
       <section id="products-apps">
         <div className="hero-bg" />
-        <div className="" style={{width:"100%", backgroundColor:"yellow", display:"flex",alignItems:"center", justifyContent:"center"}}>
-          <div className="page-title rv" style={{width:"100%", marginLeft:"auto",marginRight:"auto"}}>What We Offer</div>
+        <div className="" style={{width:"100%", display:"flex",alignItems:"center", justifyContent:"center"}}>
+          <div className="page-title rv" style={{width:"100%", marginLeft:"auto",marginRight:"auto"}}>Product Application</div>
         </div>
       </section>
 
@@ -86,8 +86,7 @@ export default function ProductApplications() {
       <section id="products-intro">
         <div className="pi-container">
           <h2 className="rv" style={{"color":"#2877A7", fontSize:"28px",fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}}>What Our High Quality Gelatin Can Do</h2>
-          <p className="rv d1">Genesis Biotech produces premium gelatin serving three major industries — pharmaceutical, cosmetic, and food &amp; confectionary — with consistent quality, compliance, and care.</p>
-        </div>
+       </div>
       </section>
 
       {/* ── PRODUCTS MAIN ── */}
@@ -195,8 +194,8 @@ export default function ProductApplications() {
                   <div  style={{color:"black", backgroundColor:"white"}} className="fc-head">Navigation</div>
                   <ul  style={{color:"black", backgroundColor:"white"}} className="fl">
                     <li><Link href="/about"  style={{color:"black", backgroundColor:"white"}}>About</Link></li>
-                    <li><Link href="/product-applications"  style={{color:"black", backgroundColor:"white"}}>Product Applications</Link></li>
-                    <li><a href="#advantages"  style={{color:"black", backgroundColor:"white"}}>Advantages</a></li>
+                    <li><Link href="/product-applications"  style={{color:"black", backgroundColor:"white"}}>Product Application</Link></li>
+                    <li><a href="#advantages"  style={{color:"black", backgroundColor:"white"}}>Benefits</a></li>
                     <li><a href="/"  style={{color:"black", backgroundColor:"white"}}>Home</a></li>
                     <li><a href="#contact"  style={{color:"black", backgroundColor:"white"}}>Contact Us</a></li>
                   </ul>

@@ -1794,6 +1794,16 @@ footer {
   overflow: hidden;
 }
 
+.page-hero-about {
+  position: relative;
+  height: 85vh;
+  min-height: 400px;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 5rem;
+  overflow: hidden;
+}
+
 .page-hero-bg {
   display: flex;
   align-items: center;
@@ -1811,7 +1821,7 @@ footer {
   inset: 0;
   background:
     linear-gradient(110deg, rgba(8,15,9,.94) 0%, rgba(8,15,9,.62) 10%, rgba(8,15,9,.28) 10%),
-    url('/assets/beautiful-sunset-beach-landscape-with-boat-scaled.webp') center/cover no-repeat;
+    url('/assets/beautiful-sunset-beach-landscape-with-boat-scaled.jpg') center/cover no-repeat;
 }
 
 .page-hero-inner {
@@ -1919,10 +1929,10 @@ footer {
   position: absolute;
   inset: 0;
   background: linear-gradient(110deg, rgba(8,15,9,.92) 0%, rgba(8,15,9,.55) 10%, rgba(8,15,9,.2) 10%),
-    url('/assets/beautiful-sunset-beach-landscape-with-boat-scaled.webp') center/cover no-repeat;
+    url('/assets/beautiful-sunset-beach-landscape-with-boat-scaled.jpg') center/cover no-repeat;
 }
 
-#products-intro { padding: 7rem 5vw; background: var(--white); text-align: center; }
+#products-intro { padding: 2rem 5vw; background: var(--white); text-align: center; }
 #products-intro .pi-container { max-width: 840px; margin: 0 auto; }
 #products-intro h2 { font-family: var(--font-display); font-size: clamp(1.9rem,3.2vw,2.6rem); font-weight: 300; color: var(--dark); letter-spacing: -.015em; }
 #products-intro p { font-family: var(--font-body); font-size: 1.02rem; line-height: 1.84; color: var(--text-2); margin-top: 1.4rem; max-width: 620px; margin-left: auto; margin-right: auto; }
@@ -2117,6 +2127,25 @@ footer {
    RESPONSIVE
 ───────────────────────────────────────────── */
 @media (max-width: 1100px) {
+  .page-hero-about {
+  position: relative;
+  height: 48vh;
+  min-height: 400px;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 5rem;
+  overflow: hidden;
+}
+
+.story-since {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+  width: 100%;
+}
+
   .techdoc{
   font-size:18px;
   color:#2877A7;
@@ -2163,7 +2192,7 @@ align-items: center;
   .ft { grid-template-columns: 1fr; gap: 3rem; }
   .story-inner { grid-template-columns: 1fr; gap: 4rem; text-align: center; }
   .story-img { width: 140px; height: 140px; margin: 0 auto; }
-  .source-grid { grid-template-columns: 1fr; }
+  .source-grid { grid-template-columns: 1fr; grid-gap: 10px;}
   .factory-grid { grid-template-columns: 1fr 1fr; }
   .products-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; gap: 4rem; }

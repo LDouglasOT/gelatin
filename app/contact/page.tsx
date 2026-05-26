@@ -265,8 +265,8 @@ export default function Contact() {
             <div className="fc-head" style={{ color: 'black', backgroundColor: 'white' }}>Navigation</div>
             <ul className="fl" style={{ color: 'black', backgroundColor: 'white' }}>
               <li><Link href="/about"                style={{ color: 'black' }}>About</Link></li>
-              <li><Link href="/product-applications" style={{ color: 'black' }}>Product Applications</Link></li>
-              <li><a href="#advantages"              style={{ color: 'black' }}>Advantages</a></li>
+              <li><Link href="/product-applications" style={{ color: 'black' }}>Product Application</Link></li>
+              <li><a href="#advantages"              style={{ color: 'black' }}>Benefits</a></li>
               <li><a href="/"                        style={{ color: 'black' }}>Home</a></li>
               <li><a href="#contact"                 style={{ color: 'black' }}>Contact Us</a></li>
             </ul>

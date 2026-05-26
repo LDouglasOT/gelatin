@@ -693,8 +693,8 @@ export default function Home() {
             <div  style={{color:"black", backgroundColor:"white"}} className="fc-head">Navigation</div>
             <ul  style={{color:"black", backgroundColor:"white"}} className="fl">
               <li><Link href="/about"  style={{color:"black", backgroundColor:"white"}}>About</Link></li>
-              <li><Link href="/product-applications"  style={{color:"black", backgroundColor:"white"}}>Product Applications</Link></li>
-              <li><a href="#advantages"  style={{color:"black", backgroundColor:"white"}}>Advantages</a></li>
+              <li><Link href="/product-applications"  style={{color:"black", backgroundColor:"white"}}>Product Application</Link></li>
+              <li><a href="#advantages"  style={{color:"black", backgroundColor:"white"}}>Benefits</a></li>
               <li><a href="/"  style={{color:"black", backgroundColor:"white"}}>Home</a></li>
               <li><a href="#contact"  style={{color:"black", backgroundColor:"white"}}>Contact Us</a></li>
             </ul>

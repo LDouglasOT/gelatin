@@ -117,28 +117,11 @@ export default function Advantages() {
       <section className="page-hero">
         <div className="page-hero-bg" />
         <div className="page-hero-inner">
-          <div className="page-title rv">Benefits</div>
+          <div className="page-title rv">Advantages</div>
         </div>
       </section>
 
       {/* ── INTRO ── */}
-      <section className="story-section">
-        <div className="story-inner">
-          <div className="story-content">
-            <h2 className="st rv d1" style={{ color: 'black', fontSize: '30px', fontWeight: 'bold', letterSpacing: '0.1px', marginLeft: 'auto', marginRight: 'auto' }}>
-              Built on Quality &amp; Trust.
-            </h2>
-            <br />
-            <br />
-            <p className="rv d2" style={{ fontSize: '19px' }}>
-              From pristine sourcing to sustainable practices, international certifications, and lasting partnerships — discover what makes Genesis Biotech the preferred gelatin supplier for discerning global markets.
-            </p>
-            <p className="rv d3" style={{ fontSize: '19px' }}>
-              Every advantage we offer is rooted in our core values: integrity, reliability, and an unceasing commitment to improvement.
-            </p>
-          </div>
-        </div>
-      </section>
 
       {/* ── ADVANTAGES GRID ── */}
       <section className="source-section">
@@ -152,7 +135,7 @@ export default function Advantages() {
             <div key={start} className="source-grid" style={{ marginBottom: '4rem' }}>
               {advantages.slice(start, start + 2).map((a, i) => (
                 <div key={a.title} className={`source-card rv d${i + 1}`} style={{ textAlign: 'center', padding: '2.5rem 2rem', background: 'var(--white, #fff)'}}>
-                  <Image src={a.img} alt={a.title} width={200} height={200} style={{ margin: '0 auto 1.5rem', display: 'block' }} />
+                  <Image src={a.img} alt={a.title} width={250} height={250} style={{ margin: '0 auto 1.5rem', display: 'block' }} />
                   <h3 style={{ fontSize: '20px', fontWeight: '700', color: 'black', marginBottom: '1rem' }}>{a.title}</h3>
                   <p style={{ fontSize: '19px', lineHeight: '1.75' }}>{a.desc}</p>
                 </div>
@@ -163,7 +146,7 @@ export default function Advantages() {
           {/* Last card centered */}
           <div style={{ display: 'flex', justifyContent: 'center' }}>
             <div className="rv d1" style={{ textAlign: 'center', padding: '2.5rem 2rem', background: 'var(--white, #ffffff)', maxWidth: '520px', width: '100%' }}>
-              <Image src={advantages[6].img} alt={advantages[6].title} width={120} height={120} style={{ margin: '0 auto 1.5rem', display: 'block' }} />
+              <Image src={advantages[6].img} alt={advantages[6].title} width={250} height={250} style={{ margin: '0 auto 1.5rem', display: 'block' }} />
               <h3 style={{ fontSize: '20px', fontWeight: '700', color: 'black', marginBottom: '1rem' }}>{advantages[6].title}</h3>
               <p style={{ fontSize: '19px', lineHeight: '1.75' }}>{advantages[6].desc}</p>
             </div>
@@ -195,8 +178,8 @@ export default function Advantages() {
             <div  style={{color:"black", backgroundColor:"white"}} className="fc-head">Navigation</div>
             <ul  style={{color:"black", backgroundColor:"white"}} className="fl">
               <li><Link href="/about"  style={{color:"black", backgroundColor:"white"}}>About</Link></li>
-              <li><Link href="/product-applications"  style={{color:"black", backgroundColor:"white"}}>Product Applications</Link></li>
-              <li><a href="#advantages"  style={{color:"black", backgroundColor:"white"}}>Advantages</a></li>
+              <li><Link href="/product-applications"  style={{color:"black", backgroundColor:"white"}}>Product Application</Link></li>
+              <li><a href="#advantages"  style={{color:"black", backgroundColor:"white"}}>Benefits</a></li>
               <li><a href="/"  style={{color:"black", backgroundColor:"white"}}>Home</a></li>
               <li><a href="#contact"  style={{color:"black", backgroundColor:"white"}}>Contact Us</a></li>
             </ul>
