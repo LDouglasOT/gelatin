@@ -117,7 +117,7 @@ export default function Advantages() {
       <section className="page-hero">
         <div className="page-hero-bg" />
         <div className="page-hero-inner">
-          <div className="page-title rv">Our Advantages</div>
+          <div className="page-title rv">Benefits</div>
         </div>
       </section>
 
@@ -130,9 +130,6 @@ export default function Advantages() {
             </h2>
             <br />
             <br />
-            <div className='whyusclass'>
-              <span className="story-year" style={{ color: 'rgb(40, 119, 167)' }}>Why Us</span>
-           </div>
             <p className="rv d2" style={{ fontSize: '19px' }}>
               From pristine sourcing to sustainable practices, international certifications, and lasting partnerships — discover what makes Genesis Biotech the preferred gelatin supplier for discerning global markets.
             </p>
