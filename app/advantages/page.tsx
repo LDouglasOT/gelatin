@@ -154,8 +154,8 @@ export default function Advantages() {
           {[0, 2, 4].map((start) => (
             <div key={start} className="source-grid" style={{ marginBottom: '4rem' }}>
               {advantages.slice(start, start + 2).map((a, i) => (
-                <div key={a.title} className={`source-card rv d${i + 1}`} style={{ textAlign: 'center', padding: '2.5rem 2rem', background: 'var(--white, #fff)', borderRadius: '12px', border: '1px solid var(--border, #e8ede6)' }}>
-                  <Image src={a.img} alt={a.title} width={120} height={120} style={{ margin: '0 auto 1.5rem', display: 'block' }} />
+                <div key={a.title} className={`source-card rv d${i + 1}`} style={{ textAlign: 'center', padding: '2.5rem 2rem', background: 'var(--white, #fff)'}}>
+                  <Image src={a.img} alt={a.title} width={200} height={200} style={{ margin: '0 auto 1.5rem', display: 'block' }} />
                   <h3 style={{ fontSize: '20px', fontWeight: '700', color: 'black', marginBottom: '1rem' }}>{a.title}</h3>
                   <p style={{ fontSize: '19px', lineHeight: '1.75' }}>{a.desc}</p>
                 </div>
@@ -165,7 +165,7 @@ export default function Advantages() {
 
           {/* Last card centered */}
           <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <div className="rv d1" style={{ textAlign: 'center', padding: '2.5rem 2rem', background: 'var(--white, #fff)', borderRadius: '12px', border: '1px solid var(--border, #e8ede6)', maxWidth: '520px', width: '100%' }}>
+            <div className="rv d1" style={{ textAlign: 'center', padding: '2.5rem 2rem', background: 'var(--white, #ffffff)', maxWidth: '520px', width: '100%' }}>
               <Image src={advantages[6].img} alt={advantages[6].title} width={120} height={120} style={{ margin: '0 auto 1.5rem', display: 'block' }} />
               <h3 style={{ fontSize: '20px', fontWeight: '700', color: 'black', marginBottom: '1rem' }}>{advantages[6].title}</h3>
               <p style={{ fontSize: '19px', lineHeight: '1.75' }}>{advantages[6].desc}</p>

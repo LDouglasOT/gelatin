@@ -75,7 +75,7 @@ export default function ProductApplications() {
       </nav>
 
       {/* ── PAGE HERO ── */}
-      <section id="hero-products">
+      <section id="products-apps">
         <div className="hero-bg" />
         <div className="" style={{width:"100%", backgroundColor:"yellow", display:"flex",alignItems:"center", justifyContent:"center"}}>
           <div className="page-title rv" style={{width:"100%", marginLeft:"auto",marginRight:"auto"}}>What We Offer</div>
@@ -85,7 +85,6 @@ export default function ProductApplications() {
       {/* ── INTRO ── */}
       <section id="products-intro">
         <div className="pi-container">
-          <div className="eyebrow rv" style={{"color":"#2877A7", fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}}>High Quality Gelatin</div>
           <h2 className="rv" style={{"color":"#2877A7", fontSize:"28px",fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}}>What Our High Quality Gelatin Can Do</h2>
           <p className="rv d1">Genesis Biotech produces premium gelatin serving three major industries — pharmaceutical, cosmetic, and food &amp; confectionary — with consistent quality, compliance, and care.</p>
         </div>
@@ -96,7 +95,7 @@ export default function ProductApplications() {
         {/* Pharmaceuticals */}
         <div className="pm-row rv">
           <div className="pm-image">
-            <Image src="/assets/spoons-with-pills-scaled.jpg" alt="Pharmaceuticals" width={600} height={600} className="pm-img" />
+            <Image src="/assets/etactics-inc-tNjUkPNL-00-unsplash.jpg" alt="Pharmaceuticals" width={600} height={600} className="pm-img" />
           </div>
           <div className="pm-content">
             <div className="pm-cat">Medical · Healthcare</div>
@@ -108,7 +107,7 @@ export default function ProductApplications() {
         {/* Collagen */}
         <div className="pm-row pm-row-reverse rv">
           <div className="pm-image">
-            <Image src="/assets/face-cream.png" alt="Collagen" width={600} height={420} className="pm-img" style={{ objectFit: 'contain', background: 'var(--cream)', padding: '2rem' }} />
+            <Image src="/assets/alexandra-tran-bgGpNDqVEyo-unsplash.jpg" alt="Collagen" width={600} height={420} className="pm-img" style={{ objectFit: 'contain', background: 'var(--cream)', padding: '2rem' }} />
           </div>
           <div className="pm-content">
             <div className="pm-cat">Beauty · Wellness</div>
@@ -120,7 +119,7 @@ export default function ProductApplications() {
         {/* Food & Confectionary */}
         <div className="pm-row rv">
           <div className="pm-image">
-            <Image src="/assets/assortment-multi-colored-marmalades-scaled.jpg" alt="Food & Confectionary" width={600} height={400} className="pm-img" />
+            <Image src="/assets/richard-multimedia-SE-vq-Qp6Uo-unsplash.jpg" alt="Food & Confectionary" width={600} height={400} className="pm-img" />
           </div>
           <div className="pm-content">
             <div className="pm-cat">Food · Confectionary</div>
@@ -133,16 +132,17 @@ export default function ProductApplications() {
       {/* ── BENEFITS ── */}
       <section id="products-benefits">
         <div className="pb-container">
-          <div className="eyebrow rv" style={{ justifyContent: 'center' }}>Health Benefits</div>
-          <h2 className="pb-head rv" style={{"color":"#2877A7", fontSize:"28px",fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}}>Benefits of Gelatin</h2>
+         <h2 className="pb-head rv" style={{"color":"#2877A7", fontSize:"28px",fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}}>Benefits</h2>
+         <br />
+         <br />
           <div className="pb-grid">
             <div className="pb-card rv d1">
               <Image
                 src="/assets/Taking-care-of-your-bones-and-joints-with-gelatin-150x150-1.webp"
                 alt="Taking care of your bones and joints"
-                width={100}
-                height={100}
-                className="pb-img"
+                width={200}
+                height={200}
+                className="pb-im"
               />
               <h3 className="pb-title">Taking care of your bones and joints</h3>
               <p className="pb-desc">Gelatin contains multiple amino acids that are proven to help prevent joint cartilage erosion and weakening.</p>
@@ -151,9 +151,9 @@ export default function ProductApplications() {
               <Image
                 src="/assets/Gelatin-for-better-digestion-150x150-1.webp"
                 alt="Better Digestion"
-                width={100}
-                height={100}
-                className="pb-img"
+                width={200}
+                height={200}
+                className="pb-im"
               />
               <h3 className="pb-title">Better Digestion</h3>
               <p className="pb-desc">Gelatin's natural bond with water eases the food's movement through the digestive system, supporting gut health.</p>
@@ -162,9 +162,9 @@ export default function ProductApplications() {
               <Image
                 src="/assets/Stronger-and-prettier-nails-hair-and-skin.png"
                 alt="Stronger nails, hair and skin"
-                width={100}
-                height={100}
-                className="pb-img"
+                width={200}
+                height={200}
+                className="pb-im"
               />
               <h3 className="pb-title">Stronger and prettier nails, hair and skin</h3>
               <p className="pb-desc">Gelatin enhances the look of the skin, strengthens the hair roots, reinforces thin brittle nails, and smooths out wrinkles.</p>
@@ -176,7 +176,7 @@ export default function ProductApplications() {
       {/* ── CTA STRIP ── */}
       <div className="spearhead">
         <div className="spearhead-inner">
-          Ready to source the world's finest Halal &amp; Kosher gelatin?<br />
+          Ready to source the world's finest gelatin?<br />
           <em>Contact us today to request a sample or quotation.</em>
         </div>
         <div style={{ textAlign: 'center',  marginTop: '2.5rem', position: 'relative', zIndex: 1 }}>

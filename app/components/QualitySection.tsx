@@ -118,7 +118,7 @@ export default function QualitySection() {
           content: '';
           position: absolute;
           inset: -1.5rem -1rem;
-          background: #e8f0e2;
+        
           border-radius: 4px;
           z-index: 0;
         }
@@ -130,7 +130,7 @@ export default function QualitySection() {
           right: -1.5rem;
           width: 60%;
           height: 60%;
-          border: 1.5px solid #c8d8c0;
+         
           border-radius: 4px;
           z-index: 0;
         }
@@ -139,7 +139,7 @@ export default function QualitySection() {
           position: relative;
           z-index: 1;
           width: 100%;
-          max-width: 420px;
+          max-width: 600px;
           height: auto;
           display: block;
           border-radius: 3px;

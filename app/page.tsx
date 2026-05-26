@@ -6,6 +6,8 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import HeroSlider from './HeroSlider'
 import QualitySection from './components/QualitySection'
+import PrimeProductSection from './components/Offers'
+import Datasheet from './components/Datasheets'
 
 export default function Home() {
   const navRef = useRef<HTMLDivElement>(null)
@@ -13,6 +15,7 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [loaded, setLoaded] = useState(false)
   const [loadPct, setLoadPct] = useState(0)
+  const [expanded, setExpanded] = useState(false)
   const cursorDotRef = useRef<HTMLDivElement>(null)
   const cursorRingRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
@@ -193,7 +196,7 @@ export default function Home() {
       </nav>
 
       {/* HERO */}
-      <section id="hero">
+      <section id="s">
         <HeroSlider />
       </section>
 
@@ -202,7 +205,7 @@ export default function Home() {
         <div className="mtrack">
           {Array(2).fill(0).map((_, i) => (
             <div key={i} style={{ display: 'flex', gap: '3rem' }}>
-              {['Halal Certified','Kosher Certified','Pharmaceutical Grade','Bovine Gelatin','Fish Gelatin','Collagen','Food & Confectionary','Global Distribution','Source of the Nile','Pollution-Free Environments'].map(t => (
+              {['Halal Certified','Kosher Certified','Pharmaceutical Grade','Bovine Gelatin','Collagen','Food & Confectionary','Global Distribution','Source of the Nile','Pollution-Free Environments'].map(t => (
                 <div key={t} className="mi" style={{color:"white"}}><div className="mdot" style={{color:"white"}} />{t}</div>
               ))}
             </div>
@@ -210,50 +213,302 @@ export default function Home() {
         </div>
       </div>
 
-      {/* ABOUT */}
-      <section id="about" style={{"backgroundImage":"url('./assets/pattern-gelatin03.webp')"}}>
-       
-        <div className="about-txt">
-            <div className="eyebrow" style={{"color":"white", fontWeight:"bold", fontSize:"28px",lineHeight:"1.0", letterSpacing:"0.1em",padding:"0px", margin:"0px"}}>Our Story</div>
-        <div style={{display: 'flex', justifyContent:"start", "alignItems":"start", "gap": '0.5ch', flexWrap: 'wrap', width: '100%'}} className="rv d1">
-          <h2 className="st" style={{"color":"white", fontWeight:"medium", fontFamily:"Roboto medium"}}>The Essence of Natural Selection.</h2>
-        </div>
-       
+    <section id="about" style={{ background: '#fff', padding: 0 }}>
+      <style>{`
+        /* ── LAYOUT ────────────────────────────────────────── */
+        .about-layout {
+          display: grid;
+          grid-template-columns: 90px 1fr 1fr;
+          gap: 0;
+          width: 100%;
+          align-items: stretch;
+          height: 900px;
+        }
 
-          <div className="since-row rv d2" style={{"backgroundColor":"#2877a7;","color":"white"}}>
-            <div className="since-num" style={{"color":"white", fontFamily:"gotham", fontWeight:"bold"}}>2018</div>
-            <div className="since-copy" style={{"color":"white", fontFamily:"Roboto regular", fontSize:"16px"}}>Established to bring the world's finest Halal &amp; Kosher gelatin — sourced directly from pristine Nile basin environments — to discerning global markets.</div>
-          </div>
-          <p className="rv d2" style={{"color":"white","fontSize":"19px",padding:"0px", margin:"0px", lineHeight:"1.3"}}>Embodies the essence of natural selection. Our partners and clients favor products from pristine, pollution-free environments pulsating with pure, vital energy.</p>
-          <p className="rv d3" style={{"color":"white","fontSize":"19px"}}>We nurture lasting relationships with clients, partners, suppliers, employees, and our community — building trust at every link in the supply chain.</p>
-          <a href="/about"  style={{ display: 'inline-flex', color:"white", fontWeight:"bold",}}><span>Read More...</span></a>
+        /* ── LEFT COL: rotated year ────────────────────────── */
+        .about-year-col {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 3rem 0;
+          background: #fff;
+          border-right: 1px solid rgba(8,15,9,.06);
+        }
+
+        .about-year-text {
+          font-family: 'Gotham', 'DM Sans', sans-serif;
+          font-size: 96px;
+          font-weight: 900;
+          color: #2877A7;
+          line-height: 1;
+          writing-mode: vertical-rl;
+          transform: rotate(180deg);
+          letter-spacing: -0.03em;
+          user-select: none;
+        }
+
+        /* ── CENTRE COL: text ──────────────────────────────── */
+        .about-text-col {
+          padding: clamp(2.5rem, 5vw, 5rem) clamp(2rem, 4vw, 4rem);
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 1.6rem;
+          background: #fff;
+        }
+
+        .about-eyebrow {
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.62rem;
+          font-weight: 600;
+          letter-spacing: 0.26em;
+          text-transform: uppercase;
+          color: #1db47b;
+          margin: 0;
+        }
+
+        .about-heading {
+          font-family: 'DM Sans', sans-serif;
+          font-size: clamp(1.25rem, 2.4vw, 1.65rem);
+          font-weight: 700;
+          color: #080f09;
+          line-height: 1.4;
+          margin: 0;
+        }
+
+        .about-body {
+          font-family: 'DM Sans', sans-serif;
+          font-size: clamp(0.95rem, 1.5vw, 1.08rem);
+          font-weight: 300;
+          color: rgba(8,15,9,.62);
+          line-height: 1.9;
+          margin: 0;
+        }
+
+        /* hidden body text shown only when expanded */
+        .about-body-extra {
+          font-family: 'DM Sans', sans-serif;
+          font-size: clamp(0.95rem, 1.5vw, 1.08rem);
+          font-weight: 300;
+          color: rgba(8,15,9,.62);
+          line-height: 1.9;
+          margin: 0;
+          overflow: hidden;
+          max-height: 0;
+          opacity: 0;
+          transition: max-height 0.5s cubic-bezier(0.16,1,0.3,1), opacity 0.4s ease;
+        }
+
+        .about-body-extra.visible {
+          max-height: 300px;
+          opacity: 1;
+        }
+
+        .about-read-more {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.45rem;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.85rem;
+          font-weight: 600;
+          color: #080f09;
+          background: none;
+          border: none;
+          padding: 0;
+          cursor: pointer;
+          letter-spacing: 0.02em;
+          transition: color 0.25s, gap 0.25s;
+          margin-top: 0.25rem;
+          text-decoration: none;
+        }
+
+        .about-read-more:hover {
+          color: #1db47b;
+        }
+
+        .about-read-more .arrow {
+          display: inline-block;
+          transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+        }
+
+        .about-read-more.open .arrow {
+          transform: rotate(90deg);
+        }
+
+        /* ── RIGHT COL: stacked images ─────────────────────── */
+        .about-images-col {
+          display: grid;
+          grid-template-rows: 1fr 1fr;
+          overflow: hidden;
+        }
+
+        .about-img-wrap {
+          overflow: hidden;
+          position: relative;
+        }
+
+        .about-img-wrap img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        .about-img-wrap:hover img {
+          transform: scale(1.05);
+        }
+
+        /* subtle dark overlay on images */
+        .about-img-wrap::after {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(
+            to bottom,
+            rgba(8,15,9,.08) 0%,
+            rgba(8,15,9,.28) 100%
+          );
+          pointer-events: none;
+        }
+
+        /* ── TABLET ────────────────────────────────────────── */
+        @media (max-width: 960px) {
+          .about-layout {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto;
+            height: auto;
+          }
+
+          /* hide year col on tablet/mobile */
+          .about-year-col {
+            display: none;
+          }
+
+          .about-text-col {
+            padding: 3rem 2rem;
+            gap: 1.4rem;
+          }
+
+          /* images side-by-side on tablet */
+          .about-images-col {
+            grid-template-rows: none;
+            grid-template-columns: 1fr 1fr;
+            height: 320px;
+          }
+        }
+
+        /* ── MOBILE ────────────────────────────────────────── */
+        @media (max-width: 600px) {
+          .about-text-col {
+            padding: 2.5rem 1.5rem;
+            gap: 1.2rem;
+          }
+
+          .about-heading {
+            font-size: 1.3rem;
+          }
+
+          .about-body {
+            font-size: 1rem;
+          }
+
+          /* stack images vertically on mobile, square-ish */
+          .about-images-col {
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr 1fr;
+            height: 480px;
+          }
+        }
+      `}</style>
+
+      <div className="about-layout">
+
+        {/* ── Col 1: Year (desktop only) ── */}
+        <div className="about-year-col">
+          <span className="about-year-text">2018</span>
         </div>
 
-         <div className="about-vis rv-scale">
-          <Image className="about-main" src="/assets/assortment-multi-colored-marmalades-scaled.jpg" alt="Genesis Biotech Products" width={500} height={600} />
-          <Image className="about-accent" src="/assets/spoons-with-pills-scaled.jpg" alt="Pharmaceutical gelatin" width={300} height={300} />
-          <div className="since-badge" style={{backgroundColor:"#1db47b", fontFamily:"Roboto regular"}}>
-            <span className="sb-label" >Since</span>
-            <span className="sb-year" style={{backgroundColor:"#1db47b", fontFamily:"Roboto regular", fontWeight:"bold"}}>2018</span>
+        {/* ── Col 2: Text ── */}
+        <div className="about-text-col">
+          <p className="about-eyebrow">Since 2018</p>
+
+          <p className="about-heading rv d1">
+            Bringing the world's finest gelatin — sourced from pristine Nile basin environments — to
+            discerning global markets.
+          </p>
+
+          {/* always visible body */}
+          <p className="about-body rv d2">
+            Genesis Biotech embodies the essence of natural selection. Our partners and clients
+            favor products from pristine, pollution-free environments pulsating with pure, vital
+            energy.
+          </p>
+
+          {/* hidden until expanded */}
+          <p className={`about-body-extra rv d3${expanded ? ' visible' : ''}`}>
+            We nurture lasting relationships with clients, partners, suppliers, employees, and our
+            community — building trust at every link in the supply chain. Our founding values are
+            integrity and reliability, while our unceasing commitment to improvement drives our
+            mission forward.
+          </p>
+
+          <p className={`about-body-extra rv d4${expanded ? ' visible' : ''}`}>
+            Our factory operates to the highest international standards, supervised and monitored
+            24×7. We produce both Halal &amp; Kosher Bovine Gelatin and Kosher Fish Gelatin, each
+            in the highest purity and bloom values — serving pharmaceutical, collagen, and food
+            industries worldwide.
+          </p>
+
+          <button
+            className={`about-read-more rv d5${expanded ? ' open' : ''}`}
+            onClick={() => setExpanded(!expanded)}
+            aria-expanded={expanded}
+          >
+            {expanded ? 'Show less' : 'Read more'}
+            <span className="arrow">→</span>
+          </button>
+        </div>
+
+        {/* ── Col 3: Stacked images ── */}
+        <div className="about-images-col rv-scale d2">
+          <div className="about-img-wrap">
+            <Image
+              src="/assets/arrangement-various-turkish-delight-flavors-wooden-board-marble-table.jpg"
+              alt="Turkish delight assortment"
+              fill
+              sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 33vw"
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
+          <div className="about-img-wrap">
+            <Image
+              src="/assets/medications-blue.jpg"
+              alt="Pharmaceutical gelatin capsules"
+              fill
+              sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 33vw"
+              style={{ objectFit: 'cover' }}
+            />
           </div>
         </div>
-      </section>
+
+      </div>
+    </section>
 
       {/* PRODUCTS */}
       <section id="products">
         <div className="prod-hdr">
           <div style={{"color":"#2877A7", display: 'flex',flexDirection: 'column', justifyContent:"center", "alignItems":"center", "gap": '0.5ch', flexWrap: 'wrap', width: '100%'}}>
           <div style={{display:"flex", flexDirection:"column", justifyContent:"start", alignItems:"start", gap:"0.5ch"}}>
-             <div className="" style={{"color":"#2877A7", fontSize:"28px",fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}}>What We Offer</div>
-             <div className="" style={{fontSize:"18px", color:"black" ,marginLeft:"auto", marginRight:"auto",padding:"0px",marginTop:"-10px"}}>Product Applications</div>
+            <div className="" style={{fontSize:"18px", color:"black" ,marginLeft:"auto", marginRight:"auto",padding:"0px",marginTop:"-10px"}}>Product Application</div>
             </div>
           </div>
         </div>
         <div className="prod-grid rv-scale">
           {[
-            { num: '01', cat: 'Medical · Healthcare', name: 'Pharmaceuticals', img: '/assets/spoons-with-pills-scaled.jpg', desc: 'Hard and soft capsules, tablet coatings, plasma expanders, and wound dressings — manufactured to BP and USP pharmacopeial standards.' },
-            { num: '02', cat: 'Beauty · Wellness', name: 'Collagen', img: '/assets/face-cream.png', desc: 'Premium hydrolyzed collagen peptides for skincare, anti-aging formulations, nutraceuticals, and functional beauty supplements.', contain: true },
-            { num: '03', cat: 'Food · Confectionary', name: 'Food &\nConfectionary', img: '/assets/assortment-multi-colored-marmalades-scaled.jpg', desc: 'Gummies, marshmallows, jellies, dairy stabilizers, and desserts — our gelatin delivers perfect texture, clarity, and mouthfeel every time.' },
+            { num: '01', cat: 'Medical · Healthcare', name: 'Pharmaceuticals', img: '/assets/etactics-inc-tNjUkPNL-00-unsplash.jpg', desc: 'Hard and soft capsules, tablet coatings, plasma expanders, and wound dressings — manufactured to BP and USP pharmacopeial standards.' },
+            { num: '02', cat: 'Beauty · Wellness', name: 'Collagen', img: '/assets/alexandra-tran-bgGpNDqVEyo-unsplash.jpg', desc: 'Premium hydrolyzed collagen peptides for skincare, anti-aging formulations, nutraceuticals, and functional beauty supplements.', contain: true },
+            { num: '03', cat: 'Food · Confectionary', name: 'Food &\nConfectionary', img: '/assets/richard-multimedia-SE-vq-Qp6Uo-unsplash.jpg', desc: 'Gummies, marshmallows, jellies, dairy stabilizers, and desserts — our gelatin delivers perfect texture, clarity, and mouthfeel every time.' },
           ].map(p => (
             <div key={p.num} className="pc">
               
@@ -262,7 +517,9 @@ export default function Home() {
                 <div className="pc-n">{p.num}</div>
                 <div className="pc-cat">{p.cat}</div>
                 <div className="pc-name">{p.name.split('\n').map((l, i) => <span key={i}>{l}<br /></span>)}</div>
-                <div className="pc-desc">{p.desc}</div>
+                <div className="pc-desc">
+                  <a href="contact" className="btn-primary">Request Sample</a>
+                </div>
                 
               </div>
             </div>
@@ -270,7 +527,36 @@ export default function Home() {
         </div>
      
       </section>
+<PrimeProductSection/>
+ {/* FOOTPRINT */}
+      <section id="footprint" style={{}}>
+        <div className='footwrapper' style={{}}>
+        <div className='ladyb'>
+           <div style={{ "color":"#2877A7",fontSize:"32px",letterSpacing:"0.01em",fontWeight:"bold" }} >Our Footprint</div>
+        </div>
+        <br />
+        <br />
+        <p className="" style={{"color":"black",}}>From the heart of Africa to markets across the globe — supplying premium gelatin wherever quality is demanded.</p> 
+        </div>
+      <br />
+       <br />
+        <br />
+       <div>
+         <div className="map-wrap rv-scale">
+          <img src="/assets/without-wordingsAsset-4world-map-768x391.webp" alt="Genesis Biotech Global Footprint" />
+        </div>
+         <br />
+       <br />
+        <br />
+        <div className="regions rv d2" style={{"color":"#2877A7",}}>
+          {['Africa','Middle East','Europe','North America','Asia Pacific'].map(r => (
+            <div key={r} className="region" style={{"color":"#2877A7",}}><div className="rdot" style={{"color":"#2877A7",}}/>{r}</div>
+          ))}
+        </div>
 
+       </div>
+       
+      </section>
       {/* STATS BAR */}
       <div className="stats-bar">
         <div className="stats-inner">
@@ -290,20 +576,12 @@ export default function Home() {
         </div>
       </div>
 
-      {/* SPEARHEAD */}
-      <div className="spearhead">
-        <div className="spearhead-inner rv" style={{fontFamily:"Georgia, serif",color:"#f9f7f4"}}>
-          We offer our customers a prime product<br />
-          <em style={{color:"#f9f7f4"}}>that represents the spearhead of the industry.</em>
-        </div>
-      </div>
 
       {/* ADVANTAGES */}
       <section id="advantages">
         <div  style={{display:"flex", flexDirection:"column", justifyContent:"center", alignItems:"center",}}>
           <div style={{display:"flex",alignItems:"start",justifyContent:"start", flexDirection:"column"}}>
-          <div  style={{"color":"#2877A7", fontSize:"28px",fontWeight:"bold", letterSpacing:"0.01em",fontFamily:"Roboto",margin:"0px"}}>Why Choose Us</div>
-          <div className="" style={{fontSize:"18px", color:"#black" ,marginLeft:"auto", marginRight:"auto",padding:"0px",marginTop:"0px",marginBottom:"0px"}}>Our Advantages</div>
+          <div className="" style={{fontSize:"18px", color:"#black" ,marginLeft:"auto", marginRight:"auto",padding:"0px",marginTop:"0px",marginBottom:"0px"}}>Benefits</div>
           </div>
            <div className="adv-grid">
             {advantages.map((a, i) => (
@@ -316,33 +594,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FOOTPRINT */}
-      <section id="footprint" style={{}}>
-        <div className='footwrapper' style={{}}>
-        <div className='ladyb'>
-           <div className="" style={{ "color":"#2877A7",fontSize:"28px",letterSpacing:"0.01em",fontWeight:"bold" }}>Global Reach</div>
-           <div className="footword" >Our Footprint</div>
-        </div>
-        <br />
-        <p className="" style={{"color":"black",}}>From the heart of Africa to markets across the globe — supplying premium gelatin wherever quality is demanded.</p> 
-        </div>
-      
-       <div>
-         <div className="map-wrap rv-scale">
-          <Image src="/assets/without-wordingsAsset-4world-map-768x391.webp" alt="Genesis Biotech Global Footprint" width={568} height={391} />
-        </div>
-        <div className="regions rv d2" style={{"color":"#2877A7",}}>
-          {['Africa','Middle East','Europe','North America','Asia Pacific'].map(r => (
-            <div key={r} className="region" style={{"color":"#2877A7",}}><div className="rdot" style={{"color":"#2877A7",}}/>{r}</div>
-          ))}
-        </div>
-
-       </div>
-       
-      </section>
+     
+          <Datasheet />
 
       {/* DATASHEETS */}
-      <section id="datasheets">
+      {/* <section id="datasheets">
         <div className="ds-wrap">
 
           <div style={{display:"flex",alignItems:"center", justifyContent:"center", flexDirection:"column"}}>
@@ -384,7 +640,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CERTIFICATIONS */}
       {/* <section id="" >
