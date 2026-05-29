@@ -552,14 +552,6 @@ export default function Home() {
         </div>
          <br />
        <br />
-        <br />
-
-        <div className="regions rv d2" style={{"color":"#2877A7",}}>
-          {['Africa','Middle East','Europe','North America','Asia Pacific'].map(r => (
-            <div key={r} className="region" style={{"color":"#2877A7",}}><div className="rdot" style={{"color":"#2877A7",}}/>{r}</div>
-          ))}
-        </div>
-
        </div>
        <br />
         <br />

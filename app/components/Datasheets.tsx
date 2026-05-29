@@ -138,15 +138,6 @@ function ProductPanel({ p, accent }: { p: Product; accent: string }) {
             href={p.pdfPath}
             target="_blank"
             rel="noopener noreferrer"
-            className="ds-btn-outline"
-            download
-          >
-            ↓ Download PDF
-          </a>
-          <a
-            href={p.pdfPath}
-            target="_blank"
-            rel="noopener noreferrer"
             className="ds-btn-solid"
             style={{ background: accent }}
           >
@@ -156,7 +147,7 @@ function ProductPanel({ p, accent }: { p: Product; accent: string }) {
       </div>
 
       {/* Tabs */}
-      <div className="ds-tabs">
+      {/* <div className="ds-tabs">
         {tabs.map((t) => (
           <button
             key={t.id}
@@ -167,15 +158,15 @@ function ProductPanel({ p, accent }: { p: Product; accent: string }) {
             {t.label}
           </button>
         ))}
-      </div>
+      </div> */}
 
       {/* Table */}
-      <div className="ds-table-wrap">
+      {/* <div className="ds-table-wrap">
         <SpecTable rows={rows} />
-      </div>
+      </div> */}
 
       {/* Footer info */}
-      <div className="ds-panel-footer">
+      {/* <div className="ds-panel-footer">
         <div className="ds-footer-row">
           <div className="ds-footer-item">
             <span className="ds-footer-label">Packaging</span>
@@ -195,7 +186,7 @@ function ProductPanel({ p, accent }: { p: Product; accent: string }) {
             <span key={c} className="ds-cert-chip">{c}</span>
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }
